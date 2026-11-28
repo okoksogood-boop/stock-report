@@ -1,0 +1,284 @@
+<!DOCTYPE html><html><head><meta name="robots" content="noindex,nofollow"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>CPU效能與CP值天梯</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap');
+* { box-sizing: border-box; }
+body{background:#0a0b0d;color:#e4e4e7;font-family:'Inter','Microsoft JhengHei',sans-serif;margin:0;padding:0;}
+.mono{font-family:'JetBrains Mono',monospace;}
+.header{border-bottom:1px solid #1c1d21;padding:28px 24px 24px;}
+.header .wrap{max-width:1180px;margin:0 auto;}
+.eyebrow{font-size:13px;letter-spacing:3px;color:#00c8ff;font-weight:700;margin-bottom:10px;}
+h1{font-size:28px;font-weight:800;margin:0;letter-spacing:-0.5px;}
+.subtitle{color:#a1a1aa;font-size:13.5px;margin-top:8px;max-width:640px;line-height:1.7;}
+.controls{border-bottom:1px solid #1c1d21;padding:14px 24px;background:#0a0b0d;z-index:10;}
+.controls .wrap{max-width:1180px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.seg{display:flex;gap:4px;background:#131417;border:1px solid #202226;border-radius:10px;padding:4px;}
+.seg button{padding:6px 14px;border-radius:7px;border:none;cursor:pointer;font-size:12.5px;font-weight:700;background:transparent;color:#a1a1aa;font-family:'JetBrains Mono',monospace;}
+.seg button.active{background:#e4e4e7;color:#0a0b0d;}
+select, input[type=text]{background:#131417;border:1px solid #202226;border-radius:10px;padding:8px 12px;color:#e4e4e7;font-size:12.5px;font-family:'JetBrains Mono',monospace;}
+input[type=text]{flex:1;min-width:140px;outline:none;}
+.chk{display:flex;align-items:center;gap:6px;font-size:12px;color:#a1a1aa;font-family:'JetBrains Mono',monospace;}
+.banner{max-width:1180px;margin:20px auto 0;padding:0 24px;}
+#bestValueBox{border-radius:12px;padding:14px 18px;display:none;align-items:center;gap:14px;flex-wrap:wrap;}
+.content{max-width:1180px;margin:0 auto;padding:20px 24px 60px;}
+.colheader{display:grid;grid-template-columns:1.7fr 1fr 0.6fr 1.4fr 0.8fr;gap:8px;padding:0 14px 10px;}
+.colheader div{font-size:13.5px;letter-spacing:1.5px;color:#f0d789;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.row{display:grid;grid-template-columns:1.7fr 1fr 0.6fr 1.4fr 0.8fr;gap:8px;align-items:center;background:#131417;border:1px solid #1c1d21;border-radius:10px;padding:12px 14px;margin-bottom:6px;}
+.row .nameCell{display:flex;align-items:center;gap:8px;min-width:0;}
+.row .bar{width:4px;height:22px;border-radius:2px;flex-shrink:0;}
+.row .gname{font-weight:700;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.row .price{font-size:12.5px;font-family:'JetBrains Mono',monospace;}
+.row .tdp{font-size:12px;color:#71717a;font-family:'JetBrains Mono',monospace;}
+.estTag{font-size:10px;font-weight:700;color:#c4b5fd;background:rgba(167,139,250,0.15);padding:1px 6px;border-radius:5px;margin-left:6px;white-space:nowrap;flex-shrink:0;cursor:help;}
+.x3dTag{font-size:10px;font-weight:700;color:#a3e635;background:rgba(163,230,53,0.15);padding:1px 6px;border-radius:5px;margin-left:6px;white-space:nowrap;flex-shrink:0;}
+.perfCell{display:flex;align-items:center;gap:8px;}
+.perfTrack{flex:1;height:6px;background:#1c1d21;border-radius:3px;overflow:hidden;}
+.perfFill{height:100%;border-radius:3px;}
+.perfNum{font-size:11.5px;color:#a1a1aa;width:38px;text-align:right;font-family:'JetBrains Mono',monospace;}
+.cpBadge{font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.liveTag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:5px;font-size:10.5px;font-weight:700;background:#76b90022;color:#76b900;vertical-align:middle;}
+.staleTag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:5px;font-size:10.5px;font-weight:700;background:#eab30822;color:#eab308;vertical-align:middle;}
+.platTag{font-size:10px;font-weight:700;color:#a1a1aa;background:#1f2127;border:1px solid #2a2d33;padding:1px 6px;border-radius:5px;margin-left:6px;white-space:nowrap;flex-shrink:0;}
+.newTag{display:inline-block;margin:3px 4px 3px 0;padding:2px 8px;border-radius:6px;background:#1f2127;border:1px solid #2a2d33;font-size:12px;color:#e4e4e7;}
+.budgetGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;}
+.budgetCard{background:#0f1012;border:1px solid #23252b;border-radius:10px;padding:12px 14px;}
+.budgetCard .bl{font-size:12px;color:#a1a1aa;margin-bottom:6px;}
+.budgetCard .bn{font-size:15px;font-weight:800;color:#e4e4e7;}
+.budgetCard .bs{font-size:12px;color:#a1a1aa;margin-top:4px;font-family:'JetBrains Mono',monospace;}
+.legend{font-size:12px;color:#a1a1aa;line-height:1.8;margin:6px 0 14px;padding:10px 14px;background:#0f1012;border:1px solid #1c1d21;border-radius:10px;}
+@media (max-width: 640px) {
+  .header{padding:20px 16px 16px;} h1{font-size:22px;} .subtitle{font-size:12.5px;}
+  .controls{padding:10px 16px;} .content{padding:14px 16px 40px;}
+  .seg button{padding:6px 10px;font-size:11.5px;}
+  select, input[type=text]{font-size:12px;padding:7px 10px;}
+  .colheader{display:none;}
+  .row{grid-template-columns:1fr 1fr;grid-template-areas:'name name' 'price tdp' 'perf perf' 'cp cp';row-gap:8px;padding:12px;}
+  .row > *:nth-child(1){grid-area:name;}
+  .row > *:nth-child(2){grid-area:price;}
+  .row > *:nth-child(3){grid-area:tdp;justify-self:end;text-align:right;}
+  .row > *:nth-child(4){grid-area:perf;}
+  .row > *:nth-child(5){grid-area:cp;justify-self:start;}
+  .row .gname{white-space:normal;overflow:visible;text-overflow:clip;}
+  .banner{padding:0 16px;} #bestValueBox{flex-wrap:wrap;padding:12px 14px;}
+  #bvCp{margin-left:0;width:100%;}
+  .techBox{padding:14px;} .techGrid{grid-template-columns:1fr;}
+}
+.techBox{background:#131417;border:1px solid #1c1d21;border-radius:12px;padding:16px 18px;margin:20px 0;}
+.techBoxTitle{font-size:14px;font-weight:700;color:#f0d789;margin-bottom:12px;}
+.techGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
+.techItem{font-size:12.5px;color:#c7ccd6;line-height:1.7;}
+.techBrand{display:block;font-weight:700;font-size:13px;margin-bottom:4px;}
+.techNote{margin-top:14px;padding-top:14px;border-top:1px solid #1c1d21;font-size:11.5px;color:#8a93a3;line-height:1.7;}
+.toolbar{display:flex;gap:8px;padding:8px 14px;background:#171a20;border-bottom:1px solid #2a2e38;align-items:center;}
+.toolbar button{background:#1a1d24;border:1px solid #262a33;border-radius:8px;color:#c7ccd6;padding:6px 12px;font-size:12.5px;cursor:pointer;}
+.toolbar button:active{background:#f0d789;color:#1a1408;}
+.toolbar-label{font-size:12px;color:#8a93a3;}
+.footer{border-top:1px solid #1c1d21;padding:18px 24px 40px;}
+.footer .wrap{max-width:1180px;margin:0 auto;font-size:11px;color:#52525b;line-height:1.8;font-family:'JetBrains Mono',monospace;}
+</style></head><body>
+<div class='header'><div class='wrap'>
+<div class='eyebrow mono'>CPU BENCHMARK &middot; CP-VALUE LADDER &middot; 20261127 07:51</div>
+<h1>CPU 效能與 CP 值天梯</h1>
+<div class='subtitle'>單核以 <span class='mono'>Core Ultra 9 285K</span> 為100基準,多核以 <span class='mono'>Ryzen 9 9950X3D</span> 為100基準。價格為本次執行時即時連線原價屋(coolpc.com.tw)抓取的當前售價,抓取失敗的型號會退回較早期的快照數字備援,部分冷門型號效能指數為估算值。</div>
+<div class='subtitle' style='margin-top:8px;color:#f0d789;'>⚠️查證提醒(2026/09):型號清單已補上AMD最新旗艦Ryzen 9 9950X3D2(2026年4月上市,雙CCD對稱3D V-Cache設計,多核效能較9950X3D再提升約6%);Intel Arrow Lake Refresh(250K Plus/270K Plus)與其餘型號皆已確認為現行清單涵蓋。下一代處理器(Intel Nova Lake、AMD Zen 6)預計延後至2027年才會發表,目前仍是Arrow Lake與Ryzen 9000系列主導市場。</div>
+</div></div>
+<div class='toolbar'>
+<span class='toolbar-label'>字體</span>
+<button onclick='changeFontSize(-1)'>A-</button>
+<button onclick='changeFontSize(1)'>A+</button>
+</div>
+<div class='controls'><div class='wrap'>
+<div class='seg' id='dimSeg'><button data-dim='Single' class='active'>單核(遊戲導向)</button><button data-dim='Multi'>多核(生產力導向)</button></div>
+<div class='seg' id='brandSeg'><button data-brand='all' class='active'>ALL</button><button data-brand='INTEL'>INTEL</button><button data-brand='AMD'>AMD</button></div>
+<select id='sortSel'><option value='perf'>依效能排序</option><option value='cp'>依CP值排序</option><option value='price'>依價格排序</option></select>
+<input type='text' id='searchBox' placeholder='搜尋型號...'>
+</div></div>
+<div class='banner'><div id='bestValueBox'>
+<div class='mono' style='font-size:10px;letter-spacing:2px;font-weight:700;' id='bvLabel'></div>
+<div style='font-weight:700;font-size:15px;' id='bvName'></div>
+<div class='mono' style='font-size:13px;color:#a1a1aa;' id='bvPrice'></div>
+<div class='mono' style='font-size:15px;font-weight:800;margin-left:auto;' id='bvCp'></div>
+</div></div>
+<div class='content' style='padding-bottom:0;'>
+<div class='techBox'>
+<div class='techBoxTitle'>選購重點:單核 vs 多核,先想清楚用途</div>
+<div class='techGrid'>
+<div class='techItem'><span class='techBrand' style='color:#a3e635'>遊戲玩家看單核+X3D快取</span>純遊戲場景,單核時脈跟大容量L3快取(X3D系列標配)影響1% Low幀數更直接,核心數多寡反而次要;AMD X3D系列在遊戲基準測試中普遍領先同價位對手。</div>
+<div class='techItem'><span class='techBrand' style='color:#00c8ff'>剪輯/算圖/多開看多核</span>影片轉檔、3D算圖、大量分頁多開這類工作,核心數與多核跑分才是關鍵,X3D系列在這類負載通常不是最佳選擇(部分X3D型號為兼顧兩者的雙CCD設計,多核表現也不錯,但單價通常較高)。</div>
+</div>
+<div class='techItem' style='margin-top:12px;'><span class='techBrand' style='color:#f0d789'>平台(腳位)決定以後能不能升級</span>型號旁的灰色標籤是腳位:<b>AM5</b>(Ryzen 7000/8000/9000,AMD承諾支援多代,升級彈性最好)、<b>AM4</b>(Ryzen 5000,舊平台,只適合預算有限或沿用舊主機板)、<b>LGA1851</b>(Core Ultra 200系列)、<b>LGA1700</b>(Intel 12~14代)。CPU與主機板腳位必須一致。</div>
+<div class='techItem' style='margin-top:10px;'><span class='techBrand' style='color:#00c8ff'>Intel 13/14代(i5-14600K、i7-14700等)購買提醒</span>這兩代曾發生「長時間高電壓導致不穩定」的問題,Intel已發布修正微碼(0x12B及之後版本)。買這兩代請確認主機板BIOS已更新到含修正微碼的版本,並使用Intel預設電源設定。</div>
+<div class='techNote'>⚠️K/KF結尾為可超頻版本,非K版本鎖定倍頻無法超頻但通常較省電、價格較低;F結尾代表沒有內建顯示,必須另外裝顯示卡。選購時務必確認主機板晶片組是否支援該型號與超頻功能。</div>
+</div>
+</div>
+<div class='content'>
+<div class='techBox' style='margin-top:0;'><div class='techBoxTitle' id='budgetTitle'>💰 各預算區間 CP 值最高(依目前選的單核/多核)</div><div class='budgetGrid' id='budgetGrid'></div><div class='techNote'>只從「即時價格」的型號裡挑;沒有即時價格的型號價格可能已過時,不列入推薦。CP值高不代表一定適合你,遊戲玩家請同時看單核與是否為X3D。</div></div>
+<div class='legend'>📖 <b>怎麼看</b>:效能條越長越快;<b>CP值100%</b>=每一塊錢買到的效能與基準CPU(單核看285K、多核看9950X3D)相同,數字越大越划算。價格後面 <span class='liveTag'>即時</span>=本次從原價屋抓到的價格;<span class='staleTag'>備援價·可能過時</span>=原價屋這次沒抓到,用的是程式內建的舊價格,僅供參考(這類型號的CP值會變淡並加「?」)。TDP顏色:綠=65W以下(原廠散熱即可)、黃=125W、橘=更高(需要好散熱)。<span class='estTag'>估算</span>=效能是依PassMark分數按同家族比例換算,不是直接量測,可能有±3左右的誤差。</div>
+<div class='colheader'><div>CPU型號</div><div>價格</div><div>TDP</div><div id='perfColLabel'>單核效能</div><div>CP值</div></div>
+<div id='rowContainer'></div>
+<div id='emptyMsg' style='display:none;text-align:center;padding:60px;color:#52525b;font-size:13px;'>找不到符合條件的CPU</div>
+</div>
+<div class='footer'><div class='wrap'>效能指數資料來源:多核為PassMark CPU Mark(passmark.com),單核為CPU-Z Benchmark資料庫相對比較,相對排名已交叉比對驅動之家/快科技CPU性能天梯圖(mydrivers.com)確認順序一致性,此部分為固定資料不會每次變動,部分冷門型號的效能指數為依架構世代與時脈的合理估算值,並非直接量測結果,精確數字建議另行查閱PassMark/CPU-Z官方資料庫。價格部分:本次執行時已即時連線原價屋(coolpc.com.tw)查詢現貨報價;若原價屋暫時抓不到對應型號(常見於已無新品通路銷售的舊型號),會自動退回較早期查詢過的快照數字備援,並非當下即時值。CP值計算僅供相對比較參考,非採購建議,實際報價請以官網當下顯示為準。</div></div>
+<script>
+const FONT_STEP = 1.5;
+const FONT_MIN = 12;
+const FONT_MAX = 24;
+function applyFontSize(px) {
+    document.body.style.fontSize = px + 'px';
+    try { localStorage.setItem('cpuReportFontSize', px); } catch (e) {}
+}
+function changeFontSize(direction) {
+    let current = parseFloat(document.body.style.fontSize) || 16;
+    let next = current + direction * FONT_STEP;
+    next = Math.max(FONT_MIN, Math.min(FONT_MAX, next));
+    applyFontSize(next);
+}
+(function initFontSize() {
+    try {
+        const saved = localStorage.getItem('cpuReportFontSize');
+        if (saved) { applyFontSize(parseFloat(saved)); }
+    } catch (e) {}
+})();
+</script>
+<script>const DATA = [{n:'Core Ultra 5 245K',brand:'INTEL',p:6650,live:true,tdp:125,Single:93.3,Multi:61.4,x3d:false,est:false},{n:'Core Ultra 5 245KF',brand:'INTEL',p:9900,live:false,tdp:125,Single:93.3,Multi:61.4,x3d:false,est:false},{n:'Core Ultra 5 250K Plus',brand:'INTEL',p:7150,live:true,tdp:125,Single:95.5,Multi:73.7,x3d:false,est:false},{n:'Core Ultra 7 265KF',brand:'INTEL',p:9380,live:false,tdp:125,Single:97,Multi:83.5,x3d:false,est:false},{n:'Core Ultra 7 265K',brand:'INTEL',p:10300,live:false,tdp:125,Single:96.9,Multi:83.6,x3d:false,est:false},{n:'Core Ultra 7 270K Plus',brand:'INTEL',p:11500,live:true,tdp:125,Single:97.8,Multi:97.7,x3d:false,est:false},{n:'Core Ultra 9 285K',brand:'INTEL',p:21500,live:true,tdp:125,Single:100,Multi:95.9,x3d:false,est:false},{n:'Core i3-14100',brand:'INTEL',p:4300,live:true,tdp:60,Single:85,Multi:20,x3d:false,est:false},{n:'Core i5-12400',brand:'INTEL',p:6100,live:false,tdp:65,Single:78.7,Multi:28.5,x3d:false,est:false},{n:'Core i5-12400F',brand:'INTEL',p:4850,live:true,tdp:65,Single:78.7,Multi:28.5,x3d:false,est:false},{n:'Core i5-14400F',brand:'INTEL',p:5300,live:true,tdp:65,Single:89.9,Multi:25,x3d:false,est:false},{n:'Core i5-14400',brand:'INTEL',p:6350,live:true,tdp:65,Single:89.9,Multi:25,x3d:false,est:false},{n:'Core i5-14600K',brand:'INTEL',p:10700,live:false,tdp:125,Single:94,Multi:58,x3d:false,est:false},{n:'Core i7-14700',brand:'INTEL',p:11000,live:true,tdp:65,Single:96.6,Multi:68.5,x3d:false,est:false},{n:'Ryzen 5 9600X',brand:'AMD',p:8150,live:true,tdp:65,Single:92,Multi:42.9,x3d:false,est:false},{n:'Ryzen 7 9700X',brand:'AMD',p:11550,live:true,tdp:65,Single:94.5,Multi:52.7,x3d:false,est:false},{n:'Ryzen 7 9800X3D',brand:'AMD',p:15000,live:true,tdp:120,Single:89,Multi:57,x3d:true,est:false},{n:'Ryzen 7 9850X3D',brand:'AMD',p:17050,live:true,tdp:120,Single:90.5,Multi:58.5,x3d:true,est:false},{n:'Ryzen 9 9900X',brand:'AMD',p:14450,live:true,tdp:120,Single:96,Multi:77.5,x3d:false,est:false},{n:'Ryzen 9 9900X3D',brand:'AMD',p:20450,live:true,tdp:120,Single:95.4,Multi:80.1,x3d:true,est:false},{n:'Ryzen 9 9950X',brand:'AMD',p:20350,live:true,tdp:170,Single:98,Multi:93.7,x3d:false,est:false},{n:'Ryzen 9 9950X3D',brand:'AMD',p:23950,live:true,tdp:170,Single:97.6,Multi:100,x3d:true,est:false},{n:'Ryzen 9 9950X3D2',brand:'AMD',p:31450,live:true,tdp:200,Single:98,Multi:106,x3d:true,est:false},{n:'Ryzen 7 7800X3D',brand:'AMD',p:10290,live:true,tdp:120,Single:85.4,Multi:48.9,x3d:true,est:false},{n:'Ryzen 7 7700',brand:'AMD',p:7290,live:true,tdp:65,Single:87.6,Multi:41.4,x3d:false,est:false},{n:'Ryzen 5 7500F',brand:'AMD',p:4890,live:true,tdp:65,Single:83.1,Multi:34.2,x3d:false,est:false},{n:'Ryzen 5 8400F',brand:'AMD',p:4450,live:true,tdp:65,Single:84.3,Multi:28.5,x3d:false,est:false},{n:'Ryzen 7 8700G',brand:'AMD',p:9450,live:false,tdp:65,Single:86.5,Multi:39.9,x3d:false,est:false},{n:'Core Ultra 5 225',brand:'INTEL',p:5800,live:true,tdp:65,Single:87.3,Multi:43.3,x3d:false,est:true},{n:'Core Ultra 5 225F',brand:'INTEL',p:4580,live:true,tdp:65,Single:87,Multi:44.1,x3d:false,est:true},{n:'Core Ultra 5 250KF Plus',brand:'INTEL',p:null,live:false,tdp:125,Single:95.5,Multi:73.7,x3d:false,est:true},{n:'Ryzen 5 8600G',brand:'AMD',p:6550,live:true,tdp:65,Single:85.6,Multi:32,x3d:false,est:true},{n:'Ryzen 5 8500G',brand:'AMD',p:null,live:false,tdp:65,Single:85.5,Multi:27.1,x3d:false,est:true},{n:'Ryzen 5 5600X',brand:'AMD',p:3990,live:true,tdp:65,Single:76,Multi:31.2,x3d:false,est:true},{n:'Ryzen 7 5800X3D',brand:'AMD',p:11790,live:true,tdp:105,Single:74.1,Multi:40.4,x3d:true,est:true},{n:'Ryzen 5 3400G',brand:'AMD',p:2099,live:true,tdp:65,Single:60.8,Multi:13.1,x3d:false,est:true},{n:'Ryzen 5 5600GT',brand:'AMD',p:4990,live:true,tdp:65,Single:75.3,Multi:28.7,x3d:false,est:false}];</script>
+<script>
+const BRAND_COLOR = { INTEL: '#00c8ff', AMD: '#ed1c24', OTHER: '#71717a' };
+const DIM_LABEL = { Single: '單核(遊戲導向)', Multi: '多核(生產力導向)' };
+const MAX_PERF = Math.max(...DATA.map(d => Math.max(d.Single || 0, d.Multi || 0)));
+// 基準CPU若這次沒有價格(理論上不會),退回固定參考價,避免整張表CP值變成NaN
+const refS = DATA.find(d => d.n.includes('285K') && !d.n.includes('Plus'));
+const refM = DATA.find(d => d.n === 'Ryzen 9 9950X3D');
+const REF_PRICE_SINGLE = (refS && refS.p) ? refS.p : 19500;
+const REF_PRICE_MULTI = (refM && refM.p) ? refM.p : 22200;
+// 腳位(平台):依型號命名規則判斷
+function platform(n) {
+    if (/^Core Ultra/.test(n)) return 'LGA1851';
+    if (/^Core i\d-1[234]\d{3}/.test(n)) return 'LGA1700';
+    const m = n.match(/^Ryzen \d (\d)\d{3}/);
+    // 【2026-10-16-A】Ryzen 3000/5000(含3400G、5600X、5800X3D)是AM4;7000/8000/9000是AM5(上一版把3000系列誤判成AM5)
+    if (m) return (m[1] === '5' || m[1] === '3') ? 'AM4' : 'AM5';
+    return '';
+}
+
+let state = { dim: 'Single', brand: 'all', sort: 'perf', q: '' };
+
+function cpValue(d) {
+    const perf = d[state.dim];
+    if (perf == null || d.p == null || d.p <= 0) return null;
+    const refPrice = state.dim === 'Single' ? REF_PRICE_SINGLE : REF_PRICE_MULTI;
+    return Math.round(perf * refPrice / d.p);
+}
+// TDP色階:瓦數直接對應發熱與散熱需求,是選購時的實際限制(機殼風道、散熱器預算、
+// 電源瓦數都被它決定),但原本是純白數字,高低要自己記門檻。這裡用顏色分級:
+// 65W以下可用原廠散熱、125W以上通常需要更好的塔散或水冷
+function tdpTier(tdp) {
+    if (tdp <= 65) return '#76b900';
+    if (tdp <= 105) return '#9fd830';
+    if (tdp <= 125) return '#eab308';
+    return '#ff7e00';
+}
+function cpTier(cp) {
+    if (cp >= 300) return '#76b900';
+    if (cp >= 200) return '#a3e635';
+    if (cp >= 120) return '#eab308';
+    return '#71717a';
+}
+function fmtPrice(p) { return p == null ? '暫無報價' : ('$' + p.toLocaleString()); }
+
+function render() {
+    let list = DATA.filter(d => state.brand === 'all' || d.brand === state.brand);
+    if (state.q.trim()) list = list.filter(d => d.n.toLowerCase().includes(state.q.trim().toLowerCase()));
+    list = [...list];
+    if (state.sort === 'perf') list.sort((a, b) => (b[state.dim] ?? -1) - (a[state.dim] ?? -1));
+    else if (state.sort === 'cp') list.sort((a, b) => (cpValue(b) ?? -1) - (cpValue(a) ?? -1));
+    else if (state.sort === 'price') list.sort((a, b) => (a.p ?? Infinity) - (b.p ?? Infinity));
+
+    document.getElementById('perfColLabel').textContent = DIM_LABEL[state.dim].split('(')[0] + '效能';
+
+    const container = document.getElementById('rowContainer');
+    container.innerHTML = '';
+    document.getElementById('emptyMsg').style.display = list.length === 0 ? 'block' : 'none';
+
+    list.forEach(d => {
+      try {
+        const color = BRAND_COLOR[d.brand];
+        const cpVal = cpValue(d);
+        const tier = cpVal == null ? '#52525b' : cpTier(cpVal);
+        const perfV = d[state.dim];
+        const barPct = perfV == null ? 0 : (perfV / MAX_PERF) * 100;
+        const plat = platform(d.n);
+        const row = document.createElement('div');
+        row.className = 'row';
+        row.innerHTML = `
+            <div class="nameCell"><span class="bar" style="background:${color}"></span><span class="gname">${d.n}</span>${d.x3d ? `<span class="x3dTag">3D快取</span>` : ''}${plat ? `<span class="platTag">${plat}</span>` : ''}${d.est ? `<span class="estTag" title="效能是依PassMark分數換算的估算值,不是直接量測">估算</span>` : ''}</div>
+            <div class="price" style="color:${d.p == null ? '#71717a' : (d.live ? '#e4e4e7' : '#a1a1aa')}">${fmtPrice(d.p)}${d.p == null ? '' : (d.live ? '<span class="liveTag">即時</span>' : '<span class="staleTag" title="原價屋這次沒抓到這款,價格是程式內建的舊資料">備援價·可能過時</span>')}</div>
+            <div class="tdp" style="color:${d.tdp == null ? '#71717a' : tdpTier(d.tdp)};font-weight:600">${d.tdp == null ? '—' : d.tdp + 'W'}</div>
+            <div class="perfCell"><div class="perfTrack"><div class="perfFill" style="width:${barPct}%;background:${color}"></div></div><div class="perfNum">${perfV == null ? '—' : perfV.toFixed(1)}</div></div>
+            <div>${cpVal == null ? '<span class="mono" style="font-size:11px;color:#52525b">&mdash;</span>' : `<span class="cpBadge" style="background:${tier}22;color:${tier};${d.live ? '' : 'opacity:.55;border:1px dashed ' + tier + '88;'}" title="${d.live ? '' : '用備援舊價格算的CP值,僅供參考'}">${cpVal}%${d.live ? '' : '?'}</span>`}</div>
+        `;
+        container.appendChild(row);
+      } catch (err) {
+        console.error('渲染單筆資料時發生錯誤,已跳過:', d && d.n, err);
+      }
+    });
+
+    // 最佳CP值優先只從「即時價格」的型號裡挑,避免舊型號的過時價格被選為最佳(比照顯卡報表)
+    const pricedAll = DATA.filter(d => cpValue(d) != null);
+    const pricedLive = pricedAll.filter(d => d.live);
+    const pool = pricedLive.length > 0 ? pricedLive : pricedAll;
+    renderBudget(pricedLive);
+    if (pool.length === 0) { document.getElementById('bestValueBox').style.display = 'none'; return; }
+    const best = pool.reduce((a, b) => (cpValue(b) > cpValue(a) ? b : a));
+    const bColor = BRAND_COLOR[best.brand];
+    const bvBox = document.getElementById('bestValueBox');
+    bvBox.style.display = 'flex';
+    bvBox.style.background = `linear-gradient(90deg, ${bColor}22, transparent)`;
+    bvBox.style.border = `1px solid ${bColor}44`;
+    document.getElementById('bvLabel').textContent = DIM_LABEL[state.dim] + ' 最佳 CP 值';
+    document.getElementById('bvLabel').style.color = bColor;
+    document.getElementById('bvName').textContent = best.n;
+    document.getElementById('bvPrice').textContent = fmtPrice(best.p) + (best.live ? '(即時)' : '(備援價,可能過時)');
+    document.getElementById('bvCp').textContent = 'CP ' + cpValue(best) + '%';
+    document.getElementById('bvCp').style.color = bColor;
+}
+
+// 各預算區間CP值最高:只用即時價格,依目前選的單核/多核
+function renderBudget(pool) {
+    const bands = [[0, 6000, '6,000元以下'], [6000, 10000, '6,000~10,000元'], [10000, 16000, '10,000~16,000元'], [16000, 1e9, '16,000元以上']];
+    const grid = document.getElementById('budgetGrid');
+    if (!grid) return;
+    document.getElementById('budgetTitle').textContent = '💰 各預算區間 CP 值最高(' + DIM_LABEL[state.dim] + ')';
+    grid.innerHTML = bands.map(b => {
+        const c = pool.filter(d => d.p >= b[0] && d.p < b[1]);
+        if (c.length === 0) return `<div class="budgetCard"><div class="bl">${b[2]}</div><div class="bs">此區間沒有即時報價的型號</div></div>`;
+        const best = c.reduce((x, y) => (cpValue(y) > cpValue(x) ? y : x));
+        return `<div class="budgetCard"><div class="bl">${b[2]}</div><div class="bn" style="color:${BRAND_COLOR[best.brand]}">${best.n}</div><div class="bs">${fmtPrice(best.p)} ・ CP ${cpValue(best)}% ・ ${platform(best.n)}</div></div>`;
+    }).join('');
+}
+
+document.querySelectorAll('#dimSeg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('#dimSeg button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.dim = btn.dataset.dim;
+        render();
+    });
+});
+document.querySelectorAll('#brandSeg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('#brandSeg button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.brand = btn.dataset.brand;
+        render();
+    });
+});
+document.getElementById('sortSel').addEventListener('change', e => { state.sort = e.target.value; render(); });
+document.getElementById('searchBox').addEventListener('input', e => { state.q = e.target.value; render(); });
+
+render();
+</script>
+<button type="button" onclick="twShare()" style="position:fixed;left:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;border:0;padding:10px 14px;border-radius:20px;font:15px sans-serif;box-shadow:0 2px 6px rgba(0,0,0,.3)">📤 分享</button>
+<script>function twShare(){var u=location.href.split('#')[0].split('?')[0];var t=document.title||'景淵報表';
+if(navigator.share){navigator.share({title:t,text:t+'',url:u}).catch(function(){});return;}
+var ok=function(){alert('已複製連結,可以貼到 LINE 傳給朋友');};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(ok,function(){window.prompt('長按複製這個連結',u);});}else{window.prompt('長按複製這個連結',u);}}</script><a href="index.html" onclick="location.href='index.html?v='+Date.now();return false;" style="position:fixed;right:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;padding:10px 14px;border-radius:20px;font:15px sans-serif;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.3)">← 回目錄</a></body></html>
+

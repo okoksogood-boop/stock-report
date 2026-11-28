@@ -1,0 +1,1316 @@
+<!DOCTYPE html><html><head><meta name="robots" content="noindex,nofollow"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>網路AI工具比較報表(景淵製作)</title><style>
+* { box-sizing: border-box; }
+body{font-family:'Microsoft JhengHei','PingFang TC',sans-serif;background:#0d0f14;color:#e4e7ec;margin:0;padding:0 0 48px;line-height:1.8;font-size:16px;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px;}
+.red{color:#ff6b6b;font-weight:bold;} .green{color:#3ddc97;font-weight:bold;} .yellow{color:#ffd666;font-weight:bold;} .blue{color:#6ab8ff;font-weight:bold;}
+h1{color:#fff;font-size:18px;font-weight:700;margin:0;padding:16px 16px;background:#161922;border-bottom:1px solid #262b36;position:sticky;top:0;z-index:6;}
+.subtitle{color:#8a93a3;font-size:12.5px;padding:0 16px 12px;background:#161922;border-bottom:1px solid #262b36;position:sticky;top:52px;z-index:6;}
+.navbar{display:flex;overflow-x:auto;gap:8px;padding:10px 16px;background:#12141c;position:sticky;top:84px;z-index:5;border-bottom:1px solid #262b36;-webkit-overflow-scrolling:touch;}
+.navbar a{flex-shrink:0;font-size:12.5px;color:#aab2c0;background:#1c202b;padding:7px 14px;border-radius:18px;text-decoration:none;white-space:nowrap;border:1px solid #262b36;}
+.navbar a:active{background:#f0d789;color:#1a1408;}
+.searchbar{display:flex;gap:8px;padding:10px 16px;background:#12141c;border-bottom:1px solid #262b36;align-items:center;}
+.searchbar input{flex:1;background:#1c202b;border:1px solid #2a2f3b;border-radius:8px;padding:9px 12px;color:#e4e7ec;font-size:14px;font-family:inherit;outline:none;}
+.searchbar input:focus{border-color:#f0d789;}
+.searchbar button{background:#2a2f3b;border:none;border-radius:8px;color:#c7ccd6;padding:9px 12px;font-size:13px;cursor:pointer;white-space:nowrap;}
+.searchbar button:active{background:#f0d789;color:#1a1408;}
+.toolbar{display:flex;gap:8px;padding:9px 16px;background:#12141c;border-bottom:1px solid #262b36;align-items:center;flex-wrap:wrap;}
+.toolbar button{background:#1c202b;border:1px solid #2a2f3b;border-radius:8px;color:#c7ccd6;padding:6px 12px;font-size:12.5px;cursor:pointer;}
+.toolbar button:active{background:#f0d789;color:#1a1408;}
+.toolbar-sep{width:1px;height:18px;background:#2a2f3b;}
+.toolbar-label{font-size:12px;color:#8a93a3;}
+#searchCount{font-size:12px;color:#8a93a3;white-space:nowrap;min-width:44px;text-align:center;}
+
+.category{margin:28px 0 8px;}
+.cat-header{padding:4px 2px 10px;border-bottom:2px solid #262b36;margin-bottom:14px;}
+.cat-header h2{margin:0 0 6px;font-size:19px;color:#fff;font-weight:700;}
+.cat-intro{margin:0;color:#9aa3b2;font-size:13.5px;line-height:1.7;}
+
+.table-wrap{overflow-x:auto;margin:14px 0 18px;border:1px solid #262b36;border-radius:10px;-webkit-overflow-scrolling:touch;}
+table.cmp-table{border-collapse:collapse;width:100%;min-width:560px;font-size:13px;}
+table.cmp-table th{background:#1c202b;color:#f0d789;text-align:left;padding:10px 12px;font-weight:600;white-space:nowrap;position:sticky;top:0;}
+table.cmp-table td{padding:10px 12px;border-top:1px solid #21252f;vertical-align:top;color:#d5dae2;}
+table.cmp-table tr:nth-child(even) td{background:#12141c;}
+table.cmp-table tr:hover td{background:#1a2230;}
+td.tcol-name{white-space:nowrap;font-weight:600;color:#fff;}
+td.tcol-name a{color:#fff;text-decoration:none;border-bottom:1px dashed #4a5568;}
+td.tcol-name .vendor{display:block;font-weight:400;font-size:11px;color:#6b7480;margin-top:2px;}
+
+.cards{display:flex;flex-direction:column;gap:12px;}
+details{background:#161922;border:1px solid #262b36;border-radius:14px;overflow:hidden;}
+details[open]{border-color:#33394a;}
+summary{padding:15px 18px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+summary::-webkit-details-marker{display:none;}
+summary::after{content:'\25be';color:#5f6672;font-size:13px;transition:transform .15s;margin-left:8px;}
+details[open] summary::after{transform:rotate(180deg);}
+.tool-title{font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:10px;}
+.tag-pill{font-size:11px;font-weight:500;color:#161922;background:#f0d789;padding:3px 9px;border-radius:10px;}
+
+.body{padding:0 18px 18px;}
+.headline{font-size:14.5px;color:#f0d789;background:#1c1a12;border:1px solid #3a331f;border-radius:8px;padding:9px 12px;margin-bottom:10px;}
+.usecase{font-size:13.5px;color:#c7ccd6;background:#12141c;border-radius:8px;padding:9px 12px;margin-bottom:6px;line-height:1.75;}
+.label-inline{color:#8a93a3;font-size:12px;}
+
+.ln{white-space:pre-wrap;word-break:break-word;font-size:14px;padding:3px 0;color:#d5dae2;}
+.ln.top{font-weight:700;font-size:14.5px;margin-top:16px;padding-top:12px;border-top:1px solid #21252f;}
+.ln.sub{margin-left:4px;padding-left:12px;border-left:2px solid #262b36;color:#c7ccd6;font-size:13.5px;padding-top:5px;padding-bottom:5px;}
+
+.footer-note{padding:24px 16px 0;color:#5f6672;font-size:12px;text-align:center;}
+.ln.search-hit{background:rgba(240,215,137,0.22);border-radius:6px;outline:2px solid #f0d789;}
+.ln.search-hit.current{background:rgba(255,107,107,0.28);outline-color:#ff6b6b;}
+</style></head><body>
+<h1>網路AI工具比較報表(景淵製作)</h1>
+<div class='subtitle'>資料查證：2026/11/27（部分重新查證，其餘沿用 2026/11/11、2026/10/15）　｜　報表產生：2026/11/27 08:19　｜　30 款工具・按用途分 11 類　｜　每類先看比較表，再點工具看細節　｜　實際額度與價格請以官方頁面為準</div>
+<div id='staleness-banner' style='padding:10px 16px;font-size:13px;background:#1c1a12;border-bottom:1px solid #3a331f;color:#f0d789;'></div>
+<div class='navbar'>
+<a href='#cat-chat'>💬 全能聊天／搜尋助手</a>
+<a href='#cat-zh'>🌐 中文AI助手</a>
+<a href='#cat-image'>🎨 圖片生成／設計</a>
+<a href='#cat-video'>🎬 影片生成</a>
+<a href='#cat-code'>💻 AI程式開發</a>
+<a href='#cat-audio'>🎵 AI音樂／語音</a>
+<a href='#cat-office'>📊 辦公／簡報</a>
+<a href='#cat-ecosystem'>🌐 多模態生態系</a>
+<a href='#cat-meeting'>📝 會議記錄</a>
+<a href='#cat-language'>🗣️ 語言學習</a>
+<a href='#cat-agent'>🤖 AI Agent（自主代理）</a>
+</div>
+<div class='searchbar'>
+<input type='text' id='toolSearchBox' placeholder='輸入工具名稱或關鍵字搜尋，例如 Claude 或 免費額度'>
+<span id='searchCount'></span>
+<button onclick='searchPrev()'>◀</button>
+<button onclick='searchNext()'>▶</button>
+</div>
+<div class='toolbar'>
+<button onclick='toggleAllSections(true)'>全部展開</button>
+<button onclick='toggleAllSections(false)'>全部收起</button>
+<span class='toolbar-sep'></span>
+<span class='toolbar-label'>字體</span>
+<button onclick='changeFontSize(-1)'>A-</button>
+<button onclick='changeFontSize(1)'>A+</button>
+</div>
+<div class='wrap'>
+
+<section class='category' id='cat-chat'>
+  <div class='cat-header'>
+    <h2>💬 全能聊天／搜尋助手</h2>
+    <p class='cat-intro'>六款都能聊天、寫作、查資料，差異主要在「額度大方程度」與「生態系綁定」。ChatGPT 免費版對話量最鬆；Gemini 綁 Google 辦公生態系最深；Claude 程式碼與長文本品質最穩；Grok 靠即時 X 資訊差異化；Perplexity 專注「有來源可查證」的搜尋；Microsoft Copilot 則綁 Windows/Office 生態最深。</p>
+  </div>
+  <div class='table-wrap'>
+<table class='cmp-table'>
+<thead><tr><th>工具</th><th>一句話定位</th><th>免費額度精華</th><th>最低付費門檻</th></tr></thead>
+<tbody>
+<tr>
+<td class='tcol-name'><a href='#tool-chatgpt'>ChatGPT</a><span class='vendor'>OpenAI</span></td>
+<td>生態最完整、上手門檻最低的國民 AI</td>
+<td>文字對話不限次數／圖片、Deep Research、Codex 仍有限額</td>
+<td>約US$8／月（Go）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-claude'>Claude</a><span class='vendor'>Anthropic</span></td>
+<td>寫作與程式碼品質最穩定的全能助手</td>
+<td>無限期免費／依5小時＋每週額度限用量，無 Claude Code</td>
+<td>US$20／月（Pro）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-gemini'>Gemini</a><span class='vendor'>Google</span></td>
+<td>與 Google 辦公生態系整合最深的 AI</td>
+<td>15GB雲端／10/9起免費版只剩Flash-Lite模型</td>
+<td>約NT$155／月（AI Plus）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-grok'>Grok</a><span class='vendor'>xAI</span></td>
+<td>唯一即時整合 X 平台輿情的 AI</td>
+<td>即時搜尋+語音／圖片影片需付費</td>
+<td>US$8／月起（The X Subscription）／US$30（SuperGrok）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-perplexity'>Perplexity</a><span class='vendor'>Perplexity AI</span></td>
+<td>會附來源引用的AI搜尋引擎</td>
+<td>基本搜尋不限次數,進階Pro搜尋約3-5次/日</td>
+<td>US$20／月（Pro）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-ms_copilot'>Microsoft Copilot</a><span class='vendor'>Microsoft</span></td>
+<td>深度整合 Windows／Office 的辦公室 AI</td>
+<td>免費版功能完整,一般問答/圖片生成皆可用</td>
+<td>約US$19.99／月（Microsoft 365 Premium）</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <div class='cards'>
+  
+<details id='tool-chatgpt'>
+<summary>
+  <span class='tool-title'>ChatGPT<span class='tag-pill'>全能聊天</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 生態最完整、上手門檻最低的國民 AI</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>日常查資料、寫作、翻譯的一般使用者；想要語音對話、圖片生成、程式與研究工具一次到位、不想切換多個工具的人。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>Free 方案 $0：2026 年 8 月起日常文字對話「不限次數」（仍有防濫用機制），預設模型 2026/10/8 起升級為 GPT-6 Luna；圖片生成（約每日 2～3 張）、檔案上傳、Deep Research、Codex、ChatGPT Work（免費版仍用 GPT-5.6 Terra）等工具仍各自有限額。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Go：約 US$8／月（台灣 NT$270／月）－在免費版基礎上提升訊息、圖片、檔案、語音、記憶額度。</div>
+<div class='ln sub'>▪ Plus：US$20／月（台灣 NT$690／月）－解鎖 GPT-6 Sol（2026/10/7 上線，含 Intelligent UI）進階推理、Deep Research、Codex、ChatGPT Work，額度大幅提升。</div>
+<div class='ln sub'>▪ Pro：US$100／US$200／US$500 月（三種用量等級，功能相同）－GPT-6 Pro（Astra）專業推理、更高額度。（原訂 10/30 起把 US$200 方案用量從 Plus 的 20 倍下修為 10 倍，但 OpenAI 於 2026/10/29 取消下修，並把 Pro 100／200／500 與 Business Premium 的 Work／Codex 用量全部加倍，價格不變；Plus 用量不變，以官網為準）</div>
+<div class='ln sub'>▪ Business（Team）：Standard 席位約 US$25／人／月（月繳）或 US$20（年繳），最低 2 席；Premium 席位 US$125（年繳 US$100）含 GPT-6 Astra。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 免費版日常對話已「不限次數」，輕度使用者幾乎不用付費</div>
+<div class='ln sub'>▪ 生態系完整：語音、圖片、Canvas、Work、Codex 一應俱全（Sora 影片已於 2026 年停止服務）</div>
+<div class='ln sub'>▪ Deep Research 可自動跨數百網頁查證，適合長篇研究報告</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 圖片生成、Deep Research、Codex、Work 在免費版仍有明確限額</div>
+<div class='ln sub'>▪ 方案階層多達 6 級（Free/Go/Plus/Pro/Business/Enterprise），第一次選容易選錯</div>
+<div class='ln sub'>▪ Pro 的 US$100／200／500 三檔功能相同，只差用量，容易多花冤枉錢</div>
+</div>
+</details>
+
+
+<details id='tool-claude'>
+<summary>
+  <span class='tool-title'>Claude<span class='tag-pill'>全能聊天</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 寫作與程式碼品質最穩定的全能助手</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要長文件分析、程式開發（尤其搭配 Claude Code）、重視「答案正確性」勝過速度的專業工作者與開發者。不打算寫程式的一般使用者，免費版其實就很夠用。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>Free 方案 $0：一般文字聊天、網頁搜尋、記憶、檔案建立、程式執行、連接器與 Skills；用量依「每5小時＋每週」雙層額度管理（官方不公布明確訊息數），無 Claude Code，也不能用 2026/9/22 推出的新旗艦 Opus 5.5（僅付費方案）。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Pro：US$20／月（年繳約 US$17／月，約 NT$648／月）－約為免費版 5 倍額度，含 Opus 5.5（2026/9/22 推出的新旗艦，付費方案預設模型）、Claude Code、Cowork、Claude Design、無限 Projects、Research。</div>
+<div class='ln sub'>▪ Max：US$100／月（只有月繳）－每 5 小時與每週都是 Pro 的 5 倍用量。</div>
+<div class='ln sub'>▪ Ultra（原 Max 20x，2026/10/30 改名，價格不變）：US$200／月（只有月繳）－每週約 Pro 的 10 倍用量，通過驗證的帳號沒有 5 小時上限；另含每月 US$200 API 點數（11/27 查證補充）。</div>
+<div class='ln sub'>▪ Fable 模型（Fable 5.2／5.1／5）：免費版不能用；Pro 與 Team 標準席位要另外用「用量點數」付費；Max、Ultra、Team 進階席位含在方案內（每週額度最多一半可用在 Fable）。</div>
+<div class='ln sub'>▪ Team：標準席位 US$20～25／人／月（年繳／月繳）；進階席位 US$100～125／人／月（用量為標準席位 5 倍），所有席位都含 Claude Code，最低 2 席。</div>
+<div class='ln sub'>▪ Enterprise：客製化報價（SSO/SAML、資料落地、合規認證）。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 長文本理解與複雜推理能力強，寫作、程式碼品質穩定，較少「一本正經胡說八道」</div>
+<div class='ln sub'>▪ Claude Code 走訂閱制，重度 coding 也不會被 token 帳單嚇到</div>
+<div class='ln sub'>▪ 免費版功能已相當完整（記憶、Skills、程式執行都在內）</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 免費版沒有 Claude Code，重度開發者必須升級才能用</div>
+<div class='ln sub'>▪ 官方只公布「倍數」而非確切訊息數，很難精算自己夠不夠用</div>
+<div class='ln sub'>▪ App 聊天與 Claude Code 共用同一額度池，白天聊太多會壓縮晚上寫程式的額度</div>
+</div>
+</details>
+
+
+<details id='tool-gemini'>
+<summary>
+  <span class='tool-title'>Gemini<span class='tag-pill'>全能聊天</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 與 Google 辦公生態系整合最深的 AI</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>已重度使用 Gmail／Docs／雲端硬碟的上班族、需要處理超長 PDF（1M tokens）的研究或法務工作者、想順便解決輕量生圖需求的人。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>Free 方案 $0：15GB Google 雲端儲存，支援一般問答、寫作、翻譯、摘要、輕量檔案分析；2026/10/9 起免費版只能用 Flash-Lite（3.5 Flash-Lite）模型，不能再用 Flash／Pro；Nano Banana Pro 只能少量試用，並有「5 小時＋每週」運算上限（每日確切圖片張數官方未公布，不知道）。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Google AI Plus：約 NT$155／月（US$4.99，2026年6月8日從US$7.99調降）－更高日用額度、400GB雲端儲存（2026/10/9 起 AI Plus 不再提供 Gemini 3.1 Pro；2026/11/13 起 AI Plus 在 Gemini App 與 Google 搜尋 AI 模式都不能再手動選 Pro 模型，要用 Pro 需升級 AI Pro），不含Workspace深度整合。</div>
+<div class='ln sub'>▪ Google AI Pro：NT$650／月（US$19.99）－Context Window 達 1M tokens、5TB 雲端儲存、Workspace（Gmail/Docs）整合、圖片生成約 100 張／日。</div>
+<div class='ln sub'>▪ Google AI Ultra：US$99.99／月(5倍Pro用量)或US$199.99／月(20倍用量)－2026年5月Google I/O後從單一US$249.99拆分成兩檔，Deep Think模式、20TB雲端儲存、Gemini 4 Argon 公開後優先開放、圖片生成約1,000張／日。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 免費版仍可日常問答，但 10/9 起模型降為 Flash-Lite，品質不如付費版</div>
+<div class='ln sub'>▪ 四級方案可依需求漸進升級，價格帶完整不跳空；10 月起每個模型都可選低／中／高「思考強度」</div>
+<div class='ln sub'>▪ 與 Gmail、Docs、雲端硬碟深度整合，辦公族群幾乎無痛上手</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 家庭共享方案的生圖／音樂點數是全家共用，一人用完全家當天都不能生成</div>
+<div class='ln sub'>▪ 「Workspace 整合」等關鍵功能只在特定方案才有，訂閱前要仔細比對</div>
+<div class='ln sub'>▪ Ultra 對個人用戶而言價格仍偏高（NT$6,500／月）</div>
+</div>
+</details>
+
+
+<details id='tool-grok'>
+<summary>
+  <span class='tool-title'>Grok<span class='tag-pill'>全能聊天</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 唯一即時整合 X 平台輿情的 AI</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要追蹤科技新聞、社群輿情、加密貨幣即時動態的人，以及 X 平台重度用戶；不使用 X 的人幾乎感受不到它的差異化優勢。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>Free 方案 $0：即時網路與 X 平台搜尋、Voice Mode，文字對話約每2小時10次(較輕量的Grok 4 Mini模型)；圖片/影片生成已於2026年3月19日起完全移除免費額度，需升級付費方案才能使用。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ 🆕 The X Subscription（2026/10/12 推出，整合 Grok、Grok Bot、Cursor、X Premium）：Plus US$8／月（年繳 US$80）、Premium US$30／月（年繳 US$300，含 Grok Bot）、Super US$100／月、Ultra US$200／月；付費方案共用同一個 Grok 用量池（Grok App、X 上的 Grok、Cursor 共用）。原 SuperGrok、X Premium 舊方案可以繼續用，改訂新方案是自願的。</div>
+<div class='ln sub'>▪ SuperGrok Lite（原 US$10／月）：2026/10 查證時 xAI 官方方案頁已不再列出，是否仍可新訂閱不知道。</div>
+<div class='ln sub'>▪ SuperGrok：US$30／月－解鎖最新 Grok 4.7 模型、Expert模式、Grok Imagine圖片／影片生成、優先運算資源。</div>
+<div class='ln sub'>▪ SuperGrok Plus：US$100／月－更高用量、支援1080p影片生成、多代理推論、優先存取。</div>
+<div class='ln sub'>▪ SuperGrok Heavy（原 US$300／月）：2026/10 查證時官方方案頁也已不再列出，目前公開方案為 Free／SuperGrok／SuperGrok Plus／Enterprise；另 X Premium（US$8）／Premium+（US$40）也含 Grok 使用權。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 即時整合 X 平台討論與網路搜尋，追蹤科技新聞／輿情有獨家優勢</div>
+<div class='ln sub'>▪ DeepSearch 會清楚呈現推理與搜尋邏輯，過程透明可檢驗</div>
+<div class='ln sub'>▪ 免費版可先體驗基本聊天與搜尋功能，不用馬上付費</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 免費版已完全沒有圖片/影片生成額度，想生圖至少要升級 US$30 的 SuperGrok</div>
+<div class='ln sub'>▪ 進階方案（SuperGrok Plus）細節需登入帳號才顯示，Lite／Heavy 已從官方頁面消失</div>
+<div class='ln sub'>▪ 核心賣點（即時 X 資訊）對不使用 X 平台的人吸引力有限</div>
+</div>
+</details>
+
+
+<details id='tool-perplexity'>
+<summary>
+  <span class='tool-title'>Perplexity<span class='tag-pill'>全能聊天/搜尋</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 會附來源引用的AI搜尋引擎</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要「有來源可查證」答案的研究者、學生、記者、分析師；已經有 ChatGPT/Claude 的人可以把 Perplexity 當作「事實查核」用的第二支 AI。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>Free 方案 $0：基本搜尋無次數上限，可即時檢索網路並附編號引用來源；進階「Pro 搜尋」（多步驟深度研究）每日限約 3～5 次。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Pro：US$20／月（年繳 US$200，約合 US$17／月）－Pro 搜尋不限次數，可自由切換 GPT-4、Claude 等頂尖模型。</div>
+<div class='ln sub'>▪ Max：US$200／月（年繳 US$2,000）－最高階方案，含更高階模型與更大量使用額度。</div>
+<div class='ln sub'>▪ Education Pro：US$10／月（需 SheerID 學生／教職員驗證）－享 Pro 版功能半價優惠。</div>
+<div class='ln sub'>▪ 企業版：Enterprise Pro US$40／席／月、Enterprise Max US$325／席／月，含團隊協作空間與使用者權限管理。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 每個答案都附來源連結，即時性與可查證性是同類工具中最強的</div>
+<div class='ln sub'>▪ 免費版基本搜尋不限次數，一般查資料需求不太需要升級</div>
+<div class='ln sub'>▪ Pro 版可自由切換多家頂尖模型，不用另外訂閱其他 AI</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 本質是「搜尋＋整合」工具，深度推理或創意寫作能力不如 Claude、ChatGPT</div>
+<div class='ln sub'>▪ 免費版每日 Pro 搜尋僅 3～5 次，重度研究需求很快會撞到上限</div>
+<div class='ln sub'>▪ 繁體中文在地（台灣）議題的資訊整合品質仍有進步空間</div>
+</div>
+</details>
+
+
+<details id='tool-ms_copilot'>
+<summary>
+  <span class='tool-title'>Microsoft Copilot<span class='tag-pill'>全能聊天</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 深度整合 Windows／Office 的辦公室 AI</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>已經在用 Windows、Edge、Word/Excel/PowerPoint 的上班族；想要 AI 直接嵌入日常辦公軟體、不用切換視窗的人。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>Microsoft Copilot（免費）：可在 copilot.microsoft.com、App 或 Edge 瀏覽器內使用，支援一般問答、圖片生成（Designer）、網頁瀏覽輔助，無需訂閱 Microsoft 365。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Microsoft 365 Premium：約US$19.99／月－原本獨立的「Copilot Pro」(US$20/月)已於2025年10月1日起停止販售新戶,功能整合進此方案,含Word/Excel/PowerPoint/Outlook內建Copilot、優先模型存取、最多6TB雲端儲存;既有Copilot Pro訂閱已於2026年8月1日結束；年繳 US$199.99，另有 Personal US$9.99／Family US$12.99 方案。</div>
+<div class='ln sub'>▪ Microsoft 365 Copilot（企業版）：每人每月 US$30－完整整合 Teams、SharePoint 等企業 M365 環境，含資料保護與權限控管。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 內建即時網路搜尋，免費版就能查到最新資訊，不像部分 AI 免費版有知識截止日限制</div>
+<div class='ln sub'>▪ 深度整合 Windows、Edge、Office 生態系，不用切換視窗就能用 AI 處理文件</div>
+<div class='ln sub'>▪ 對多數個人用戶來說，免費版的日常問答、資料查詢、寫作輔助已經很夠用</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 要在 Word/Excel/PowerPoint 裡完整使用 AI，需訂閱 Microsoft 365 Premium（約 US$19.99／月）；舊的 Copilot Pro 已停售、既有訂閱已於 2026/8/1 結束</div>
+<div class='ln sub'>▪ 企業版每人每月 US$30，對中小企業是不小的負擔</div>
+<div class='ln sub'>▪ 整體創意生成與複雜推理能力，官方評測仍略遜於 Claude、ChatGPT 等專門聊天工具</div>
+</div>
+</details>
+
+  </div>
+</section>
+
+
+<section class='category' id='cat-zh'>
+  <div class='cat-header'>
+    <h2>🌐 中文AI助手</h2>
+    <p class='cat-intro'>中國陣營三強打法不同：DeepSeek 走技術開源、豆包靠免費流量、Kimi 專攻長文件與 Agent，都主打比國際大廠更低的價格。</p>
+  </div>
+  <div class='table-wrap'>
+<table class='cmp-table'>
+<thead><tr><th>工具</th><th>一句話定位</th><th>免費額度精華</th><th>最低付費門檻</th></tr></thead>
+<tbody>
+<tr>
+<td class='tcol-name'><a href='#tool-deepseek'>DeepSeek</a><span class='vendor'>深度求索（杭州）</span></td>
+<td>永久免費開源、程式與數學能力突出的中文 AI</td>
+<td>網頁版/App完全免費,無廣告無內購</td>
+<td>無消費版訂閱,API走用量計費</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-doubao'>豆包（Doubao）</a><span class='vendor'>字節跳動</span></td>
+<td>字節跳動旗下、多模態能力最完整的中文 AI 助手</td>
+<td>基礎對話免費,2026年5月起推出付費會員</td>
+<td>約人民幣68元/月（標準版）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-kimi'>Kimi</a><span class='vendor'>月之暗面（Moonshot AI）</span></td>
+<td>主打超長上下文與中文長文件處理的 AI</td>
+<td>基礎對話免費,進階功能加購會員</td>
+<td>國際版US$19/月起</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <div class='cards'>
+  
+<details id='tool-deepseek'>
+<summary>
+  <span class='tool-title'>DeepSeek<span class='tag-pill'>中文AI助手</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 永久免費開源、程式與數學能力突出的中文 AI</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要低成本、大量呼叫 API 的開發者；預算敏感、想要免費好用中文 AI 的一般使用者；重視「開源」與自行部署彈性的技術團隊。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>官方明確聲明網頁端與正版 App 完全免費、無廣告、無內購，聯網搜索、深度思考、長上下文等功能皆免費開放。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln'>沒有個人訂閱方案；僅開放 API 依 token 用量計費，目前主力 V4.1 Flash（2026/9/10 推出）輸入 US$0.30、輸出 US$1.20／百萬 token，V4 Pro 輸入 US$1.32、輸出 US$3.96，離峰時段再打 5 折，仍是同類中文模型中最低價之一，適合大量、低成本的程式化調用。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 網頁版與 App 完全免費，沒有任何內購或會員限制</div>
+<div class='ln sub'>▪ 採永久開源策略，技術社群活躍，中小型專案可直接部署使用</div>
+<div class='ln sub'>▪ API 價格是中文 AI 陣營中最低廉的選項之一，適合大量批次任務</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 消費端體驗（介面、生態整合）不如 ChatGPT、Claude 等國際大廠完整</div>
+<div class='ln sub'>▪ 複雜推理與多模態（圖片／影片）能力相對開發較晚，不是全能型工具</div>
+<div class='ln sub'>▪ 沒有付費升級選項，若需要更高穩定性或 SLA 保證需另外規劃</div>
+</div>
+</details>
+
+
+<details id='tool-doubao'>
+<summary>
+  <span class='tool-title'>豆包（Doubao）<span class='tag-pill'>中文AI助手</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 字節跳動旗下、多模態能力最完整的中文 AI 助手</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>已經在用抖音生態、需要影片生成（1080P）與多模態創作的一般大眾用戶；想要「免費、順手、口語化」中文 AI 日常助手的人。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>基礎文字對話、聯網搜尋等日常功能維持免費，截至 2026 年月活躍用戶已破 1.5 億，是中國市場滲透率最高的 AI 助手之一。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln'>2026/6/24 正式推出「豆包專業版」：標準套餐連續包月人民幣 68 元（包年 688 元）、加強套餐 200 元（包年 2,048 元，額度為標準 4 倍）、高級套餐 500 元（包年 5,088 元，額度為標準 10 倍），基礎功能仍免費。（11/27 再查：未發現 11 月新變動）</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 多模態能力完整，影片生成（1080P）、3D 生成與抖音生態整合是強項</div>
+<div class='ln sub'>▪ 免費策略跑了半年多，日活躍用戶破億，產品成熟度與穩定性高</div>
+<div class='ln sub'>▪ 口語化、貼近一般大眾使用習慣，上手門檻低</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 複雜推理能力相對 DeepSeek、Kimi 等專攻技術路線的對手較弱</div>
+<div class='ln sub'>▪ 2026/6/24 才正式推出付費專業版，方案還很新</div>
+<div class='ln sub'>▪ 主要服務中國大陸用戶與生態，國際化程度不如 ChatGPT、Gemini</div>
+</div>
+</details>
+
+
+<details id='tool-kimi'>
+<summary>
+  <span class='tool-title'>Kimi<span class='tag-pill'>中文AI助手</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 主打超長上下文與中文長文件處理的 AI</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要處理長篇 PDF、會議紀錄、研究報告的知識工作者；需要中文 Agent 自動化任務（K3 系列）的技術使用者。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>網頁版與 App 日常對話免費使用，基礎長文本問答與整理功能不收費。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln'>國際版會員 2026/9 起改名 Plus US$19／Pro US$39／Max US$99／Ultra US$199（月繳；年繳 Plus 約 US$15／月），舊方案（Andante／Moderato／Allegretto／Allegro）既有訂戶可續用；中國版人民幣價格本次查不到最新資料（不知道）。最新 K3.1 Pro（1M 上下文）API：輸入 US$2、輸出 US$10／百萬 token（K3 原為 US$3／US$15）；會員費和 API 費分開計算。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 長上下文處理能力是中文 AI 陣營中的強項，適合丟整份 PDF、逐字稿進去做摘要</div>
+<div class='ln sub'>▪ K3 系列鎖定 Agent 自動化任務，技術路線清晰</div>
+<div class='ln sub'>▪ 基礎功能免費，日常長文件整理需求不太需要花錢</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 2026 年市占率（月活躍用戶）相較豆包、DeepSeek 呈下滑趨勢，生態較小</div>
+<div class='ln sub'>▪ 會員定價從 US$19 到 US$199 區間跨度大，方案選擇需要仔細比較</div>
+<div class='ln sub'>▪ 英文與國際化場景的能力不是主打強項</div>
+</div>
+</details>
+
+  </div>
+</section>
+
+
+<section class='category' id='cat-image'>
+  <div class='cat-header'>
+    <h2>🎨 圖片生成／設計</h2>
+    <p class='cat-intro'>Mixboard 目前完全免費但屬實驗性質；Nano Banana Pro 隨 Gemini 訂閱附贈、適合資訊圖表；Lovart 走「一次生成整套品牌視覺」的設計代理路線；Midjourney 畫面美感公認最強但沒有免費版；Adobe Firefly 版權最乾淨、與 Creative Cloud 整合最深；Ideogram 專改圖片內文字渲染。</p>
+  </div>
+  <div class='table-wrap'>
+<table class='cmp-table'>
+<thead><tr><th>工具</th><th>一句話定位</th><th>免費額度精華</th><th>最低付費門檻</th></tr></thead>
+<tbody>
+<tr>
+<td class='tcol-name'><a href='#tool-mixboard'>Google Mixboard</a><span class='vendor'>Google Labs</span></td>
+<td>目前完全免費的靈感拼貼畫布</td>
+<td>公開Beta,完全免費,已開放全球180+國家/地區</td>
+<td>尚未推出付費方案</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-nanobanana'>Nano Banana Pro</a><span class='vendor'>Google（Gemini）</span></td>
+<td>會思考、能生成資訊圖表的圖片模型</td>
+<td>Gemini App內少量試用,10/9起免費限制更緊</td>
+<td>隨Gemini AI Plus起(約NT$155/月)</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-lovart'>Lovart</a><span class='vendor'>Liblib</span></td>
+<td>一次 prompt 產出整套品牌視覺的設計代理</td>
+<td>每日30點,無需信用卡</td>
+<td>US$19/月起（Starter）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-midjourney'>Midjourney</a><span class='vendor'>Midjourney Inc.</span></td>
+<td>畫面美感公認最強的 AI 繪圖工具</td>
+<td>已無免費試用,需直接訂閱付費方案</td>
+<td>US$10／月（Basic）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-firefly'>Adobe Firefly</a><span class='vendor'>Adobe</span></td>
+<td>版權最乾淨、與 Creative Cloud 整合最深的 AI 創作平台</td>
+<td>免費帳號提供有限生成點數(約25點/月)</td>
+<td>US$9.99/月（Standard）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-ideogram'>Ideogram</a><span class='vendor'>Ideogram（Toronto）</span></td>
+<td>圖片內文字渲染最準確的 AI 繪圖工具</td>
+<td>每週約10點慢速生成,圖片預設公開</td>
+<td>US$20/月（Plus；Basic 已取消）</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <div class='cards'>
+  
+<details id='tool-mixboard'>
+<summary>
+  <span class='tool-title'>Google Mixboard<span class='tag-pill'>圖片生成</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 目前完全免費的靈感拼貼畫布</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>發想階段需要快速視覺化想法、對客戶提案前做概念驗證，但不追求最終商用成品的人；正式素材仍建議交給設計師精修。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>公開 Beta 測試階段，目前完全免費使用，已從美國限定擴展到全球超過 180 個國家／地區（含台灣）。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln'>尚未公布付費方案；官方僅表示這是 Google Labs 實驗性產品，未來定價策略尚未確定。（11/27 再查：查不到新的官方定價資訊）</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 目前完全免費，沒有點數或次數限制</div>
+<div class='ln sub'>▪ 基於 Nano Banana 模型架構，「混搭」（Mix）式操作比傳統打字下 prompt 更直覺</div>
+<div class='ln sub'>▪ 擅長鎖定核心元素、僅更換背景或風格，適合系列產品圖／電商素材</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 仍屬實驗性 Beta 產品，功能與可用性可能隨時調整或下線</div>
+<div class='ln sub'>▪ 官方建議當作發想／概念驗證工具，正式產出仍需設計師精修</div>
+<div class='ln sub'>▪ 未來可能轉為付費模式，需持續關注 Google 官方公告</div>
+</div>
+</details>
+
+
+<details id='tool-nanobanana'>
+<summary>
+  <span class='tool-title'>Nano Banana Pro<span class='tag-pill'>圖片生成</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 會思考、能生成資訊圖表的圖片模型</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要把資料、天氣、賽事等即時資訊轉成圖表或圖解的行銷／簡報工作者，以及對圖片浮水印合規（客戶會問「這圖怎麼生成的」）有要求的商業用途。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費帳號可在 Gemini App「Thinking」模式試用 Nano Banana Pro，額度用完自動降級為一般版 Nano Banana（2026/10/9 調整後免費版每日確切張數官方未公布，不知道；解析度上限 1K）。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ 隨Google AI Plus(約NT$155／月,2026年6月已從US$7.99降至US$4.99)：圖片生成額度提升至約50張／日。</div>
+<div class='ln sub'>▪ 隨Google AI Pro(NT$650／月)：額度約100張／日，並開放4K輸出。</div>
+<div class='ln sub'>▪ 隨Google AI Ultra(US$99.99或US$199.99／月,2026年5月已從單一US$249.99拆分兩檔)：額度約1,000張／日。</div>
+<div class='ln sub'>▪ （Nano Banana Pro 用量與 Gemini 訂閱方案共用同一額度池，沒有獨立訂閱費用。）</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 具備推理（Thinking）能力，能生成有內容的資訊圖表、圖解，不只是美圖</div>
+<div class='ln sub'>▪ 可連結 Google 搜尋知識庫，快速把天氣、賽事等即時資訊視覺化</div>
+<div class='ln sub'>▪ 內建 SynthID 浮水印＋C2PA 內容憑證，商業／出版合規性佳</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 免費額度用完會自動降級為畫質較弱的一般版 Nano Banana</div>
+<div class='ln sub'>▪ 繁體中文圖片內文字的渲染穩定度仍待加強</div>
+<div class='ln sub'>▪ 生成速度比同系列 Flash 版（Nano Banana 2）慢，不適合大量迭代</div>
+</div>
+</details>
+
+
+<details id='tool-lovart'>
+<summary>
+  <span class='tool-title'>Lovart<span class='tag-pill'>圖片生成</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 一次 prompt 產出整套品牌視覺的設計代理</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>沒有設計師的新創／行銷團隊需要一次生成海報＋品牌識別＋社群圖，願意為「省下請設計師的時間」付費的人。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費方案提供每日／每月設計點數，無需信用卡即可測試核心生成功能。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Starter US$19（2,000 點）／Basic US$32（3,500 點）／Pro US$90（11,000 點，年繳首期促銷約 US$39／月）。</div>
+<div class='ln sub'>▪ Ultimate：US$199／月（27,000 點，年繳首期促銷約 US$99／月）；Team 需洽官方報價。</div>
+<div class='ln sub'>▪ 11/27 再查：價格未見變動；2026/10/19 推出 Lovart 2.0（Arti 設計助理）。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 一次 prompt 可產出完整成品（海報系列、品牌識別套件、分鏡腳本），不只是單張圖片</div>
+<div class='ln sub'>▪ 整合 15 種以上圖片／影片生成模型（含 Wan 2.6、Seedance 2.0），自動選最適合的模型</div>
+<div class='ln sub'>▪ 支援批次生成，最多可一次產出 40 張圖片，適合系列素材</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 完整定價表未完全公開於官網文字內容，需登入結帳頁才看得到即時價格</div>
+<div class='ln sub'>▪ 高品質影片或大量品牌資產生成時，點數消耗速度快</div>
+<div class='ln sub'>▪ 免費版僅適合小規模測試，正式商業專案幾乎必須升級付費</div>
+</div>
+</details>
+
+
+<details id='tool-midjourney'>
+<summary>
+  <span class='tool-title'>Midjourney<span class='tag-pill'>圖片生成</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 畫面美感公認最強的 AI 繪圖工具</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>追求藝術風格與畫面美感的插畫師、封面設計師、視覺創作者；能接受用 Discord 或網頁操作、且願意直接付費（無免費版）的專業用戶。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>目前已完全取消免費試用（原註冊贈送 25 張生成額度已取消），必須直接訂閱付費方案才能使用。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Basic：US$10／月－快速生圖模式 3.3 小時（約 200 次生成）。</div>
+<div class='ln sub'>▪ Standard：US$30／月－快速生圖模式 15 小時，並含無限量 Relax（較慢）生成模式。</div>
+<div class='ln sub'>▪ Pro：US$60／月－快速生圖模式 30 小時，並開放隱身模式（生成內容不公開）。</div>
+<div class='ln sub'>▪ Mega：US$120／月－快速生圖模式 60 小時。年繳方案平均可再省約 2 成。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 在 Artificial Analysis 圖片競技場盲測長期排名第一，畫面美感公認業界標竿；目前預設模型為 V8.2（2026/7/24 起）</div>
+<div class='ln sub'>▪ 風格強烈多樣，插畫、寫實、概念設計都有很成熟的呈現</div>
+<div class='ln sub'>▪ 訂閱付費即可商用，版權歸屬清楚</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 完全沒有免費版，連測試都要先付至少 US$10</div>
+<div class='ln sub'>▪ 需綁定 Discord 操作（或較新的網頁版），新手需要時間熟悉指令與參數</div>
+<div class='ln sub'>▪ 沒有公開 API，只能透過 Discord 或官方網頁應用生成</div>
+</div>
+</details>
+
+
+<details id='tool-firefly'>
+<summary>
+  <span class='tool-title'>Adobe Firefly<span class='tag-pill'>圖片生成</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 版權最乾淨、與 Creative Cloud 整合最深的 AI 創作平台</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>已經在用 Photoshop/Illustrator 的設計師、需要商用版權保障（企業侵權賠償）的品牌與行銷團隊。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費帳號可獲得有限量的生成點數（約每月 25 點），部分進階功能（如無限畫布、影片生成）受限，足夠日常小量測試。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Standard：US$9.99／月－每月 2,000 點，解鎖商用授權。</div>
+<div class='ln sub'>▪ Pro：US$19.99／月（2026/4 從 US$29.99 調降）－每月 4,000 點，支援更高性能模型調用（如 Veo 3.1 4K 生成）、更大量點數。</div>
+<div class='ln sub'>▪ Pro Plus US$49.99（10,000 點）／Premium US$199.99（50,000 點）：2026 年新增，提供更大量影片／音訊生成點數。</div>
+<div class='ln sub'>▪ ⏰限時優惠：Firefly Pro／Pro Plus 優惠期 2026/11/10～12/6（12/6 後失效；折扣幅度依地區不同，以官網為準）。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 僅使用 Adobe Stock 與已授權／公有領域素材訓練，並提供企業版權侵權賠償保障，合規性業界最高</div>
+<div class='ln sub'>▪ 與 Photoshop、Illustrator 深度整合，「生成式向量圖」（Generative Vector）是獨家能力</div>
+<div class='ln sub'>▪ 整合多家外部模型（Nano Banana 2、Veo 3.1 等），一個平台可切換多種生成引擎</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 獨立圖片美感不算業界頂尖，不如 Midjourney 搶眼</div>
+<div class='ln sub'>▪ 點數消耗依模型、解析度、功能而異，不易一眼看出實際額度換算多少張圖</div>
+<div class='ln sub'>▪ 高階影片／音訊功能需要跳到較貴的 Pro Plus 或 Premium 方案才能用</div>
+</div>
+</details>
+
+
+<details id='tool-ideogram'>
+<summary>
+  <span class='tool-title'>Ideogram<span class='tag-pill'>圖片生成</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 圖片內文字渲染最準確的 AI 繪圖工具</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要在圖片裡放正確文字的設計師（海報、Logo、社群圖卡）；中小企業行銷需要大量文字精準的行銷素材。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費方案每週約 10 點慢速生成額度（約可生成 10～40 張圖，依模型而定），所有生成圖片預設為公開、不可轉私人。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Basic（原 US$8／月）：2026/11 查證官網方案頁已不再列出，確認不再提供。</div>
+<div class='ln sub'>▪ Plus：US$20／月（年繳約 US$15／月）－2,400 點／月（2026/10 由 1,000 點提高），含無限慢速生成與私人生成。</div>
+<div class='ln sub'>▪ Pro：US$60／月（年繳約 US$42／月）－7,500 點／月，支援批次生成與更高解析度輸出。</div>
+<div class='ln sub'>▪ Team：US$30／人／月（年繳約 US$20／人／月），每人 3,600 點；目前旗艦模型為 Ideogram 4.0。</div>
+<div class='ln sub'>▪ 點數加購包：US$4 可購買 150～250 點，加購點數可跨月結轉。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 在圖片內嵌入正確、清晰文字的能力公認業界最強，海報／Logo 設計師評價高</div>
+<div class='ln sub'>▪ 免費版即含完整功能（風格、Remix、角色參考等），只是額度與公開性受限</div>
+<div class='ln sub'>▪ 入門 Plus 方案 US$20／月含 2,400 點（2026/10 提高），點數比以前多</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 免費版生成的圖片一律公開、只能下載 JPG，無法用於正式商業案件</div>
+<div class='ln sub'>▪ 訂閱內含的「優先點數」每月到期不結轉，加購點數才會累積</div>
+<div class='ln sub'>▪ 整體藝術風格辨識度不如 Midjourney，更偏向「工具型」而非「風格型」</div>
+</div>
+</details>
+
+  </div>
+</section>
+
+
+<section class='category' id='cat-video'>
+  <div class='cat-header'>
+    <h2>🎬 影片生成</h2>
+    <p class='cat-intro'>Veo 3.1 免費額度最大方；Seedance 2.0（Dreamina 已上架新版 2.5）跑分最強但需第三方平台；Runway 功能最完整（影片後製）；可靈 Kling 中文最友善、性價比最高。（OpenAI Sora 的 App 已於 2026/4/26 關閉、API 於 2026/9/24 停止，已移出本清單）</p>
+  </div>
+  <div class='table-wrap'>
+<table class='cmp-table'>
+<thead><tr><th>工具</th><th>一句話定位</th><th>免費額度精華</th><th>最低付費門檻</th></tr></thead>
+<tbody>
+<tr>
+<td class='tcol-name'><a href='#tool-veo'>Veo 3.1</a><span class='vendor'>Google DeepMind</span></td>
+<td>免費額度最大方的官方影片工具</td>
+<td>每日50點免費(約可生成12支)+每月10支(Vids)</td>
+<td>無獨立訂閱,隨Gemini方案附贈</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-seedance'>Seedance 2.0</a><span class='vendor'>ByteDance</span></td>
+<td>跑分最強的多模態導演級影片模型</td>
+<td>Dreamina每日約225點共用點數,約可生成1-2支短片</td>
+<td>約US$5起(Dreamina,依批量計)</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-runway'>Runway</a><span class='vendor'>Runway AI</span></td>
+<td>功能最完整的 AI 影片編輯與生成平台</td>
+<td>約125點免費額度(約可生成25秒影片)</td>
+<td>US$12~15/月（Standard）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-kling'>可靈 Kling</a><span class='vendor'>快手（Kuaishou）</span></td>
+<td>性價比最高、中文最友善的 AI 影片生成工具</td>
+<td>每日約30-66點免費積分,約可生成1-6支720p短片</td>
+<td>約人民幣46~58元/月或US$10/月（海外版）</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <div class='cards'>
+  
+<details id='tool-veo'>
+<summary>
+  <span class='tool-title'>Veo 3.1<span class='tag-pill'>影片生成</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 免費額度最大方的官方影片工具</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>想免費試跑 AI 短影音、拍社群直式影片（Shorts/Reels）的一般創作者；不需要 API 串接的人幾乎不用花錢。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>2026 年 4 月起對所有 Google 帳號免費開放：Google Flow 每日 50 點免費額度（約可生成 12 支短片）、Google Vids 每月 10 支免費短片，均無需信用卡。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ 隨 Google AI Plus／Pro／Ultra 訂閱每月加贈 Flow 點數（英國價參考：Plus 200、Pro 1,000、Ultra 5x 10,000、Ultra 20x 25,000 點；換算：Lite 約 10 點、Fast 約 20 點、Quality 約 100 點／次；4K 升頻約 50 點，僅 Ultra 適用）。</div>
+<div class='ln sub'>▪ 開發者 API（無免費額度）：Lite 720p 約 US$0.05／秒起、Fast 約 US$0.10／秒、4K Standard 含音訊約 US$0.60／秒（8 秒片約 US$4.80）。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 消費端免費額度大方（每日 50 點，約可生成 12 支短片），不訂閱就能長期使用</div>
+<div class='ln sub'>▪ 深度整合 Gemini 語言能力，完美支援繁體中文指令與專業鏡頭語言術語</div>
+<div class='ln sub'>▪ 原生支援 4K 升頻與直式構圖，對社群短影音友善</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 開發者 API 完全沒有免費額度，需直接付費</div>
+<div class='ln sub'>▪ Flow 點數與 API 計費是兩套獨立系統，彼此不互通</div>
+<div class='ln sub'>▪ 免費額度每日重置、不可累積到隔天</div>
+<div class='ln sub'>▪ Veo Extend（延長影片）已於 2026/11/5 退役，延長影片現在需要 Google AI Plus 以上方案</div>
+</div>
+</details>
+
+
+<details id='tool-seedance'>
+<summary>
+  <span class='tool-title'>Seedance 2.0<span class='tag-pill'>影片生成</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 跑分最強的多模態導演級影片模型</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要精準控制運鏡、多角色一致性的專業影片創作者；願意透過即夢／Dreamina 等第三方平台，並能接受點數制計費的人。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>透過 Dreamina（即夢國際版）免費帳號，每日約 225 點共用點數（圖片／影片／編輯共用同一點數池），約可生成 1～2 支短片；純圖片生成目前完全免費。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Dreamina 已上架新版 Seedance 2.5：2026/9/23～10/9 促銷期 Basic 月繳首月 1 折（美國 US$1.50），720p 約 US$0.035／秒；促銷結束後的價格依地區而定（確切金額不知道）。</div>
+<div class='ln sub'>▪ Dreamina 月繳／年繳進階方案：最低約 US$0.055／秒（年繳），為目前市面比較中最低價之一。</div>
+<div class='ln sub'>▪ 以 10 秒 720p Pro 影片估算：約需 1,880 點，依批量與方案不同，約 US$1.91～4.60／支。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 支援多模態參考輸入（最多 9 張圖片＋3 段影片＋3 段音訊），可精準控制構圖與角色</div>
+<div class='ln sub'>▪ 具備自動分鏡與運鏡能力，生成內容鏡頭語言接近電影級</div>
+<div class='ln sub'>▪ 在 Artificial Analysis 文生影片（含音訊）與圖生影片競技場均排名第一</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 完整功能官方僅透過即夢（需陸版帳號）或 Dreamina、CapCut、Freepik 等第三方平台使用，沒有獨立官方訂閱頁</div>
+<div class='ln sub'>▪ 點數消耗高，重度使用者實際成本可能超過同級訂閱制影片工具</div>
+<div class='ln sub'>▪ 上線後曾引發訓練資料版權爭議，好萊塢片商已提出質疑</div>
+</div>
+</details>
+
+
+<details id='tool-runway'>
+<summary>
+  <span class='tool-title'>Runway<span class='tag-pill'>影片生成</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 功能最完整的 AI 影片編輯與生成平台</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要影片轉影片、運動筆刷、綠幕移除等專業後製功能的影片創作者／團隊；好萊塢等級特效工作室也在用的專業選擇。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費方案提供約 125 點生成額度（約可生成 25 秒影片），可用來測試文生影片、圖生影片等核心功能。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Standard：約 US$12～15／月－除 Runway 自家模型外，同時每月 625 點，可用自家 Gen-4.5，也可調用 Veo 3.1、Kling 3.0 Pro、Seedance 2.0、FLUX.2 等第三方模型，等於「一份訂閱看多家片庫」。</div>
+<div class='ln sub'>▪ Pro：US$28（年繳）～35／月（2,250 點）；Max：US$76（年繳）～95／月（9,500 點，取代已退役的 Unlimited）；Enterprise 另議。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 除生成外，還有影片轉影片（風格轉換）、運動筆刷、綠幕移除、影片延伸等專業後製工具，功能完整度同類最高</div>
+<div class='ln sub'>▪ 訂閱可同時使用自家模型與 Veo 3.1、Kling 3.0 等第三方模型，彈性大</div>
+<div class='ln sub'>▪ 已被多部好萊塢電影特效團隊採用，專業可信度高</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 免費額度僅約 25 秒影片，測試空間有限</div>
+<div class='ln sub'>▪ 功能選單多、專業術語較多，新手上手曲線比單純的文字轉影片工具陡</div>
+<div class='ln sub'>▪ 多模型調用雖有彈性，但費用與點數換算需要花時間搞懂</div>
+</div>
+</details>
+
+
+
+
+
+<details id='tool-kling'>
+<summary>
+  <span class='tool-title'>可靈 Kling<span class='tag-pill'>影片生成</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 性價比最高、中文最友善的 AI 影片生成工具</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>預算有限、需要中文 prompt 效果好的兩岸創作者；日常社群短影音、電商產品影片等高頻次、低預算需求。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費版每天提供約 30～66 點積分（24 小時刷新、不累計），約可生成 1～6 支 720p 短片，但需排隊等待（5～30 分鐘）且有 Kling 浮水印。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ 初級版：約人民幣 46～58 元／月－660 點，約可生成數十支影片。</div>
+<div class='ln sub'>▪ 黃金版：約人民幣 186～234 元／月－3,000 點，約可生成 150 個 720p 影片，圖片 3.0 模型全年免費。</div>
+<div class='ln sub'>▪ 鉑金版／至尊版：人民幣 466 元至 1,149 元／月－更高點數與 4K 畫質、數字人 2.0 等進階功能。</div>
+<div class='ln sub'>▪ 海外版（Kling）：Standard US$10（660 點）／Pro US$37（3,000 點）／Premier US$92（8,000 點）／Ultra US$180（26,000 點），年繳約省 34%，支援台灣信用卡付款。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 中文語義理解與人物動作自然度表現突出，對中文使用者 prompt 效果最好；最新模型 Kling 3.0（Turbo／Omni，2026/6/17 推出）</div>
+<div class='ln sub'>▪ 價格是同類國際影片工具的約三分之一，性價比公認最高</div>
+<div class='ln sub'>▪ 免費額度充足，一般測試與輕度使用完全不用付費</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 免費版生成內容帶有 Kling 浮水印，且解析度上限僅 720p</div>
+<div class='ln sub'>▪ 尖峰時段排隊時間長（5～30 分鐘），付費用戶才有優先排隊權</div>
+<div class='ln sub'>▪ 主要面向中文／亞洲市場，國際化與英文介面完整度不如 Runway</div>
+</div>
+</details>
+
+  </div>
+</section>
+
+
+<section class='category' id='cat-code'>
+  <div class='cat-header'>
+    <h2>💻 AI程式開發</h2>
+    <p class='cat-intro'>兩者都是「AI 寫程式」的代表，Cursor 走獨立 IDE、Agent 自動化能力最強路線（2026/10/12 方案大改版）；GitHub Copilot 靠 IDE 覆蓋範圍最廣、價格最親民取勝。</p>
+  </div>
+  <div class='table-wrap'>
+<table class='cmp-table'>
+<thead><tr><th>工具</th><th>一句話定位</th><th>免費額度精華</th><th>最低付費門檻</th></tr></thead>
+<tbody>
+<tr>
+<td class='tcol-name'><a href='#tool-cursor'>Cursor</a><span class='vendor'>Anysphere</span></td>
+<td>AI 原生的程式編輯器，Agent 自動化能力最強</td>
+<td>有限額度免費試用(依方案調整,常態性變動)</td>
+<td>US$8/月（Plus,僅Grok模型）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-gh_copilot'>GitHub Copilot</a><span class='vendor'>GitHub（Microsoft）</span></td>
+<td>IDE 相容性最廣、CP 值最高的程式碼助手</td>
+<td>每月2,000次程式碼補全+50次聊天,永久免費</td>
+<td>US$10/月（Pro）</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <div class='cards'>
+  
+<details id='tool-cursor'>
+<summary>
+  <span class='tool-title'>Cursor<span class='tag-pill'>AI程式開發</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 AI 原生的程式編輯器，Agent 自動化能力最強</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要多檔案自動重構、大規模程式碼變更的資深工程師；願意為「複雜任務自動執行」付費的專業開發團隊。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>提供免費層級可試用基本 AI 補全與有限的 Agent 請求額度，實際額度會隨官方調整，並非固定數字。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln'>2026/10/12 起方案大改版（Cursor 2026/8 被 SpaceX 收購，新訂閱改經由 The X Subscription 購買，與 Grok、X Premium 同一份帳單；舊 Hobby／Pro／Pro+／Ultra／舊 Teams 方案停止新購，舊用戶可續用）：</div>
+<div class='ln sub'>▪ Plus：US$8／月－只能用 Grok 模型，不含雲端 Agent、Bugbot、自備 API 金鑰。</div>
+<div class='ln sub'>▪ Premium：US$30／月－4 倍 Plus 用量，含雲端 Agent、Bugbot，取代 Pro 成為主力入門付費方案。</div>
+<div class='ln sub'>▪ Super：US$100／月（15 倍 Plus 用量、尖峰優先）；Ultra：US$200／月（50 倍、最早用到新模型）。</div>
+<div class='ln sub'>▪ Claude／GPT／Gemini 改為依 API 牌價另外儲值計費；用量改每週重置。原 Pro（US$20）與 Pro+ 停止新申請，舊 Pro 用戶暫時維持原價；學生方案現況不知道。</div>
+<div class='ln sub'>▪ OpenAI 原定 2026/11/12 停止提供模型給 Cursor（之後要自備 OpenAI API 金鑰、依 OpenAI API 價格計費，未來新模型不會上架 Cursor）；11/12 之後是否已實際停止，11/27 查證時查不到確認（不知道）。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ Composer 2 + Background Agents 的多步驟自動化能力，是市面上最強的 Agent 組合之一</div>
+<div class='ln sub'>▪ 支援多家前沿模型（Claude、GPT、Gemini）自由切換，不綁定單一供應商</div>
+<div class='ln sub'>▪ 獨立 IDE 設計，深度整合 AI 於整個開發流程，不只是外掛</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 想用 Claude／GPT 等前沿模型要 Premium（US$30）以上再另外儲值，費用比 GitHub Copilot 高</div>
+<div class='ln sub'>▪ 2026/10/12 改版後前沿模型改按 API 牌價另計，頻繁呼叫的重度用戶實際花費可能超出預期</div>
+<div class='ln sub'>▪ 獨立 IDE 介面僅英文，沒有正式中文化版本（不影響 AI 理解中文輸入）</div>
+</div>
+</details>
+
+
+<details id='tool-gh_copilot'>
+<summary>
+  <span class='tool-title'>GitHub Copilot<span class='tag-pill'>AI程式開發</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 IDE 相容性最廣、CP 值最高的程式碼助手</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>已經深度使用 GitHub 工作流的團隊；預算有限但需要穩定 AI 補全的個人開發者、學生；需要多種 IDE（VS Code／JetBrains／Xcode）支援的工程師。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費方案每月提供 2,000 次程式碼補全建議與 50 次聊天請求，對輕量使用者已相當夠用，且為永久免費（非試用期）。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln'>Pro：US$10／月－補全與聊天請求不限次數，並可使用 GitHub Issues→PR 自動化（Coding Agent）。2026 年 6 月起全面轉為 AI Credits 用量計費模式，頻繁呼叫前沿模型可能超出額度。Pro 每月含 US$15 AI Credits（不含 Opus 模型）；Pro+ US$39／月（US$70 Credits、全部模型）；2026/6 新增 Max US$100／月（US$200 Credits、優先存取）。新用戶申請已於 2026/6/17 起陸續重新開放。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 支援 40+ 種 IDE，是唯一同時覆蓋 VS Code、JetBrains、Xcode 的 AI 助理</div>
+<div class='ln sub'>▪ 免費方案「永久免費」且額度對多數輕度用戶已足夠，不是短期試用</div>
+<div class='ln sub'>▪ US$10／月的 Pro 方案是同價位中功能最完整的選擇，CP 值高</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 在複雜多檔案 Agent 任務的能力上，官方評測略遜於 Cursor</div>
+<div class='ln sub'>▪ 2026/4～6 月曾暫停新用戶申請 58 天，方案與計費政策變動頻繁</div>
+<div class='ln sub'>▪ 2026 年 6 月改用 AI Credits 計費後，重度使用前沿模型的費用可能難以預估</div>
+</div>
+</details>
+
+  </div>
+</section>
+
+
+<section class='category' id='cat-audio'>
+  <div class='cat-header'>
+    <h2>🎵 AI音樂／語音</h2>
+    <p class='cat-intro'>Suno 專攻「完整歌曲」，ElevenLabs 專攻「逼真語音與配音」，兩者互補而非直接競爭。</p>
+  </div>
+  <div class='table-wrap'>
+<table class='cmp-table'>
+<thead><tr><th>工具</th><th>一句話定位</th><th>免費額度精華</th><th>最低付費門檻</th></tr></thead>
+<tbody>
+<tr>
+<td class='tcol-name'><a href='#tool-suno'>Suno</a><span class='vendor'>Suno Inc.</span></td>
+<td>文字生成完整歌曲的音樂創作工具</td>
+<td>每日50點免費點數,約可生成10首歌(僅個人非商用)</td>
+<td>US$10/月（Pro）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-elevenlabs'>ElevenLabs</a><span class='vendor'>ElevenLabs</span></td>
+<td>業界公認最自然的 AI 語音生成與克隆工具</td>
+<td>每月約10,000點數(約10分鐘語音),不可商用</td>
+<td>US$6/月（Starter）</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <div class='cards'>
+  
+<details id='tool-suno'>
+<summary>
+  <span class='tool-title'>Suno<span class='tag-pill'>AI音樂/語音</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 文字生成完整歌曲的音樂創作工具</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>不懂樂理但想快速做出完整歌曲（含歌詞、旋律、人聲）的內容創作者；需要幫影片配上原創主題曲的 YouTuber。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費帳號每天有 50 點數，每次生成消耗 10 點，等於一天最多可免費生成 10 首完整歌曲（v4.5 模型），但下載的音樂僅限個人非商業用途。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Pro：US$10／月（年繳約 US$8／月）－2,500 點／月，取得商業使用授權，可上傳 YouTube 營利或用於廣告。</div>
+<div class='ln sub'>▪ Premier：US$30／月（年繳約 US$24／月）－10,000 點／月，並開放 Suno Studio 進階編輯工具。</div>
+<div class='ln sub'>▪ 🆕 Platinum：US$120／月（年繳約 US$100／月，2026/11/17 推出）－唯一含影片點數的方案（每月 20,000 Visual 點），可用新功能 Visuals 把歌曲做成最長 15 秒、對嘴的短片。</div>
+<div class='ln sub'>▪ 下載上限（2026/9/3 起）：免費版不能下載、Pro 每月 20 首、Premier 每月 60 首（限制的是下載，不是生成）。</div>
+<div class='ln sub'>▪ ⏰限時優惠：黑色星期五 2026/11/24～12/1，年繳 Pro／Premier 6 折、月繳 8 折（12/1 後失效）。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 不需要任何樂理知識，一句話就能生成有歌詞、旋律、人聲的完整歌曲</div>
+<div class='ln sub'>▪ 免費版每天 50 點、可生成約 10 首歌，測試與個人娛樂用途完全不用付費</div>
+<div class='ln sub'>▪ 在 ELO 音質評分中長期是同類工具（Suno v5）的品質標竿，人聲細節表現突出</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 免費版下載的歌曲只能個人非商業使用，想上傳 YouTube 營利就必須升級 Pro</div>
+<div class='ln sub'>▪ 說唱（Rap）、口白等特定曲風的人聲表現仍偏合成感</div>
+<div class='ln sub'>▪ 與環球、索尼等唱片公司的版權訴訟尚未完全落幕，長期版權風險需留意</div>
+</div>
+</details>
+
+
+<details id='tool-elevenlabs'>
+<summary>
+  <span class='tool-title'>ElevenLabs<span class='tag-pill'>AI音樂/語音</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 業界公認最自然的 AI 語音生成與克隆工具</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要高品質配音、Podcast 旁白、多國語言影片翻譯配音的內容創作者；需要語音複刻（Voice Cloning）建立品牌專屬聲音的企業。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費方案每月約 10,000 點數（約可生成 10 分鐘語音），可使用標準語音庫，但不含語音複刻功能，且生成內容不可用於商業用途。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Starter：US$6／月（首月常有 US$1 優惠）－30,000 點數（約 30 分鐘），解鎖即時語音複刻與商業授權。</div>
+<div class='ln sub'>▪ Creator：US$22／月－121,000 點數（約 120 分鐘），開放專業級語音複刻與 192kbps 高音質。</div>
+<div class='ln sub'>▪ Pro：US$99／月－600,000 點數（約 600 分鐘），適合企業級大量配音需求。</div>
+<div class='ln sub'>▪ Scale／Business：US$299～990／月－更大量點數與多席位協作，企業與代理商適用。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 語音自然度公認業界最強，side-by-side 比較幾乎每次都勝出</div>
+<div class='ln sub'>▪ 支援即時與專業級語音複刻（Voice Cloning），可打造品牌專屬聲音</div>
+<div class='ln sub'>▪ 商業授權條款清楚透明，訓練資料已取得授權，版權爭議風險低</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 免費版不可商用，且很多評測反映免費額度測試沒幾次就用完</div>
+<div class='ln sub'>▪ 計費單位是「點數（約等於字元數）」而非直覺的分鐘數，換算方式需要花時間理解</div>
+<div class='ln sub'>▪ 對話式 AI（Conversational AI）採取獨立按分鐘計費，容易跟主要訂閱方案的點數搞混</div>
+</div>
+</details>
+
+  </div>
+</section>
+
+
+<section class='category' id='cat-office'>
+  <div class='cat-header'>
+    <h2>📊 辦公／簡報</h2>
+    <p class='cat-intro'>Notion AI 把 AI 嵌入你已經在用的筆記／知識庫；Gamma 專注把一句話變成一份設計好的簡報／文件，兩者定位不同。</p>
+  </div>
+  <div class='table-wrap'>
+<table class='cmp-table'>
+<thead><tr><th>工具</th><th>一句話定位</th><th>免費額度精華</th><th>最低付費門檻</th></tr></thead>
+<tbody>
+<tr>
+<td class='tcol-name'><a href='#tool-notion'>Notion AI</a><span class='vendor'>Notion Labs</span></td>
+<td>深度嵌入筆記與知識庫工作流的 AI 同事</td>
+<td>Free/Plus方案共用20次一次性AI試用額度(非每月重置)</td>
+<td>US$20/人/月（Business,含完整AI功能）</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-gamma'>Gamma</a><span class='vendor'>Gamma Tech</span></td>
+<td>一句話生成簡報、文件、網頁的 AI 設計工具</td>
+<td>一次性400點(不每月補充),支援繁中</td>
+<td>US$9/月起（Plus）</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <div class='cards'>
+  
+<details id='tool-notion'>
+<summary>
+  <span class='tool-title'>Notion AI<span class='tag-pill'>辦公/簡報</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 深度嵌入筆記與知識庫工作流的 AI 同事</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>已經把文件、專案、會議記錄集中在 Notion 管理的團隊；需要 AI 直接讀取 Slack、Google Drive、GitHub 等跨平台資料回答問題的知識工作者。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費版（Free）與進階版（Plus）僅提供每個工作區一次性 20 次 AI 回覆試用額度，並非每月重置，用完需升級才能持續使用完整 AI 功能。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Business：US$20／人／月（年繳；月繳 US$24）－完整開放 Notion AI 功能，含 AI Meeting Notes、跨平台搜尋（Slack/Google Drive/GitHub/Jira）。</div>
+<div class='ln sub'>▪ Notion 點數（僅 Business／Enterprise 可買）：月購 US$10／1,000 點、年購 US$13／1,000 點，用於 Agents／Workers 等自動化；Workers 測試期免費，日後將改扣點數。</div>
+<div class='ln sub'>▪ 2026/11/2 起 Business／Enterprise 每人每月內含 1,500 Standard 點＋500 Select 點（每月重置、不累積），用完才扣工作區另外購買的 Notion 點數。</div>
+<div class='ln sub'>▪ Enterprise：客製化報價，含 Custom Agents 與 24/7 自動化模式。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 能直接串接讀取 Slack、Google Drive、GitHub 等外部平台資料，回答時會附原始來源連結</div>
+<div class='ln sub'>▪ 2026 年推出 Custom Agents，可針對客服回報、文件審核等情境建立專屬自動化流程</div>
+<div class='ln sub'>▪ 已經用 Notion 當主要知識庫的團隊，AI 功能完全嵌入既有工作流，不用切換工具</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 免費版的 20 次 AI 額度是「一次性」而非每月重置，用完就得付費，新手很容易誤解</div>
+<div class='ln sub'>▪ 完整 AI 功能綁在 US$20／人／月的 Business 方案，對只想試用 AI 的人門檻偏高</div>
+<div class='ln sub'>▪ 若只是要日常聊天寫作，不少用戶認為疊加 Notion AI 費用不如直接用 ChatGPT 或 Claude</div>
+</div>
+</details>
+
+
+<details id='tool-gamma'>
+<summary>
+  <span class='tool-title'>Gamma<span class='tag-pill'>辦公/簡報</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 一句話生成簡報、文件、網頁的 AI 設計工具</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要快速產出簡報但不想自己排版的行銷／業務人員；想把簡報、文件、社群貼文用同一個工具搞定的個人創作者或小團隊。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費方案提供基礎生成點數可製作簡報、文件、網頁，介面完整支援繁體中文，適合輕度、偶爾使用的需求。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Plus US$9（1,000 點）／Pro US$18（4,000 點）／Ultra US$90（20,000 點），皆為每席每月；Ultra，可存取最先進的文字／圖片／影片模型，支援最多 100 個自訂網域。</div>
+<div class='ln sub'>▪ 年繳可省最高約 28%；未使用點數可結轉至下月，最多累積到當月額度 2 倍。</div>
+<div class='ln sub'>▪ 免費賺點數：推薦好友或邀請隊友加入工作區，雙方各得 200 點。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 把「設計」這件事交給 AI 負責，使用者只要專注內容，不用自己排版調色</div>
+<div class='ln sub'>▪ 同一工具可產出簡報、文件、網頁、社群貼文多種格式，不用切換軟體</div>
+<div class='ln sub'>▪ 2026 年推出 Gamma Imagine，可在平台內直接生成品牌 Logo、資訊圖表等視覺素材</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 免費方案點數有限，經常製作簡報的使用者很快就需要升級付費</div>
+<div class='ln sub'>▪ 自動排版雖然快，但客製化與精細調整的自由度不如 PowerPoint 等傳統工具</div>
+<div class='ln sub'>▪ 點數消耗依模型與功能而異，不容易一眼看出「一份簡報大概要花多少點數」</div>
+</div>
+</details>
+
+  </div>
+</section>
+
+
+<section class='category' id='cat-ecosystem'>
+  <div class='cat-header'>
+    <h2>🌐 多模態生態系</h2>
+    <p class='cat-intro'>MiniMax 是唯一橫跨文字、音樂、影片、語音、程式碼的一站式平台，用一組 Token Plan 點數打通所有產品線，適合技術背景、願意自行試算用量成本的使用者。</p>
+  </div>
+  <div class='table-wrap'>
+<table class='cmp-table'>
+<thead><tr><th>工具</th><th>一句話定位</th><th>免費額度精華</th><th>最低付費門檻</th></tr></thead>
+<tbody>
+<tr>
+<td class='tcol-name'><a href='#tool-minimax'>MiniMax</a><span class='vendor'>稀宇科技（上海）</span></td>
+<td>一組訂閱打通文字／音樂／影片／語音的中國 AI 生態系</td>
+<td>各產品線提供少量試用額度,無統一標準</td>
+<td>US$5起(Token Plan Starter)</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <div class='cards'>
+  
+<details id='tool-minimax'>
+<summary>
+  <span class='tool-title'>MiniMax<span class='tag-pill'>多模態生態系</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 一組訂閱打通文字／音樂／影片／語音的中國 AI 生態系</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要同時用到多種生成能力（寫程式＋配樂＋短片＋語音）、願意自行試算用量成本以省錢的技術型使用者；不想比較多個工具定價的人可能會覺得入口太分散。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>MiniMax Agent App 標示為「免費＋App 內購買」；旗下各產品線（M3 語言模型、Hailuo 影片、Music、Speech）多提供新用戶少量免費試用額度，但沒有統一、公開的免費用量標準。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Token Plan 預付點數包：Starter US$5／5,000 點、Growth US$25／25,000 點、High Volume US$100／100,000 點（點數效期 1 年）。</div>
+<div class='ln sub'>▪ MiniMax Music：約 US$0.15／首（最長 5 分鐘曲目），歌詞生成另計 US$0.01／首。</div>
+<div class='ln sub'>▪ API：輸入 token 低至 US$0.30／百萬（未達 512K 上下文），適合大量程式化調用。</div>
+<div class='ln sub'>▪ Token Plan 月訂閱 2026/8/26 漲價 10%：Plus US$22、Max US$55、Ultra US$132；影片模型 2026/7 起由 MiniMax-H3 取代 Hailuo、改按秒計費；Music API 2026/8/26 起停止新用戶申請。</div>
+<div class='ln sub'>▪ 2026/9/29 公告 M Plan 將接替 Token Plan（價格與文字用量不變，部分方案開放 H3 等全模型），Token Plan 不再開放新購；上一行的月費（US$22／55／132）與 11/27 查到的官方文件（US$20／50／120）不一致，目前價格不知道，以官網為準。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 一組 Token Plan 訂閱可跨 CLI、API、Agent、音樂、影片、語音共用點數</div>
+<div class='ln sub'>▪ M3 語言模型上下文長度可達 1M tokens，適合長文件分析</div>
+<div class='ln sub'>▪ Agent 桌面版支援多智能體並行協作，可處理單一 Agent 難以獨力完成的長流程任務</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 產品線眾多（Chat／Code／Hub／Hailuo／Token Plan 等入口分散），初次使用容易搞不清楚差異</div>
+<div class='ln sub'>▪ 官方建議正式量產環境改用「用量計費」而非訂閱制，成本需自行試算</div>
+<div class='ln sub'>▪ 訂閱包含的月度額度用不完不會結轉到下個月</div>
+</div>
+</details>
+
+  </div>
+</section>
+
+
+<section class='category' id='cat-meeting'>
+  <div class='cat-header'>
+    <h2>📝 會議記錄</h2>
+    <p class='cat-intro'>Fathom 幾乎是目前同類工具中免費版最大方的選擇，錄製與轉錄無限制，只有「進階 AI 摘要」每月 5 通的限制值得留意。</p>
+  </div>
+  <div class='table-wrap'>
+<table class='cmp-table'>
+<thead><tr><th>工具</th><th>一句話定位</th><th>免費額度精華</th><th>最低付費門檻</th></tr></thead>
+<tbody>
+<tr>
+<td class='tcol-name'><a href='#tool-fathom'>Fathom</a><span class='vendor'>Fathom AI</span></td>
+<td>免費版最佳的 AI 會議記錄工具</td>
+<td>錄製/轉錄無限次數,進階AI摘要每月限5通</td>
+<td>US$16~20/月(Premium)</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <div class='cards'>
+  
+<details id='tool-fathom'>
+<summary>
+  <span class='tool-title'>Fathom<span class='tag-pill'>會議記錄</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 免費版最佳的 AI 會議記錄工具</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>業務、客服、顧問等每天開很多視訊會議、需要事後快速回顧重點的人；每月開會不到 5 次重要會議的輕度用戶，免費版就很夠用。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費版可「無限次數、無時長上限」錄製與轉錄會議逐字稿，但進階 AI 摘要每月僅限前 5 通電話，超過後僅提供基礎時間軸範本摘要。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Premium：US$20／月（年繳 US$16）－解鎖無限進階 AI 摘要、自訂摘要範本、CRM 自動同步（HubSpot／Salesforce）。</div>
+<div class='ln sub'>▪ Team Edition US$19（年繳 US$15，最低 2 席）／Business US$34（年繳 US$25）：另加共享資料夾、團隊分析、優先客服支援。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 免費版「錄製與轉錄無限次數、無時長上限」在同類工具中相當罕見</div>
+<div class='ln sub'>▪ AI 摘要多在會議結束後 30 秒內產生，速度快</div>
+<div class='ln sub'>▪ 逐字稿直接連結影片時間戳記，一鍵跳轉到任何一句話的當下畫面</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 免費版進階 AI 摘要每月僅 5 通，超過後只剩陽春時間軸摘要</div>
+<div class='ln sub'>▪ 以「看得見的機器人」身分加入會議，部分與會者會不自在（2026年8月起有Beta免機器人模式）</div>
+<div class='ln sub'>▪ 主要針對排定好的線上視訊會議設計，不支援電話或現場實體錄音</div>
+</div>
+</details>
+
+  </div>
+</section>
+
+
+<section class='category' id='cat-language'>
+  <div class='cat-header'>
+    <h2>🗣️ 語言學習</h2>
+    <p class='cat-intro'>Speakly 走「高頻單字優先」的效率學習路線，適合短期衝刺基礎溝通能力，但沒有真正永久免費版。</p>
+  </div>
+  <div class='table-wrap'>
+<table class='cmp-table'>
+<thead><tr><th>工具</th><th>一句話定位</th><th>免費額度精華</th><th>最低付費門檻</th></tr></thead>
+<tbody>
+<tr>
+<td class='tcol-name'><a href='#tool-speakly'>Speakly</a><span class='vendor'>Speakly OÜ</span></td>
+<td>用單字使用頻率排序學習優先度的語言 App</td>
+<td>7天完整試用(需先綁信用卡),之後降為受限免費版</td>
+<td>US$9.99起/月</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <div class='cards'>
+  
+<details id='tool-speakly'>
+<summary>
+  <span class='tool-title'>Speakly<span class='tag-pill'>語言學習</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 用單字使用頻率排序學習優先度的語言 App</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>想快速掌握一門新語言基本溝通能力（尤其愛沙尼亞語、芬蘭語等冷門語言選項）的旅行者或短期學習需求者；追求長期系統化課程的人可能覺得練習略單調。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>提供 7 天完整功能免費試用（須先綁定付款方式），試用期滿後自動降級為功能受限的免費版，僅能有限度使用詞彙練習。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ 月訂閱：US$9.99 起／月（1 個月或 3 個月方案僅能學習 1 種語言）。</div>
+<div class='ln sub'>▪ 6 個月／12 個月訂閱：可解鎖平台上所有語言。</div>
+<div class='ln sub'>▪ 11/27 再查：查不到 11 月新資料；另見 2026/7 資料歐元報價 Premium €14.99／月或 €99／年（各地區價格不同，以 App 內為準）。</div>
+<div class='ln sub'>▪ App 內限定終身方案：US$89.99（一次性付費，僅在 App 內購買）。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 以「使用頻率」為核心，優先教目標語言中最常用的 4,000 個單字，學習效率導向明確</div>
+<div class='ln sub'>▪ 結合拼字、口說、聽力、文法多重練習，並用間隔重複複習機制鞏固記憶</div>
+<div class='ln sub'>▪ 支援愛沙尼亞語、芬蘭語等市面較少見的語言選項</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 沒有真正「永久免費」版本，只有限時試用，定價機制常被使用者認為不夠直覺</div>
+<div class='ln sub'>▪ 部分進階文法課程僅開放給月費或終身訂閱用戶</div>
+<div class='ln sub'>▪ 練習模式對已有一定程度的進階學習者而言可能略顯重複單調</div>
+</div>
+</details>
+
+  </div>
+</section>
+
+
+<section class='category' id='cat-agent'>
+  <div class='cat-header'>
+    <h2>🤖 AI Agent（自主代理）</h2>
+    <p class='cat-intro'>Manus 與 Genspark 都能自主完成多步驟任務（研究、簡報、程式、影片），差異在 Genspark 額外整合聊天與電話撥打等 80+ 工具、走 All-in-One 路線；Manus 更專注在「單一任務端到端執行」。</p>
+  </div>
+  <div class='table-wrap'>
+<table class='cmp-table'>
+<thead><tr><th>工具</th><th>一句話定位</th><th>免費額度精華</th><th>最低付費門檻</th></tr></thead>
+<tbody>
+<tr>
+<td class='tcol-name'><a href='#tool-manus'>Manus</a><span class='vendor'>獨立營運（Meta收購案已被擋）</span></td>
+<td>會自己動手做完整任務的 AI 代理</td>
+<td>每日300點自動重置,支援1個並行任務</td>
+<td>US$20/月(Standard,4,000點)</td>
+</tr><tr>
+<td class='tcol-name'><a href='#tool-genspark'>Genspark</a><span class='vendor'>MainFunc</span></td>
+<td>整合 80+ 工具與多模型的 All-in-One 工作站</td>
+<td>免費點數改為終身上限(2026/10起),無需信用卡</td>
+<td>US$24.99/月（Plus）</td>
+</tr>
+</tbody>
+</table>
+</div>
+  <div class='cards'>
+  
+<details id='tool-manus'>
+<summary>
+  <span class='tool-title'>Manus<span class='tag-pill'>AI Agent</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 會自己動手做完整任務的 AI 代理</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>需要把「幫我研究＋做簡報＋寫程式」整串流程一次交辦出去的個人研究者或小型團隊，且能接受點數制、任務失敗需重跑的風險。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費方案每日 300 點自動重置點數（每 24 小時），支援 1 個並行任務、2 個排程任務，可使用 Chat 模式與 Manus 1.6 Lite（Agent 模式）；新用戶另贈一次性 1,000 點新手包。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Standard（Pro）：US$20／月－4,000 點／月。</div>
+<div class='ln sub'>▪ 進階 Pro：US$40／月－8,000 點／月（含 7 天免費試用）。</div>
+<div class='ln sub'>▪ Extended：US$200／月－40,000 點／月。</div>
+<div class='ln sub'>▪ Team：US$20／人／月起（最低 2 席），共享團隊點數池，年繳約省 17%。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 免費方案「可實際完成任務」而非純展示版，每日 300 點足以跑完幾個簡單流程</div>
+<div class='ln sub'>▪ 能自主完成研究、寫程式、資料分析、建立網頁應用等多步驟任務，一次 prompt 交付完整成果</div>
+<div class='ln sub'>▪ 已購買的加購點數只要訂閱持續有效就不會過期清零</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 複雜任務單次可能消耗 500～900 點，免費額度很容易一次就用完</div>
+<div class='ln sub'>▪ 月訂閱內含的月度點數不會結轉到下個月</div>
+<div class='ln sub'>▪ Meta 收購案 2026 年 4 月遭中國監管擋下，2026/9/1 起恢復獨立營運，長期歸屬仍有不確定性</div>
+</div>
+</details>
+
+
+<details id='tool-genspark'>
+<summary>
+  <span class='tool-title'>Genspark<span class='tag-pill'>AI Agent</span></span>
+</summary>
+<div class='body'>
+  <div class='headline'>💡 整合 80+ 工具與多模型的 All-in-One 工作站</div>
+  <div class='usecase'><span class='label-inline'>適合誰／使用情境　</span>不想在多個 AI 工具間切換、想用單一訂閱涵蓋聊天＋簡報＋影片＋電話撥打的效率導向使用者，尤其適合單人小團隊取代多個工具訂閱。</div>
+  <div class='ln top blue'>🆓 免費額度</div>
+  <div class='ln'>免費方案原為每日 100～200 點，2026 年 10 月起改為「終身總量上限」（上限數字官方未公布，不知道），約 1GB 儲存空間，無需信用卡即可體驗大部分工具。</div>
+  <div class='ln top yellow'>💳 付費方案</div>
+  <div class='ln sub'>▪ Plus：US$24.99／月（2026/10/5 起；9 月一度標示 US$49.99），含 1TB 儲存空間，每月點數以官網為準。</div>
+<div class='ln sub'>▪ Pro：US$249.99／月（年繳約 US$199.99／月）－125,000 點／月，另含 1TB 儲存空間。</div>
+<div class='ln sub'>▪ Team：2026/10/15 起 US$40／人／月（年繳 US$35），每席每月 10,000 點（原 US$30、12,000 點）。</div>
+<div class='ln sub'>▪ 付費方案的 AI 聊天與圖片生成，目前保證於 2026 年底前為「零點數」無限使用。</div>
+  <div class='ln top green'>✅ 優點</div>
+  <div class='ln sub'>▪ 整合 80 種以上工具與多個前沿模型（GPT-5.6、Claude Fable 5、Gemini 等）於單一介面</div>
+<div class='ln sub'>▪ 付費版聊天與圖片生成為零點數無限次使用（至少維持到 2026 年 12 月），日常使用成本可控</div>
+<div class='ln sub'>▪ AI Slides 簡報生成品質獲不少使用者好評，可直接產出可編輯圖表與商用圖片</div>
+  <div class='ln top red'>⚠️ 缺點／限制</div>
+  <div class='ln sub'>▪ 影片生成、長時間通話、複雜 Super Agent 任務仍會快速消耗點數</div>
+<div class='ln sub'>▪ 沒有公開 API，僅提供終端使用者介面，開發者無法直接整合</div>
+<div class='ln sub'>▪ 「零點數聊天／圖片」等優惠僅保證到 2026 年 12 月 31 日，之後政策尚未明朗</div>
+</div>
+</details>
+
+  </div>
+</section>
+
+<div class='footer-note'>報表由 PowerShell 工具自動產生／景淵製作　｜　密碼保護版本　｜　資料需人工定期更新以確保時效性</div>
+</div>
+
+<script>
+// 內容查證日期過期提醒:這份報表的內容(免費額度/付費方案/優缺點)是Claude人工查證整理的靜態快照,
+// 不是即時抓取的資料(AI工具的方案資訊沒有結構化API可供程式直接查詢),所以需要定期主動請Claude重新
+// 查證更新;這裡用JavaScript在開啟頁面當下計算「距離上次查證過了幾天」,不需要每次重新產生報表
+(function checkContentStaleness() {
+    const verifiedDate = new Date('2026-11-27');
+    const today = new Date();
+    const daysSince = Math.floor((today - verifiedDate) / (1000 * 60 * 60 * 24));
+    const banner = document.getElementById('staleness-banner');
+    if (!banner) return;
+    if (daysSince > 30) {
+        banner.innerHTML = '⚠️此內容已經 ' + daysSince + ' 天沒有查證更新,AI工具的免費額度/價格變動很快,建議請Claude重新查證彙整最新資訊(目標:每月查證一次)';
+    } else {
+        banner.innerHTML = '距離上次查證:' + daysSince + ' 天(2026/11/27 部分重新查證,其餘沿用 2026/11/11、2026/10/15;目標每月查證一次,超過30天會在此顯示提醒。11/27 重點變動:ChatGPT Pro 原訂下修取消並改為用量加倍、Ideogram 點數提高且 Basic 方案移除、Notion Business 每人內含 AI 點數、Kimi 方案改名與 K3.1 Pro 降價、Suno 新增 Platinum 影片方案、Claude Ultra 另含 API 點數、OpenAI 原定停止供應 Cursor、Veo Extend 退役、MiniMax M Plan 接替 Token Plan;另有 Suno、Adobe Firefly 限時優惠(有到期日);豆包、Lovart、Google Mixboard、Speakly 查不到 11 月新資料)';
+    }
+})();
+
+let searchHits = [];
+let searchIdx = -1;
+
+function toggleAllSections(open) {
+    document.querySelectorAll('details').forEach(function(el) { el.open = open; });
+}
+
+const FONT_STEP = 1.5;
+const FONT_MIN = 12;
+const FONT_MAX = 24;
+function applyFontSize(px) {
+    document.body.style.fontSize = px + 'px';
+    try { localStorage.setItem('aiToolReportFontSize', px); } catch (e) {}
+}
+function changeFontSize(direction) {
+    let current = parseFloat(document.body.style.fontSize) || 16;
+    let next = current + direction * FONT_STEP;
+    next = Math.max(FONT_MIN, Math.min(FONT_MAX, next));
+    applyFontSize(next);
+}
+(function initFontSize() {
+    try {
+        const saved = localStorage.getItem('aiToolReportFontSize');
+        if (saved) { applyFontSize(parseFloat(saved)); }
+    } catch (e) {}
+})();
+
+function clearSearchHighlights() {
+    document.querySelectorAll('.ln.search-hit').forEach(function(el) {
+        el.classList.remove('search-hit', 'current');
+    });
+}
+
+function doToolSearch() {
+    const kw = document.getElementById('toolSearchBox').value.trim();
+    clearSearchHighlights();
+    searchHits = [];
+    searchIdx = -1;
+    const countEl = document.getElementById('searchCount');
+    if (!kw) { countEl.textContent = ''; return; }
+
+    const lowerKw = kw.toLowerCase();
+    document.querySelectorAll('.ln, .headline, .usecase').forEach(function(el) {
+        if (el.textContent.toLowerCase().indexOf(lowerKw) !== -1) {
+            el.classList.add('search-hit');
+            searchHits.push(el);
+        }
+    });
+
+    if (searchHits.length === 0) {
+        countEl.textContent = '0 筆';
+        return;
+    }
+    searchIdx = 0;
+    goToHit(0);
+}
+
+function goToHit(idx) {
+    if (searchHits.length === 0) return;
+    searchHits.forEach(function(el) { el.classList.remove('current'); });
+    idx = ((idx % searchHits.length) + searchHits.length) % searchHits.length;
+    searchIdx = idx;
+    const el = searchHits[idx];
+    el.classList.add('current');
+    const details = el.closest('details');
+    if (details && !details.open) { details.open = true; }
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('searchCount').textContent = (idx + 1) + ' / ' + searchHits.length;
+}
+
+function searchNext() {
+    if (searchHits.length === 0) { doToolSearch(); return; }
+    goToHit(searchIdx + 1);
+}
+function searchPrev() {
+    if (searchHits.length === 0) { doToolSearch(); return; }
+    goToHit(searchIdx - 1);
+}
+
+document.getElementById('toolSearchBox').addEventListener('input', function() {
+    if (this.value.trim() === '') { clearSearchHighlights(); document.getElementById('searchCount').textContent = ''; }
+});
+document.getElementById('toolSearchBox').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') { event.preventDefault(); doToolSearch(); }
+});
+</script>
+
+<button type="button" onclick="twShare()" style="position:fixed;left:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;border:0;padding:10px 14px;border-radius:20px;font:15px sans-serif;box-shadow:0 2px 6px rgba(0,0,0,.3)">📤 分享</button>
+<script>function twShare(){var u=location.href.split('#')[0].split('?')[0];var t=document.title||'景淵報表';
+if(navigator.share){navigator.share({title:t,text:t+'',url:u}).catch(function(){});return;}
+var ok=function(){alert('已複製連結,可以貼到 LINE 傳給朋友');};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(ok,function(){window.prompt('長按複製這個連結',u);});}else{window.prompt('長按複製這個連結',u);}}</script><a href="index.html" onclick="location.href='index.html?v='+Date.now();return false;" style="position:fixed;right:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;padding:10px 14px;border-radius:20px;font:15px sans-serif;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.3)">← 回目錄</a></body></html>

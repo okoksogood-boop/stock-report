@@ -1,0 +1,279 @@
+<!DOCTYPE html><html><head><meta name="robots" content="noindex,nofollow"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>顯卡效能與CP值天梯</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap');
+* { box-sizing: border-box; }
+body{background:#0a0b0d;color:#e4e4e7;font-family:'Inter','Microsoft JhengHei',sans-serif;margin:0;padding:0;}
+.mono{font-family:'JetBrains Mono',monospace;}
+.header{border-bottom:1px solid #1c1d21;padding:28px 24px 24px;}
+.header .wrap{max-width:1180px;margin:0 auto;}
+.eyebrow{font-size:13px;letter-spacing:3px;color:#76b900;font-weight:700;margin-bottom:10px;}
+h1{font-size:28px;font-weight:800;margin:0;letter-spacing:-0.5px;}
+.subtitle{color:#a1a1aa;font-size:13.5px;margin-top:8px;max-width:640px;line-height:1.7;}
+.controls{border-bottom:1px solid #1c1d21;padding:14px 24px;background:#0a0b0d;z-index:10;}
+.controls .wrap{max-width:1180px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.seg{display:flex;gap:4px;background:#131417;border:1px solid #202226;border-radius:10px;padding:4px;}
+.seg button{padding:6px 14px;border-radius:7px;border:none;cursor:pointer;font-size:12.5px;font-weight:700;background:transparent;color:#a1a1aa;font-family:'JetBrains Mono',monospace;}
+.seg button.active{background:#e4e4e7;color:#0a0b0d;}
+select, input[type=text]{background:#131417;border:1px solid #202226;border-radius:10px;padding:8px 12px;color:#e4e4e7;font-size:12.5px;font-family:'JetBrains Mono',monospace;}
+input[type=text]{flex:1;min-width:140px;outline:none;}
+.chk{display:flex;align-items:center;gap:6px;font-size:12px;color:#a1a1aa;font-family:'JetBrains Mono',monospace;}
+.banner{max-width:1180px;margin:20px auto 0;padding:0 24px;}
+#bestValueBox{border-radius:12px;padding:14px 18px;display:none;align-items:center;gap:14px;flex-wrap:wrap;}
+.content{max-width:1180px;margin:0 auto;padding:20px 24px 60px;}
+.colheader{display:grid;grid-template-columns:1.7fr 1.4fr 0.6fr 1.4fr 0.8fr;gap:8px;padding:0 14px 10px;}
+.colheader div{font-size:13.5px;letter-spacing:1.5px;color:#f0d789;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.row{display:grid;grid-template-columns:1.7fr 1.4fr 0.6fr 1.4fr 0.8fr;gap:8px;align-items:center;background:#131417;border:1px solid #1c1d21;border-radius:10px;padding:12px 14px;margin-bottom:6px;}
+.row .nameCell{display:flex;align-items:center;gap:8px;min-width:0;}
+.row .bar{width:4px;height:22px;border-radius:2px;flex-shrink:0;}
+.row .gname{font-weight:700;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.row .price{font-size:12.5px;font-family:'JetBrains Mono',monospace;}
+.row .tdp{font-size:12px;color:#71717a;font-family:'JetBrains Mono',monospace;}
+.pwLabel{display:block;font-size:10px;color:#4a4f5a;margin-top:2px;}
+.vramWarn{font-size:10px;font-weight:700;color:#eab308;background:rgba(234,179,8,0.15);padding:1px 6px;border-radius:5px;margin-left:6px;white-space:nowrap;flex-shrink:0;cursor:help;}
+.techBox{background:#131417;border:1px solid #1c1d21;border-radius:12px;padding:16px 18px;margin:20px 0;}
+.techBoxTitle{font-size:14px;font-weight:700;color:#f0d789;margin-bottom:12px;}
+.techGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
+.techItem{font-size:12.5px;color:#c7ccd6;line-height:1.7;}
+.techBrand{display:block;font-weight:700;font-size:13px;margin-bottom:4px;}
+.techNote{margin-top:14px;padding-top:14px;border-top:1px solid #1c1d21;font-size:11.5px;color:#8a93a3;line-height:1.7;}
+.perfCell{display:flex;align-items:center;gap:8px;}
+.perfTrack{flex:1;height:6px;background:#1c1d21;border-radius:3px;overflow:hidden;}
+.perfFill{height:100%;border-radius:3px;}
+.perfNum{font-size:11.5px;color:#a1a1aa;width:38px;text-align:right;font-family:'JetBrains Mono',monospace;}
+.cpBadge{font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+@media (max-width: 640px) {
+  .header{padding:20px 16px 16px;} h1{font-size:22px;} .subtitle{font-size:12.5px;}
+  .controls{padding:10px 16px;} .content{padding:14px 16px 40px;}
+  .seg button{padding:6px 10px;font-size:11.5px;}
+  select, input[type=text]{font-size:12px;padding:7px 10px;}
+  .colheader{display:none;}
+  .row{grid-template-columns:1fr 1fr;grid-template-areas:'name name' 'price tdp' 'perf perf' 'cp cp';row-gap:8px;padding:12px;}
+  .row > *:nth-child(1){grid-area:name;}
+  .row > *:nth-child(2){grid-area:price;}
+  .row > *:nth-child(3){grid-area:tdp;justify-self:end;text-align:right;}
+  .row > *:nth-child(4){grid-area:perf;}
+  .row > *:nth-child(5){grid-area:cp;justify-self:start;}
+  .row .gname{white-space:normal;overflow:visible;text-overflow:clip;}
+  .banner{padding:0 16px;} #bestValueBox{flex-wrap:wrap;padding:12px 14px;}
+  #bvCp{margin-left:0;width:100%;}
+  .techBox{padding:14px;} .techGrid{grid-template-columns:1fr;}
+}
+.footer{border-top:1px solid #1c1d21;padding:18px 24px 40px;}
+.footer .wrap{max-width:1180px;margin:0 auto;font-size:11px;color:#52525b;line-height:1.8;font-family:'JetBrains Mono',monospace;}
+.liveTag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:5px;font-size:10.5px;font-weight:700;background:#76b90022;color:#76b900;vertical-align:middle;}
+.staleTag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:5px;font-size:10.5px;font-weight:700;background:#eab30822;color:#eab308;vertical-align:middle;}
+.newTag{display:inline-block;margin:3px 4px 3px 0;padding:2px 8px;border-radius:6px;background:#1f2127;border:1px solid #2a2d33;font-size:12px;color:#e4e4e7;}
+.budgetGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;}
+.budgetCard{background:#0f1012;border:1px solid #23252b;border-radius:10px;padding:12px 14px;}
+.budgetCard .bl{font-size:12px;color:#a1a1aa;margin-bottom:6px;}
+.budgetCard .bn{font-size:15px;font-weight:800;color:#e4e4e7;}
+.budgetCard .bs{font-size:12px;color:#a1a1aa;margin-top:4px;font-family:'JetBrains Mono',monospace;}
+.legend{font-size:12px;color:#a1a1aa;line-height:1.8;margin:6px 0 14px;padding:10px 14px;background:#0f1012;border:1px solid #1c1d21;border-radius:10px;}
+.toolbar{display:flex;gap:8px;padding:8px 14px;background:#171a20;border-bottom:1px solid #2a2e38;align-items:center;}
+.toolbar button{background:#1a1d24;border:1px solid #262a33;border-radius:8px;color:#c7ccd6;padding:6px 12px;font-size:12.5px;cursor:pointer;}
+.toolbar-label{font-size:12px;color:#8a93a3;}
+</style></head><body>
+<div class='header'><div class='wrap'>
+<div class='eyebrow mono'>GPU BENCHMARK &middot; CP-VALUE LADDER &middot; 20261127 07:53</div>
+<h1>顯卡效能與 CP 值天梯</h1>
+<div class='subtitle'>以 <span class='mono'>RTX 5090 32G</span> 為 100 基準,換算 1080p / 2K / 4K 三種解析度下的相對效能與 CP 值(每元效能)。價格為本次執行時即時連線原價屋(coolpc.com.tw)抓取的當前售價(標示<span class='liveTag'>即時</span>);原價屋目前沒在賣、抓不到的型號(多為停產舊卡)會退回較早期的快照數字,標示<span class='staleTag'>備援價·可能過時</span>,這些價格可能與現在的庫存或二手價差很多,比較CP值時請特別留意。</div>
+<div class='subtitle' style='margin-top:8px;color:#f0d789;'>⚠️市場提醒(2026/09查證):受記憶體缺貨影響,NVIDIA/AMD顯卡自2026年7月起全面調漲,漲幅約25%~122%不等且仍在變動中,本報表價格雖為即時查詢,實際到貨與通路報價仍可能有落差,購買前務必再次確認當下報價。型號清單已查證至2026年9月,下一世代顯卡(RTX 60/RDNA 5)預計延後至2027年後才會推出,目前RTX 50/RX 9000系列仍是市場主力。</div>
+</div></div>
+<div class='toolbar'><span class='toolbar-label'>字體</span><button onclick='changeFontSize(-1)'>A-</button><button onclick='changeFontSize(1)'>A+</button></div>
+<div class='controls'><div class='wrap'>
+<div class='seg' id='resSeg'><button data-res='D1080' data-cp='CP1080' class='active'>1080p</button><button data-res='D2K' data-cp='CP2K'>2K</button><button data-res='D4K' data-cp='CP4K'>4K</button></div>
+<div class='seg' id='brandSeg'><button data-brand='all' class='active'>ALL</button><button data-brand='NVIDIA'>NVIDIA</button><button data-brand='AMD'>AMD</button><button data-brand='INTEL'>INTEL</button></div>
+<select id='sortSel'><option value='perf'>依效能排序</option><option value='cp'>依CP值排序</option><option value='price'>依價格排序</option></select>
+<label class='chk'><input type='checkbox' id='onlyPriced' checked> 只顯示有報價</label>
+<input type='text' id='searchBox' placeholder='搜尋型號...'>
+</div></div>
+<div class='banner'><div id='bestValueBox'>
+<div class='mono' style='font-size:10px;letter-spacing:2px;font-weight:700;' id='bvLabel'></div>
+<div style='font-weight:700;font-size:15px;' id='bvName'></div>
+<div class='mono' style='font-size:13px;color:#a1a1aa;' id='bvPrice'></div>
+<div class='mono' style='font-size:15px;font-weight:800;margin-left:auto;' id='bvCp'></div>
+</div></div>
+<div class='content' style='padding-bottom:0;'>
+<div class='techBox'>
+<div class='techBoxTitle'>升級技術差異(DLSS / FSR / XeSS)</div>
+<div class='techGrid'>
+<div class='techItem'><span class='techBrand' style='color:#76b900'>NVIDIA DLSS</span>畫質與生態成熟度目前普遍被認為最佳,支援機種最廣、更新最頻繁,尤其Frame Generation與畫質重建效果領先。</div>
+<div class='techItem'><span class='techBrand' style='color:#ed1c24'>AMD FSR</span>不需要特定硬體、相容性最廣(含舊卡),但畫質重建效果普遍公認略遜於DLSS,尤其在低解析度放大時較明顯。</div>
+<div class='techItem'><span class='techBrand' style='color:#00c8ff'>Intel XeSS</span>較晚推出但進步快,新一代版本畫質已有明顯提升,遊戲支援數量仍在追趕前兩者。</div>
+</div>
+<div class='techNote'>⚠️這張表的效能指數是原生解析度跑分,不包含升級技術效果;若您常用超取樣/低解析度放大玩遊戲,實際體驗差異可能比原生FPS數字更重要,建議一併列入考慮。</div>
+</div>
+<div class='techBox'>
+<div class='techBoxTitle'>AI運算能力參考(本機跑AI繪圖/語言模型的考量)</div>
+<div class='techGrid'>
+<div class='techItem'><span class='techBrand' style='color:#f0d789'>VRAM容量是本機AI的關鍵瓶頸</span>比起原生跑分,VRAM容量對能不能順利跑AI繪圖(Stable Diffusion等)或本機語言模型影響更直接——模型能不能載入、跑多大的模型,VRAM不夠時效能會直接崩潰,不是慢而已。上方表格中標示⚠️8G的型號,若有明確AI用途需求,建議優先考慮VRAM較大的版本(例如同系列的16G版)。</div>
+<div class='techItem'><span class='techBrand' style='color:#76b900'>NVIDIA CUDA生態最成熟</span>絕大多數AI繪圖/語言模型工具(ComfyUI、Automatic1111、Ollama等)原生對CUDA支援最完整、社群資源最多,遇到問題最容易找到解法;AMD/Intel近年支援已改善,但相容性與教學資源仍相對少。</div>
+</div>
+<div class='techNote'>⚠️各廠牌官方公布的「AI TOPS」算力數字,因採用的量測基準(FP4/FP8/INT8等)不同,不同資料來源常出現差異頗大的數字,本報表不逐卡列出容易誤導的算力數字,僅提供VRAM與生態面的實務建議;若需要精確AI算力比較,建議直接查閱各廠牌官網針對特定型號的完整規格頁。</div>
+</div>
+</div>
+<div class='content'>
+<div class='techBox' style='margin-top:0;'><div class='techBoxTitle' id='budgetTitle'>💰 各預算區間 CP 值最高</div><div class='budgetGrid' id='budgetGrid'></div><div class='techNote'>只從「即時價格」的型號裡挑(取該型號最低價);備援價可能已過時,不列入推薦。想跑本機AI的話,請優先看VRAM(避開標示⚠️8G的型號)。</div></div>
+<div class='legend'>📖 <b>怎麼看</b>:效能以RTX 5090為100;<b>CP值100%</b>=每一塊錢買到的效能與「RTX 5090以10.5萬元計」相同,數字越大越划算,公式為「效能÷最低價×105000」。價格後面 <span class='liveTag'>即時</span>=本次從原價屋抓到;<span class='staleTag'>備援價·可能過時</span>=原價屋這次沒抓到,用程式內建舊價格(這類型號的CP值會變淡並加「?」,不要拿來跟即時價比)。TDP下方小字=每瓦效能,越高越省電。</div>
+<div class='colheader'><div>顯卡型號</div><div>價格區間(最低-最高)</div><div>TDP</div><div id='perfColLabel'>1080p 效能</div><div>CP值</div></div>
+<div id='rowContainer'></div>
+<div id='emptyMsg' style='display:none;text-align:center;padding:60px;color:#52525b;font-size:13px;'>找不到符合條件的顯卡</div>
+<div class='techBox'><div class='techBoxTitle'>📌 原價屋有賣、但本報表還沒收錄的型號(1 款)</div><div class='techItem'><span class='newTag'>RTX 6000 48G</span></div><div class='techNote'>這些型號沒有可靠的效能數字,所以不列入排名(不會用猜的)。想加入的話,打開「桌面\台股工具箱\共用設定\顯卡型號補充.txt」照說明加一行即可,不用改程式。</div></div>
+</div>
+<div class='footer'><div class='wrap'>效能指數資料來源:TechPowerUp,相對排名已交叉比對驅動之家/快科技顯卡性能天梯圖(mydrivers.com)確認順序一致性,此部分為固定資料不會每次變動。價格部分:本次執行時已即時連線原價屋(coolpc.com.tw)查詢所有廠牌/版本現售報價,取實際最低與最高值呈現價格區間;CP值以最低價格計算,公式為「效能指數÷價格×105000」。若原價屋暫時抓不到對應型號的即時報價(常見於已無新品通路銷售的舊型號),會自動退回較早期查詢過的快照數字備援,並非當下即時值。CP值計算基準與方式僅供相對比較參考,非採購建議,實際報價請以各通路官網當下顯示為準。</div></div>
+<script>
+const DATA = [{n:'RTX 3050 6G',brand:'NVIDIA',live:true,p:8888,pmax:10900,tdp:70,D1080:15.1,CP1080:178,D2K:12.2,CP2K:144,D4K:8.8,CP4K:104},{n:'RTX 3050 8G',brand:'NVIDIA',live:true,p:11490,pmax:11490,tdp:130,D1080:19.3,CP1080:176,D2K:15.9,CP2K:145,D4K:12.3,CP4K:112},{n:'RTX 3060 12G',brand:'NVIDIA',live:true,p:15990,pmax:15990,tdp:170,D1080:26.8,CP1080:176,D2K:22.7,CP2K:149,D4K:18.8,CP4K:123},{n:'RTX 4090 24G',brand:'NVIDIA',live:false,p:59990,pmax:null,tdp:450,D1080:89.8,CP1080:157,D2K:83.7,CP2K:146,D4K:76.1,CP4K:133},{n:'RTX 5050 8G',brand:'NVIDIA',live:true,p:12888,pmax:14290,tdp:130,D1080:30.1,CP1080:245,D2K:24.4,CP2K:199,D4K:18.1,CP4K:147},{n:'RTX 5060 8G',brand:'NVIDIA',live:true,p:16888,pmax:19990,tdp:145,D1080:38.9,CP1080:242,D2K:31.7,CP2K:197,D4K:21.7,CP4K:135},{n:'RTX 5060 Ti 8G',brand:'NVIDIA',live:true,p:19488,pmax:22490,tdp:180,D1080:44.9,CP1080:242,D2K:37.1,CP2K:200,D4K:26.1,CP4K:141},{n:'RTX 5060 Ti 16G',brand:'NVIDIA',live:true,p:25590,pmax:30990,tdp:180,D1080:44.6,CP1080:183,D2K:38,CP2K:156,D4K:31.9,CP4K:131},{n:'RTX 5070 12G',brand:'NVIDIA',live:true,p:30990,pmax:35990,tdp:250,D1080:59.6,CP1080:202,D2K:52.7,CP2K:179,D4K:45.3,CP4K:153},{n:'RTX 5070 Ti 16G',brand:'NVIDIA',live:true,p:46990,pmax:53990,tdp:300,D1080:71.4,CP1080:160,D2K:64.9,CP2K:145,D4K:57.2,CP4K:128},{n:'RTX 5080 16G',brand:'NVIDIA',live:true,p:61990,pmax:63990,tdp:360,D1080:78.6,CP1080:133,D2K:72.4,CP2K:123,D4K:65.8,CP4K:111},{n:'RTX 5090D V2 24G',brand:'NVIDIA',live:false,p:87420,pmax:null,tdp:575,D1080:100,CP1080:120,D2K:100,CP2K:120,D4K:100,CP4K:120},{n:'RTX 5090 32G',brand:'NVIDIA',live:false,p:159990,pmax:179990,tdp:575,D1080:100,CP1080:66,D2K:100,CP2K:66,D4K:100,CP4K:66},{n:'Arc B570 10G',brand:'INTEL',live:false,p:null,pmax:null,tdp:150,D1080:27.7,CP1080:null,D2K:24,CP2K:null,D4K:20.7,CP4K:null},{n:'Arc B580 12G',brand:'INTEL',live:false,p:8500,pmax:null,tdp:190,D1080:31.6,CP1080:390,D2K:27.6,CP2K:341,D4K:24.6,CP4K:304},{n:'RX 7650 GRE 8G',brand:'AMD',live:true,p:11990,pmax:15090,tdp:165,D1080:29.2,CP1080:256,D2K:23.7,CP2K:208,D4K:15.9,CP4K:139},{n:'RX 9060 XT 8G',brand:'AMD',live:true,p:17890,pmax:17890,tdp:150,D1080:40.1,CP1080:235,D2K:33.4,CP2K:196,D4K:26.8,CP4K:157},{n:'RX 9060 XT 16G',brand:'AMD',live:true,p:19990,pmax:28990,tdp:160,D1080:42.2,CP1080:222,D2K:35.1,CP2K:184,D4K:29.2,CP4K:153},{n:'RX 9070 GRE 12G',brand:'AMD',live:true,p:18990,pmax:27590,tdp:220,D1080:56.6,CP1080:313,D2K:49.5,CP2K:274,D4K:41.7,CP4K:231},{n:'RX 9070 16G',brand:'AMD',live:true,p:26000,pmax:32890,tdp:220,D1080:64.5,CP1080:260,D2K:56.8,CP2K:229,D4K:49.3,CP4K:199},{n:'RX 9070 XT 16G',brand:'AMD',live:true,p:29990,pmax:40990,tdp:304,D1080:70.2,CP1080:246,D2K:62.4,CP2K:218,D4K:54.9,CP4K:192}];
+const BRAND_COLOR = { NVIDIA: '#76b900', AMD: '#ed1c24', INTEL: '#00c8ff', OTHER: '#71717a' };
+const RES_LABEL = { D1080: '1080p', D2K: '2K', D4K: '4K' };
+const MAX_PERF = Math.max(...DATA.map(d => Math.max(d.D1080 || 0, d.D2K || 0, d.D4K || 0)));
+const FONT_STEP = 1.5, FONT_MIN = 12, FONT_MAX = 24;
+function applyFontSize(px) { document.body.style.fontSize = px + 'px'; try { localStorage.setItem('gpuReportFontSize', px); } catch (e) {} }
+function changeFontSize(direction) { let cur = parseFloat(document.body.style.fontSize) || 16; applyFontSize(Math.max(FONT_MIN, Math.min(FONT_MAX, cur + direction * FONT_STEP))); }
+try { const sv = localStorage.getItem('gpuReportFontSize'); if (sv) applyFontSize(parseFloat(sv)); } catch (e) {}
+
+let state = { res: 'D1080', cp: 'CP1080', brand: 'all', onlyPriced: true, sort: 'perf', q: '' };
+
+// TDP色階:顯卡瓦數直接決定電源供應器要買多大、機殼散熱夠不夠,是實際的採購限制。
+// 原本是純白數字,250W跟450W的差別要自己換算。200W以下一般電源就夠、
+// 350W以上通常要850W以上電源並注意機殼風道
+function tdpTier(tdp) {
+    if (tdp == null) return '#71717a';
+    if (tdp <= 200) return '#76b900';
+    if (tdp <= 300) return '#9fd830';
+    if (tdp <= 350) return '#eab308';
+    return '#ff7e00';
+}
+function cpTier(cp) {
+    if (cp == null) return null;
+    if (cp >= 300) return '#76b900';
+    if (cp >= 200) return '#a3e635';
+    if (cp >= 120) return '#eab308';
+    return '#71717a';
+}
+
+function fmtPrice(p) { return p == null ? '未提供' : ('$' + p.toLocaleString()); }
+function fmtPriceRange(p, pmax) {
+    if (p == null) return '未提供';
+    if (pmax == null || pmax === p) return '$' + p.toLocaleString();
+    return '$' + p.toLocaleString() + ' ~ $' + pmax.toLocaleString();
+}
+
+// 從型號名稱解析VRAM容量(GB),供8GB風險提醒使用
+function getVram(name) {
+    const m = name.match(/(\d+)G(?!B\b)|(\d+)GB/i);
+    if (!m) return null;
+    return parseInt(m[1] || m[2], 10);
+}
+function perfPerWatt(perf, tdp) {
+    if (perf == null || !tdp) return null;
+    return (perf / tdp).toFixed(3);
+}
+
+function render() {
+    let list = DATA.filter(d => state.brand === 'all' || d.brand === state.brand);
+    if (state.onlyPriced) list = list.filter(d => d.p != null);
+    if (state.q.trim()) list = list.filter(d => d.n.toLowerCase().includes(state.q.trim().toLowerCase()));
+    list = [...list];
+    if (state.sort === 'perf') list.sort((a, b) => (b[state.res] ?? -1) - (a[state.res] ?? -1));
+    else if (state.sort === 'cp') list.sort((a, b) => (b[state.cp] ?? -1) - (a[state.cp] ?? -1));
+    else if (state.sort === 'price') list.sort((a, b) => (a.p ?? Infinity) - (b.p ?? Infinity));
+
+    document.getElementById('perfColLabel').textContent = RES_LABEL[state.res] + ' 效能';
+
+    const container = document.getElementById('rowContainer');
+    container.innerHTML = '';
+    document.getElementById('emptyMsg').style.display = list.length === 0 ? 'block' : 'none';
+
+    list.forEach(d => {
+      try {
+        const color = BRAND_COLOR[d.brand];
+        const cpVal = d[state.cp];
+        const tier = cpTier(cpVal);
+        const perfV = d[state.res];
+        const barPct = perfV == null ? 0 : (perfV / MAX_PERF) * 100;
+        const vram = getVram(d.n);
+        const lowVram = vram != null && vram <= 8;
+        const pw = perfPerWatt(d[state.res], d.tdp);
+        const row = document.createElement('div');
+        row.className = 'row';
+        row.style.opacity = d.p != null ? '1' : '0.55';
+        row.innerHTML = `
+            <div class="nameCell"><span class="bar" style="background:${color}"></span><span class="gname">${d.n}</span>${lowVram ? `<span class="vramWarn" title="8GB(含)以下VRAM,新遊戲畫質拉高時可能較早遇到記憶體瓶頸">⚠️8G</span>` : ''}</div>
+            <div class="price" style="color:${d.p != null ? (d.live ? '#e4e4e7' : '#a1a1aa') : '#71717a'}">${fmtPriceRange(d.p, d.pmax)}${d.p != null ? (d.live ? '<span class="liveTag">即時</span>' : '<span class="staleTag" title="原價屋目前沒在賣這款,價格是程式內建的舊資料,可能已過時">備援價·可能過時</span>') : ''}</div>
+            <div class="tdp" style="color:${tdpTier(d.tdp)};font-weight:600">${d.tdp == null ? '—' : d.tdp + 'W'}<span class="pwLabel">${pw ? pw + '/W' : ''}</span></div>
+            <div class="perfCell"><div class="perfTrack"><div class="perfFill" style="width:${barPct}%;background:${color}"></div></div><div class="perfNum">${perfV == null ? '—' : perfV.toFixed(1)}</div></div>
+            <div>${tier ? `<span class="cpBadge" style="background:${tier}22;color:${tier};${d.live ? '' : 'opacity:.55;border:1px dashed ' + tier + '88;'}" title="${d.live ? '' : '用備援舊價格算的CP值,僅供參考'}">${cpVal}%${d.live ? '' : '?'}</span>` : `<span class="mono" style="font-size:11px;color:#52525b">&mdash;</span>`}</div>
+        `;
+        container.appendChild(row);
+      } catch (err) {
+        console.error('渲染單筆資料時發生錯誤,已跳過:', d && d.n, err);
+      }
+    });
+
+    // 【2026-10-04-C】最佳CP值優先只從「即時價格」的型號裡挑,避免停產舊卡的過時價格被選為最佳
+    const pricedAll = DATA.filter(d => d.p != null && d[state.cp] != null);
+    const pricedLive = pricedAll.filter(d => d.live);
+    const priced = pricedLive.length > 0 ? pricedLive : pricedAll;
+    renderBudget(pricedLive);
+    const bvBox = document.getElementById('bestValueBox');
+    if (priced.length > 0) {
+        const best = priced.reduce((a, b) => (b[state.cp] > a[state.cp] ? b : a));
+        const bColor = BRAND_COLOR[best.brand];
+        bvBox.style.display = 'flex';
+        bvBox.style.background = `linear-gradient(90deg, ${bColor}22, transparent)`;
+        bvBox.style.border = `1px solid ${bColor}44`;
+        document.getElementById('bvLabel').textContent = RES_LABEL[state.res] + ' 最佳 CP 值';
+        document.getElementById('bvLabel').style.color = bColor;
+        document.getElementById('bvName').textContent = best.n;
+        document.getElementById('bvPrice').textContent = fmtPrice(best.p) + (best.live ? '(即時)' : '(備援價,可能過時)');
+        document.getElementById('bvCp').textContent = 'CP ' + best[state.cp] + '%';
+        document.getElementById('bvCp').style.color = bColor;
+    } else {
+        bvBox.style.display = 'none';
+    }
+}
+
+// 各預算區間CP值最高(只用即時價格,依目前選的解析度)
+function renderBudget(pool) {
+    const bands = [[0, 12000, '12,000元以下'], [12000, 20000, '12,000~20,000元'], [20000, 35000, '20,000~35,000元'], [35000, 1e9, '35,000元以上']];
+    const grid = document.getElementById('budgetGrid');
+    if (!grid) return;
+    document.getElementById('budgetTitle').textContent = '💰 各預算區間 CP 值最高(' + RES_LABEL[state.res] + ')';
+    grid.innerHTML = bands.map(b => {
+        const c = pool.filter(d => d.p >= b[0] && d.p < b[1]);
+        if (c.length === 0) return `<div class="budgetCard"><div class="bl">${b[2]}</div><div class="bs">此區間沒有即時報價的型號</div></div>`;
+        const best = c.reduce((x, y) => (y[state.cp] > x[state.cp] ? y : x));
+        const v = getVram(best.n);
+        return `<div class="budgetCard"><div class="bl">${b[2]}</div><div class="bn" style="color:${BRAND_COLOR[best.brand]}">${best.n}</div><div class="bs">${fmtPrice(best.p)} ・ CP ${best[state.cp]}%${v != null && v <= 8 ? ' ・ ⚠️8G' : ''}</div></div>`;
+    }).join('');
+}
+
+document.querySelectorAll('#resSeg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('#resSeg button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.res = btn.dataset.res;
+        state.cp = btn.dataset.cp;
+        render();
+    });
+});
+document.querySelectorAll('#brandSeg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('#brandSeg button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.brand = btn.dataset.brand;
+        render();
+    });
+});
+document.getElementById('sortSel').addEventListener('change', e => { state.sort = e.target.value; render(); });
+document.getElementById('onlyPriced').addEventListener('change', e => { state.onlyPriced = e.target.checked; render(); });
+document.getElementById('searchBox').addEventListener('input', e => { state.q = e.target.value; render(); });
+
+render();
+</script>
+<button type="button" onclick="twShare()" style="position:fixed;left:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;border:0;padding:10px 14px;border-radius:20px;font:15px sans-serif;box-shadow:0 2px 6px rgba(0,0,0,.3)">📤 分享</button>
+<script>function twShare(){var u=location.href.split('#')[0].split('?')[0];var t=document.title||'景淵報表';
+if(navigator.share){navigator.share({title:t,text:t+'',url:u}).catch(function(){});return;}
+var ok=function(){alert('已複製連結,可以貼到 LINE 傳給朋友');};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(ok,function(){window.prompt('長按複製這個連結',u);});}else{window.prompt('長按複製這個連結',u);}}</script><a href="index.html" onclick="location.href='index.html?v='+Date.now();return false;" style="position:fixed;right:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;padding:10px 14px;border-radius:20px;font:15px sans-serif;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.3)">← 回目錄</a></body></html>
+

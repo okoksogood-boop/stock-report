@@ -1,0 +1,1752 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex,nofollow"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>景淵命理館</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+  :root{
+    --ink:#0d1024;
+    --ink2:#161a35;
+    --panel:#12152c;
+    --panel2:#1b1f42;
+    --line:#33385f;
+    --gold:#c9a35c;
+    --gold-bright:#e8c789;
+    --star:#f4ead0;
+    --text:#e7e4f2;
+    --text-dim:#9b9dc4;
+    --rose:#c98a8a;
+    --teal:#7fb3ac;
+  }
+  *{box-sizing:border-box;}
+  /* ---------- 快速導覽列與回到頂部按鈕 ---------- */
+  .quicknav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(13,16,36,.96); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    padding:10px 14px; margin:0 -24px 18px;
+    overflow-x:auto; white-space:nowrap;
+    -webkit-overflow-scrolling:touch;
+  }
+  .quicknav a{
+    display:inline-block; color:var(--text-dim); text-decoration:none;
+    font-size:12.5px; padding:5px 11px; margin-right:6px;
+    border:1px solid var(--line); border-radius:14px;
+    transition:color .15s, border-color .15s;
+  }
+  .quicknav a:hover, .quicknav a:active{ color:var(--gold-bright); border-color:var(--gold); }
+  .back-to-top{
+    position:fixed; right:18px; bottom:22px; z-index:60;
+    width:44px; height:44px; border-radius:50%;
+    background:var(--gold); color:var(--ink); border:none;
+    font-size:18px; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.4);
+    display:none; align-items:center; justify-content:center;
+  }
+  .back-to-top.show{ display:flex; }
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(201,163,92,.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(127,179,172,.08), transparent 55%),
+      var(--ink);
+    color:var(--text);
+    font-family:'Noto Sans TC', sans-serif;
+    line-height:1.7;
+    min-height:100vh;
+  }
+  .stars{
+    position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.55;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20px 30px, var(--star), transparent),
+      radial-gradient(1px 1px at 120px 80px, var(--star), transparent),
+      radial-gradient(1.5px 1.5px at 220px 140px, var(--star), transparent),
+      radial-gradient(1px 1px at 320px 40px, var(--star), transparent),
+      radial-gradient(1.5px 1.5px at 60px 180px, var(--star), transparent),
+      radial-gradient(1px 1px at 400px 220px, var(--star), transparent),
+      radial-gradient(1.5px 1.5px at 500px 60px, var(--star), transparent),
+      radial-gradient(1px 1px at 160px 260px, var(--star), transparent);
+    background-repeat:repeat;
+    background-size:560px 320px;
+  }
+  .wrap{position:relative; z-index:1; max-width:920px; margin:0 auto; padding:48px 24px 100px;}
+
+  header.hero{text-align:center; margin-bottom:40px;}
+  .kicker{font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--gold); letter-spacing:.08em; font-size:15px; margin-bottom:6px;}
+  h1.title{
+    font-family:'Noto Serif TC', serif; font-weight:700;
+    font-size:clamp(30px,5vw,44px); margin:0 0 10px; color:var(--star);
+    letter-spacing:.02em;
+  }
+  .sigil{font-size:34px; display:inline-block; margin-bottom:10px; filter:drop-shadow(0 0 12px rgba(201,163,92,.5));}
+  p.lede{color:var(--text-dim); max-width:520px; margin:0 auto; font-size:15px;}
+
+  .card{
+    background:linear-gradient(180deg, var(--panel2), var(--panel));
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:28px;
+    margin-bottom:28px;
+    position:relative;
+  }
+  .card::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity:.5;
+  }
+
+  .formgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:16px; margin-bottom:18px;}
+  .field label{display:block; font-size:12.5px; color:var(--text-dim); margin-bottom:6px; letter-spacing:.03em;}
+  .field input, .field select{
+    width:100%; background:var(--ink2); border:1px solid var(--line); color:var(--text);
+    padding:10px 12px; border-radius:3px; font-size:15px; font-family:inherit;
+  }
+  .field input:focus, .field select:focus{outline:none; border-color:var(--gold);}
+
+  .btnrow{display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;}
+  button.primary{
+    background:linear-gradient(180deg, var(--gold-bright), var(--gold));
+    color:#221a08; border:none; font-weight:700; letter-spacing:.03em;
+    padding:12px 26px; border-radius:3px; cursor:pointer; font-size:15px;
+    font-family:'Noto Sans TC', sans-serif;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  button.primary:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(201,163,92,.28);}
+  button.ghost{
+    background:transparent; border:1px solid var(--line); color:var(--text);
+    padding:12px 22px; border-radius:3px; cursor:pointer; font-size:14.5px;
+    font-family:'Noto Sans TC', sans-serif;
+  }
+  button.ghost:hover{border-color:var(--gold); color:var(--gold-bright);}
+
+  .section-title{
+    font-family:'Noto Serif TC', serif; font-size:22px; color:var(--gold-bright);
+    margin:0 0 4px; display:flex; align-items:center; gap:10px;
+  }
+  .section-sub{color:var(--text-dim); font-size:13px; margin-bottom:18px;}
+
+  .result-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px;}
+  .stat{background:var(--ink2); border:1px solid var(--line); border-radius:3px; padding:16px 18px;}
+  .stat .k{font-size:12px; color:var(--text-dim); margin-bottom:4px;}
+  .stat .v{font-family:'Noto Serif TC', serif; font-size:19px; color:var(--star);}
+
+  .tag{display:inline-block; background:rgba(201,163,92,.14); border:1px solid rgba(201,163,92,.35); color:var(--gold-bright); font-size:12px; padding:3px 10px; border-radius:20px; margin:2px 4px 2px 0;}
+
+  .palace-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:18px 0;}
+  .palace{background:var(--ink2); border:1px solid var(--line); border-radius:3px; padding:10px 8px; text-align:center; min-height:64px; display:flex; flex-direction:column; justify-content:center;}
+  .palace .pname{font-size:11px; color:var(--text-dim);}
+  .palace .pstar{font-size:13px; color:var(--gold-bright); margin-top:3px; font-weight:600;}
+  @media (max-width:640px){ .palace-grid{grid-template-columns:repeat(2,1fr);} }
+
+  .bazi-pillars{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:16px 0;}
+  .pillar{background:var(--ink2); border:1px solid var(--line); border-radius:3px; padding:14px 8px; text-align:center;}
+  .pillar .plabel{font-size:11px; color:var(--text-dim); margin-bottom:6px;}
+  .pillar .pval{font-family:'Noto Serif TC', serif; font-size:22px; color:var(--star);}
+
+  .tarot-row{display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin:20px 0;}
+  .tarot-card{
+    width:120px; height:190px; border-radius:8px; cursor:pointer;
+    background:linear-gradient(145deg, #232759, #14172f);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-size:34px; transition:transform .25s ease, border-color .2s;
+    perspective:600px;
+  }
+  .tarot-card:hover{transform:translateY(-6px); border-color:var(--gold);}
+  .tarot-card.picked{cursor:default; background:linear-gradient(160deg, var(--panel2), var(--panel)); border-color:var(--gold);}
+  .tarot-card.picked:hover{transform:none;}
+  .tarot-result{margin-top:14px; text-align:center;}
+  .tarot-name{font-family:'Noto Serif TC', serif; color:var(--gold-bright); font-size:19px; margin-bottom:4px;}
+  .tarot-orient{color:var(--text-dim); font-size:12.5px; margin-bottom:10px;}
+
+  .divider{height:1px; background:linear-gradient(90deg, transparent, var(--line), transparent); margin:22px 0;}
+
+  .disc{
+    font-size:12.5px; color:var(--text-dim); background:rgba(255,255,255,.03);
+    border-left:2px solid var(--gold); padding:10px 14px; border-radius:2px; margin-top:16px;
+  }
+
+  .hidden{display:none !important;}
+
+  footer{text-align:center; color:var(--text-dim); font-size:12px; margin-top:40px; padding-top:24px; border-top:1px solid var(--line);}
+
+  .name-input-row{display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;}
+  .name-input-row .field{flex:1; min-width:180px;}
+
+  #pastlife-result, #advice-result{font-family:'Noto Serif TC', serif; font-size:16.5px; color:var(--star); line-height:1.9;}
+
+  .loading-line{color:var(--text-dim); font-size:13px; margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="sigil">✦ ☾ ✦</div>
+    <div class="kicker">Divination &amp; Destiny</div>
+    <h1 class="title">景淵命理館 <span id="live-datetime" style="font-size:16px; color:var(--teal); font-family:'Noto Sans TC',sans-serif; font-weight:500; vertical-align:middle;"></span></h1>
+    <p class="lede">每個人出生的那一刻,天上的星辰、地支的流轉,都悄悄寫下了一份屬於您的密碼。填上生日,讓我們一起把它翻開來看看——這裡沒有標準答案,只有值得您細細品味的可能性。</p>
+  </header>
+
+  <nav class="quicknav" id="quicknav">
+    <a href="#almanac">農民曆</a><a href="#birthinput">出生資料</a><a href="#zodiac">星座</a><a href="#rising">上升星座</a><a href="#birthflower">生日花寶石</a><a href="#ranking">星座排行</a><a href="#ziwei">紫微</a><a href="#bazi">八字</a><a href="#shengxiao">生肖</a><a href="#lifenum">生命靈數</a><a href="#lucky">幸運符號</a><a href="#fengshui">風水命卦</a><a href="#totem">守護動物</a><a href="#crystal">能量水晶</a><a href="#weekly">本週預告</a><a href="#oracle">心靈占卜</a><a href="#iching">易經求籤</a><a href="#compat">速配合婚</a><a href="#today">今日運勢</a><a href="#liunian">流年運勢</a><a href="#taohua">桃花運</a><a href="#name">姓名學</a><a href="#pastlife">前世回溯</a><a href="#tarot">塔羅牌</a><a href="#advice">綜合建議</a>
+  </nav>
+
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到頂部">↑</button>
+
+  <div class="card" id="almanac">
+    <div class="section-title">📅 今日農民曆</div>
+    <div class="section-sub">開啟頁面即自動顯示,一律以電腦當下真實日期計算,不需要輸入生日</div>
+    <div id="almanac-result"></div>
+    <details style="margin-top:16px;">
+      <summary style="cursor:pointer;color:var(--gold-bright);font-family:'Noto Serif TC',serif;font-size:15px;">📖 <span id="fullyear-title">整年度農民曆</span>(點擊展開,自動抓取當下年度資料)</summary>
+      <div id="fullyear-result" style="margin-top:12px;"></div>
+    </details>
+  </div>
+
+  <div class="card" id="birthinput">
+    <div class="section-title">🪐 出生資料</div>
+    <div class="section-sub">請輸入國曆(陽曆)生日,時辰若不確定可先選「不確定」</div>
+    <div class="formgrid">
+      <div class="field"><label>出生年(西元)</label><input type="number" id="byear" placeholder="例如 1995" min="1900" max="2026"></div>
+      <div class="field"><label>出生月</label>
+        <select id="bmonth"></select>
+      </div>
+      <div class="field"><label>出生日</label>
+        <select id="bday"></select>
+      </div>
+      <div class="field"><label>出生時辰</label>
+        <select id="bhour">
+          <option value="-1">不確定</option>
+          <option value="23">子時(23:00~00:59)</option>
+          <option value="1">丑時(01:00~02:59)</option>
+          <option value="3">寅時(03:00~04:59)</option>
+          <option value="5">卯時(05:00~06:59)</option>
+          <option value="7">辰時(07:00~08:59)</option>
+          <option value="9">巳時(09:00~10:59)</option>
+          <option value="11">午時(11:00~12:59)</option>
+          <option value="13">未時(13:00~14:59)</option>
+          <option value="15">申時(15:00~16:59)</option>
+          <option value="17">酉時(17:00~18:59)</option>
+          <option value="19">戌時(19:00~20:59)</option>
+          <option value="21">亥時(21:00~22:59)</option>
+        </select>
+      </div>
+      <div class="field"><label>性別(僅供紫微排盤參考)</label>
+        <select id="bgender"><option value="F">女</option><option value="M">男</option></select>
+      </div>
+    </div>
+    <div class="name-input-row">
+      <div class="field"><label>姓名(選填,用於姓名學分析)</label><input type="text" id="bname" placeholder="例如 王小明" maxlength="6"></div>
+    </div>
+    <div class="btnrow" style="margin-top:18px;">
+      <button class="primary" onclick="runAll()">✦ 開始排盤</button>
+      <button class="ghost" onclick="fillRandom()">隨機示範資料</button>
+    </div>
+    <div class="disc">此工具的紫微斗數、八字為<b>簡化娛樂版</b>,月/日干支與紫微排盤採用簡化規則,不是專業命理師使用的精確排盤方式;年柱干支計算方式正確。星座、塔羅牌抽牌邏輯為真實邏輯,非簡化。所有內容僅供自我探索與娛樂參考,不作為醫療、法律、財務或任何重大人生決策的依據。</div>
+  </div>
+
+  <div id="results" class="hidden">
+
+    <div class="card" id="zodiac">
+      <div class="section-title">♈ 星座分析</div>
+      <div class="section-sub" id="zodiac-sub"></div>
+      <div class="result-grid" id="zodiac-stats"></div>
+      <div class="divider"></div>
+      <div id="zodiac-desc"></div>
+    </div>
+
+    <div class="card" id="rising">
+      <div class="section-title">🌅 上升星座</div>
+      <div class="section-sub">出生時的東方地平線星座,需要精確出生時辰才能估算</div>
+      <div id="rising-result"></div>
+    </div>
+
+    <div class="card" id="birthflower">
+      <div class="section-title">🌸 生日花與生日寶石</div>
+      <div class="section-sub">依出生月份對照的西方傳統,常用來作為送禮或自我認識的參考</div>
+      <div id="birthflower-result"></div>
+    </div>
+
+    <div class="card" id="ranking">
+      <div class="section-title">🏆 12星座本週運勢排行</div>
+      <div class="section-sub">同一週查詢結果固定,下週會重新洗牌</div>
+      <div id="zodiac-ranking"></div>
+    </div>
+
+    <div class="card" id="ziwei">
+      <div class="section-title">🔮 簡化紫微命盤</div>
+      <div class="section-sub">十二宮位×簡化主星配置,採固定演算規則產生,非傳統紫微斗數完整排盤法</div>
+      <div class="palace-grid" id="ziwei-grid"></div>
+      <div id="ziwei-desc"></div>
+    </div>
+
+    <div class="card" id="bazi">
+      <div class="section-title">📜 簡化八字(四柱)</div>
+      <div class="section-sub">年柱依正式干支週期計算;月柱/日柱/時柱為簡化推算,僅供參考方向</div>
+      <div class="bazi-pillars" id="bazi-pillars"></div>
+      <div id="bazi-desc"></div>
+      <div class="divider"></div>
+      <div id="wuxing-result"></div>
+    </div>
+
+    <div class="card" id="shengxiao">
+      <div class="section-title">🐉 生肖與本命佛</div>
+      <div class="result-grid" id="shengxiao-stats"></div>
+      <div class="divider"></div>
+      <div id="shengxiao-desc"></div>
+    </div>
+
+    <div class="card" id="lifenum">
+      <div class="section-title">🔢 生命靈數</div>
+      <div class="section-sub">畢達哥拉斯數字學,出生年月日全部數字加總至個位數</div>
+      <div class="result-grid" id="lifenum-stats"></div>
+      <div class="divider"></div>
+      <div id="lifenum-desc"></div>
+    </div>
+
+    <div class="card" id="lucky">
+      <div class="section-title">🍀 專屬幸運符號</div>
+      <div class="result-grid" id="lucky-stats"></div>
+    </div>
+
+    <div class="card" id="fengshui">
+      <div class="section-title">🧭 風水命卦(東四命/西四命)</div>
+      <div class="section-sub">八宅風水系統,依出生年與性別計算命卦,建議適合的居家/座位方位</div>
+      <div id="fengshui-result"></div>
+    </div>
+
+    <div class="card" id="totem">
+      <div class="section-title">🦋 守護動物圖騰</div>
+      <div id="totem-result"></div>
+    </div>
+
+    <div class="card" id="crystal">
+      <div class="section-title">💎 能量水晶推薦</div>
+      <div id="crystal-result"></div>
+    </div>
+
+    <div class="card" id="weekly">
+      <div class="section-title">📅 本週能量預告</div>
+      <div id="weekly-fortune"></div>
+    </div>
+
+    <div class="card" id="oracle">
+      <div class="section-title">🌙 心靈選擇占卜</div>
+      <div class="section-sub">放空一下,單純憑感覺選一個最吸引您的符號</div>
+      <div class="tarot-row" id="symbol-row"></div>
+      <div class="tarot-result hidden" id="symbol-result"></div>
+      <div class="btnrow" id="symbol-reset-row" style="display:none; margin-top:10px;">
+        <button class="ghost" onclick="renderSymbolOracle()">重新選一次</button>
+      </div>
+    </div>
+
+    <div class="card" id="iching">
+      <div class="section-title">☯️ 易經求籤</div>
+      <div class="section-sub">默想您想詢問的事,點擊擲筊求一卦</div>
+      <button class="primary" onclick="drawHexagram()" id="hexagram-btn">🪙 擲筊求卦</button>
+      <div id="hexagram-result" style="margin-top:16px;"></div>
+    </div>
+
+    <div class="card" id="compat">
+      <div class="section-title">💞 速配合婚</div>
+      <div class="section-sub">輸入對方的出生年月日,看看兩人的速配指數</div>
+      <div class="formgrid">
+        <div class="field"><label>對方出生年</label><input type="number" id="pyear" placeholder="例如 1993" min="1900" max="2026"></div>
+        <div class="field"><label>對方出生月</label><select id="pmonth"></select></div>
+        <div class="field"><label>對方出生日</label><select id="pday"></select></div>
+      </div>
+      <button class="ghost" onclick="renderCompat()">計算速配指數</button>
+      <div id="compat-result" style="margin-top:16px;"></div>
+    </div>
+
+    <div class="card" id="today">
+      <div class="section-title">🌅 今日運勢</div>
+      <div id="today-fortune"></div>
+    </div>
+
+    <div class="card" id="liunian">
+      <div class="section-title">🗓️ <span id="liunian-year"></span> 流年運勢</div>
+      <div id="liunian-fortune"></div>
+    </div>
+
+    <div class="card" id="taohua">
+      <div class="section-title">🌸 桃花運勢</div>
+      <div id="taohua-fortune"></div>
+    </div>
+
+    <div class="card" id="name">
+      <div class="section-title">✒️ 姓名學分析</div>
+      <div id="name-result"></div>
+    </div>
+
+    <div class="card" id="pastlife">
+      <div class="section-title">🌌 前世回溯(純娛樂)</div>
+      <button class="ghost" onclick="rollPastLife()" style="margin-bottom:14px;">再算一次</button>
+      <div id="pastlife-result"></div>
+    </div>
+
+    <div class="card" id="tarot">
+      <div class="section-title">🃏 塔羅牌指引(過去・現在・未來三牌陣)</div>
+      <div class="section-sub">請靜心想一個您想詢問的問題,依序點選三個位置抽牌——這是塔羅牌最經典的標準牌陣之一</div>
+      <div class="tarot-row" id="tarot-row"></div>
+      <div id="tarot-result-list"></div>
+      <div id="tarot-summary" class="hidden" style="margin-top:16px;padding:14px;background:var(--ink2);border-radius:4px;border-left:3px solid var(--gold);"></div>
+      <div class="btnrow" id="tarot-reset-row" style="display:none; margin-top:10px;">
+        <button class="ghost" onclick="resetTarot()">重新抽牌</button>
+      </div>
+    </div>
+
+    <div class="card" id="advice">
+      <div class="section-title">🧭 綜合個人化建議</div>
+      <div class="section-sub">結合星座特質與簡易心理學原型,產生的整合建議</div>
+      <div id="advice-result"></div>
+    </div>
+
+  </div>
+
+  <footer>景淵命理館 ・ 台股工具箱附屬娛樂功能 ・ 所有結果為演算法生成,僅供參考娛樂</footer>
+</div>
+
+<script>
+/* ---------- 基礎資料 ---------- */
+const monthSel = document.getElementById('bmonth');
+for(let m=1;m<=12;m++){ const o=document.createElement('option'); o.value=m; o.textContent=m+'月'; monthSel.appendChild(o); }
+const daySel = document.getElementById('bday');
+function refreshDays(){
+  const y = parseInt(document.getElementById('byear').value)||2000;
+  const m = parseInt(monthSel.value)||1;
+  const dim = new Date(y, m, 0).getDate();
+  const cur = daySel.value;
+  daySel.innerHTML='';
+  for(let d=1; d<=dim; d++){ const o=document.createElement('option'); o.value=d; o.textContent=d+'日'; daySel.appendChild(o); }
+  if(cur && cur<=dim) daySel.value=cur;
+}
+monthSel.addEventListener('change', refreshDays);
+document.getElementById('byear').addEventListener('change', refreshDays);
+refreshDays();
+
+/* ---------- 農民曆與即時時間顯示:開啟頁面立即執行,一律用電腦當下真實日期計算,
+   不需要等使用者填生日,也不需要連網——所有計算都是本機的日期公式運算 ---------- */
+function updateLiveDateTime(){
+  const now = new Date();
+  const weekDayNames = ['日','一','二','三','四','五','六'];
+  const dateStr = `${now.getFullYear()}/${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')} (週${weekDayNames[now.getDay()]}) ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  const el = document.getElementById('live-datetime');
+  if(el) el.textContent = dateStr;
+}
+function renderAlmanac(){
+  const now = new Date();
+  const y = now.getFullYear(), m = now.getMonth()+1, d = now.getDate();
+  const gz = getDayGanZhi(y, m, d);
+  const jianchu = getJianchu(m, gz.branchIdx0);
+  const isGood = JIANCHU_GOOD.includes(jianchu);
+  const yearP = getYearPillar(y);
+  const sx = getShengxiao(y);
+  const jcColor = isGood ? 'var(--teal)' : 'var(--rose)';
+  document.getElementById('almanac-result').innerHTML = `
+    <div class="result-grid">
+      <div class="stat"><div class="k">今日日期</div><div class="v" style="font-size:16px;">${y}/${m}/${d}</div></div>
+      <div class="stat"><div class="k">日干支</div><div class="v">${gz.ganzhi}日</div></div>
+      <div class="stat"><div class="k">建除值日</div><div class="v" style="color:${jcColor};">${jianchu}(${isGood?'吉':'凶'})</div></div>
+    </div>
+    <div class="divider"></div>
+    <p><b style="color:var(--gold-bright);">${jianchu}日:</b>${JIANCHU_MEANING[jianchu]}</p>
+    <p style="margin-top:8px;font-size:13px;color:var(--text-dim);">今年為${yearP}年,生肖屬${sx}。</p>
+    <div class="disc">日干支計算為真實查證過的公式(已用已知正確答案實測驗證);建除十二值日則需要精確農曆月份(依節氣劃分)才能完全準確,這裡用「國曆月份」直接當農曆月份的近似替代,跟本頁面其他簡化農曆換算的限制相同,可能有誤差。傳統農民曆的完整宜忌還需搭配沖煞生肖、每日吉神凶神等更多資訊,此處僅為簡化版參考,不是正式通書。</div>
+  `;
+  document.getElementById('fullyear-title').textContent = `整年度農民曆(${y}年)`;
+}
+
+/* ---------- 整年度農民曆:自動抓取電腦當下的年度(例如2026年開啟就產生2026年整年,
+   2027年開啟自動變成2027年,不需要每年手動更新),預設收合,點擊<details>展開時才
+   真正產生365/366天的內容,避免使用者沒點開也白白運算一次 ---------- */
+let fullYearRendered = false;
+function renderFullYearAlmanac(){
+  if(fullYearRendered) return; // 只需要產生一次,展開/收合不用重算
+  fullYearRendered = true;
+  const now = new Date();
+  const y = now.getFullYear();
+  const isLeap = (y % 4 === 0 && y % 100 !== 0) || (y % 400 === 0);
+  const daysInMonth = [31, isLeap?29:28, 31,30,31,30,31,31,30,31,30,31];
+  const monthNames2 = ['一','二','三','四','五','六','七','八','九','十','十一','十二'];
+
+  let monthsHtml = '';
+  for(let mo=1; mo<=12; mo++){
+    let rowsHtml = '';
+    for(let day=1; day<=daysInMonth[mo-1]; day++){
+      const gz = getDayGanZhi(y, mo, day);
+      const jc = getJianchu(mo, gz.branchIdx0);
+      const good = JIANCHU_GOOD.includes(jc);
+      const dateObj = new Date(y, mo-1, day);
+      const wd = ['日','一','二','三','四','五','六'][dateObj.getDay()];
+      const jcColor2 = good ? 'var(--teal)' : 'var(--rose)';
+      rowsHtml += `<tr><td>${mo}/${day}</td><td>週${wd}</td><td>${gz.ganzhi}</td><td style="color:${jcColor2};">${jc}(${good?'吉':'凶'})</td></tr>`;
+    }
+    monthsHtml += `
+      <details style="margin-bottom:8px;">
+        <summary style="cursor:pointer;color:var(--teal);font-size:13.5px;padding:6px 0;">${monthNames2[mo-1]}月(${daysInMonth[mo-1]}天)</summary>
+        <div style="overflow-x:auto;margin-top:8px;">
+          <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+            <tr style="color:var(--text-dim);border-bottom:1px solid var(--line);"><th style="text-align:left;padding:4px 8px;">日期</th><th style="text-align:left;padding:4px 8px;">星期</th><th style="text-align:left;padding:4px 8px;">日干支</th><th style="text-align:left;padding:4px 8px;">建除值日</th></tr>
+            ${rowsHtml}
+          </table>
+        </div>
+      </details>
+    `;
+  }
+  document.getElementById('fullyear-result').innerHTML = `
+    <div class="disc" style="margin-bottom:14px;">此表為${y}年整年度(共${isLeap?366:365}天)的日干支與建除值日,依月份分開收合,點擊各月份標題展開查看。計算邏輯與上方「今日農民曆」相同(日干支為真實查證公式,建除十二值日用國曆月份近似替代農曆月份),同樣的準確度限制請參照上方說明。</div>
+    ${monthsHtml}
+  `;
+}
+const fullyearDetailsEl = document.querySelector('#fullyear-result').closest('details');
+if(fullyearDetailsEl){
+  fullyearDetailsEl.addEventListener('toggle', function(){
+    if(fullyearDetailsEl.open) renderFullYearAlmanac();
+  });
+}
+
+/* ---------- 回到頂部按鈕:捲動超過一個畫面高度才顯示,避免一開頁面就擋畫面 ---------- */
+window.addEventListener('scroll', function(){
+  const btn = document.getElementById('backToTop');
+  if(btn){
+    if(window.scrollY > window.innerHeight * 0.6){ btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  }
+});
+
+updateLiveDateTime();
+setInterval(updateLiveDateTime, 30000);
+
+function fillRandom(){
+  document.getElementById('byear').value = 1985 + Math.floor(Math.random()*25);
+  monthSel.value = 1+Math.floor(Math.random()*12);
+  refreshDays();
+  daySel.value = 1+Math.floor(Math.random()*28);
+  document.getElementById('bhour').value = [-1,23,1,3,5,7,9,11,13,15,17,19,21][Math.floor(Math.random()*13)];
+  document.getElementById('bname').value = ['林靜怡','陳柏宇','張雅婷','王建成','李思瑩'][Math.floor(Math.random()*5)];
+}
+
+/* ---------- 簡易可重現亂數(同一組生日每次結果一致,不會每次重整都變) ---------- */
+function seededRandom(seedStr){
+  let h = 0;
+  for(let i=0;i<seedStr.length;i++){ h = (h*31 + seedStr.charCodeAt(i)) >>> 0; }
+  return function(){
+    h ^= h << 13; h >>>= 0;
+    h ^= h >> 17;
+    h ^= h << 5; h >>>= 0;
+    return (h % 100000) / 100000;
+  };
+}
+function pick(arr, rnd){ return arr[Math.floor(rnd()*arr.length)]; }
+
+/* ---------- 星座 ---------- */
+const ZODIAC = [
+  {name:'魔羯座', symbol:'♑', from:[12,22], to:[1,19], trait:'務實、自律、有長遠規劃能力,天生具備把想法落實成具體成果的耐心,但有時容易過度嚴肅、對自己要求太高。', element:'土象'},
+  {name:'水瓶座', symbol:'♒', from:[1,20], to:[2,18], trait:'獨立、重視自我思想、對世界抱持人道關懷,喜歡與眾不同的視角,但有時顯得疏離、不易被理解。', element:'風象'},
+  {name:'雙魚座', symbol:'♓', from:[2,19], to:[3,20], trait:'感性、有豐富的想像力與同理心,直覺敏銳,擅長感受他人情緒,但容易因為太投入他人的感受而忽略自己。', element:'水象'},
+  {name:'牡羊座', symbol:'♈', from:[3,21], to:[4,19], trait:'行動力強、勇於嘗試新事物,天生的開創者性格,喜歡挑戰,但有時不夠有耐心、容易衝動行事。', element:'火象'},
+  {name:'金牛座', symbol:'♉', from:[4,20], to:[5,20], trait:'穩重、重視安全感與實際的享受,做事踏實可靠,對美感與品質有一定堅持,但有時固執、不容易改變決定。', element:'土象'},
+  {name:'雙子座', symbol:'♊', from:[5,21], to:[6,21], trait:'反應快、好奇心旺盛,擅長溝通與吸收新資訊,興趣廣泛多元,但有時容易三分鐘熱度、難以長時間專注一件事。', element:'風象'},
+  {name:'巨蟹座', symbol:'♋', from:[6,22], to:[7,22], trait:'重感情、顧家,有很強的直覺與保護欲,擅長經營親密關係,但情緒容易受環境影響,有時過度敏感。', element:'水象'},
+  {name:'獅子座', symbol:'♌', from:[7,23], to:[8,22], trait:'自信、有領袖魅力,樂於在人群中發光發熱,慷慨大方,但有時過於在意他人眼光、需要被肯定的成就感。', element:'火象'},
+  {name:'處女座', symbol:'♍', from:[8,23], to:[9,22], trait:'細心、追求完美與效率,對細節有很高的敏銳度,擅長分析與解決問題,但容易對自己與他人過度挑剔。', element:'土象'},
+  {name:'天秤座', symbol:'♎', from:[9,23], to:[10,23], trait:'重視和諧與美感,擅長社交與協調不同意見,天生具備平衡感,但有時因為想討好所有人而難以做決定。', element:'風象'},
+  {name:'天蠍座', symbol:'♏', from:[10,24], to:[11,21], trait:'深沉、專注、意志力強,一旦投入就會全力以赴,洞察力敏銳,但有時不容易信任他人、佔有欲較強。', element:'水象'},
+  {name:'射手座', symbol:'♐', from:[11,22], to:[12,21], trait:'樂觀、熱愛自由與探索,對世界充滿好奇,坦率直言,但有時說話不經修飾、缺乏耐心處理瑣碎細節。', element:'火象'}
+];
+const ZODIAC_DETAIL = {
+  '魔羯座':{love:'感情上偏向謹慎務實,不輕易表態,但一旦認定就會全心投入、長久經營,重視對方是否能與自己共同規劃未來。',career:'事業心強,擅長長期布局與累積,適合需要毅力與規劃能力的領域,升遷之路雖慢但穩健扎實。',health:'容易因為過度自我要求而累積壓力,骨骼與關節保養需多留意,建議培養規律運動習慣釋放壓力。',wealth:'理財觀念保守務實,擅長儲蓄與長期規劃,不容易被一時的投機機會誘惑,財富多半穩健累積。'},
+  '水瓶座':{love:'重視精神層面的契合勝過激情,喜歡跟伴侶像朋友一樣自在相處,但有時會讓另一半覺得情感表達不夠直接。',career:'適合需要創新思維的領域,不喜歡被制式規則綁住,在能自由發揮想法的環境中最能發光發熱。',health:'神經系統與循環系統需多留意,思緒常常轉個不停,建議培養靜心或放空的習慣平衡身心。',wealth:'對金錢的態度較為理性客觀,願意投資新奇或前瞻性的標的,但也要留意衝動追求新趨勢的風險。'},
+  '雙魚座':{love:'感情豐沛、浪漫且富有同理心,容易全心付出,但也要留意別在關係中失去自我、過度犧牲委屈。',career:'適合藝術創作、助人工作或需要豐富想像力的領域,在能發揮直覺與同理心的環境中表現亮眼。',health:'容易因為情緒起伏影響身體狀況,尤其是免疫系統與睡眠品質,建議建立穩定的生活作息。',wealth:'理財容易憑感覺而非計畫,建議建立基本的記帳習慣,避免因為一時心軟或衝動而破財。'},
+  '牡羊座':{love:'追求熱烈直接的感情,喜歡主動出擊,新鮮感對牡羊很重要,建議學習在關係穩定後仍保持用心經營。',career:'天生的開創者,適合需要衝勁與行動力的第一線工作,喜歡自己當家作主勝過聽命行事。',health:'活動力旺盛但容易忽略休息,頭部與運動傷害需多留意,建議適度安排恢復期避免過度耗損。',wealth:'花錢乾脆、投資果斷,但也容易因衝動決策而承擔不必要的風險,建議重大決定前先冷靜沉澱。'},
+  '金牛座':{love:'感情穩定專一,重視實質的安全感與陪伴,一旦交往通常很長久,但也需要學習偶爾給彼此一點新鮮感。',career:'適合需要耐心與細膩堅持的領域,例如財務、餐飲、美感相關產業,一步一腳印累積實力。',health:'容易因為享受美食而忽略飲食均衡,喉嚨與甲狀腺需多留意保養,建議維持規律運動習慣。',wealth:'天生擅長理財與儲蓄,重視物質保障,是十二星座中最容易累積穩定財富的星座之一。'},
+  '雙子座':{love:'喜歡有話題、有互動的感情關係,厭倦一成不變,重視伴侶能否跟上自己多變的思考節奏。',career:'適合需要溝通表達與快速學習的領域,例如媒體、行銷、業務,多元發展常帶來意外機會。',health:'神經系統較為敏感,容易因為想太多而失眠,建議培養固定的放鬆習慣,避免思緒過度活躍。',wealth:'收入來源常較為多元,但理財計畫容易半途而廢,建議設定明確的儲蓄目標維持紀律。'},
+  '巨蟹座':{love:'重感情、顧家,渴望被重視與呵護,是十二星座中最願意為家庭付出的星座之一,但也容易情緒化敏感。',career:'適合需要細膩照顧與同理心的領域,例如教育、醫療、餐飲,在有歸屬感的環境中表現最好。',health:'情緒與腸胃健康息息相關,壓力大時容易反映在消化系統上,建議學習適度抒發情緒。',wealth:'重視家庭財務安全感,傾向保守儲蓄,願意為了家人未來而做長期規劃與犧牲。'},
+  '獅子座':{love:'感情中渴望被欣賞與尊重,大方且捨得付出,但也需要另一半給予足夠的肯定與面子。',career:'天生具備領袖魅力,適合站在舞台中央的角色,在能展現才華、獲得掌聲的環境中最有動力。',health:'心臟與背部需多留意保養,容易因為逞強而忽略身體發出的警訊,建議適度放慢步調。',wealth:'花錢大方、重視生活品質,建議留意量入為出,避免為了面子而過度消費。'},
+  '處女座':{love:'感情中重視細節與實際付出,不擅長浪漫的甜言蜜語,但會用行動默默照顧對方的生活起居。',career:'細心嚴謹,適合需要分析、規劃、品質把關的領域,是團隊中不可或缺的精算與執行者。',health:'容易因為過度思慮而腸胃敏感,建議學習放鬆對完美的執著,適度紓解精神壓力。',wealth:'理財精打細算,記帳習慣良好,是十二星座中花錢最有計畫、最不容易亂花錢的星座之一。'},
+  '天秤座':{love:'渴望和諧美好的關係,擅長經營浪漫氛圍,但有時因為不擅長衝突而迴避該處理的問題。',career:'適合需要協調溝通與美感品味的領域,例如公關、設計、法律,擅長在多方意見中找到平衡點。',health:'腎臟與泌尿系統需多留意,情緒容易因猶豫不決而累積壓力,建議培養果斷做決定的練習。',wealth:'重視生活品質與美感消費,建議建立預算概念,避免因追求精緻生活而超支。'},
+  '天蠍座':{love:'感情深沉專一,一旦愛上就會全心投入,佔有欲較強,信任感是這段關係能否長久的關鍵。',career:'意志力強、洞察力敏銳,適合需要深度鑽研或危機處理的領域,危機感反而是前進的動力。',health:'生殖系統與代謝功能需多留意,情緒容易壓抑不表達,建議找到適合自己的情緒出口。',wealth:'對金錢有敏銳的直覺與野心,擅長透過深度研究掌握投資機會,但也要留意過度冒險。'},
+  '射手座':{love:'重視自由與空間,喜歡感情中帶點探索與冒險的樂趣,不喜歡被綁得太緊,坦率直接是最大的魅力。',career:'適合需要自由度與國際視野的領域,例如旅遊、教育、國際業務,喜歡不斷拓展新的可能性。',health:'肝臟與臀部關節需多留意,活動量大但容易疏於保養,建議定期安排健康檢查。',wealth:'花錢豪邁、樂觀看待財務風險,建議留一部分預備金,避免過度樂觀而忽略風險控管。'}
+};
+function getZodiac(m,d){
+  for(const z of ZODIAC){
+    const [fm,fd]=z.from, [tm,td]=z.to;
+    if(fm===tm){ if(m===fm && d>=fd && d<=td) return z; }
+    else if(fm>tm){ if((m===fm && d>=fd) || (m===tm && d<=td)) return z; }
+    else { if((m===fm && d>=fd) || (m>fm && m<tm) || (m===tm && d<=td)) return z; }
+  }
+  return ZODIAC[0];
+}
+
+/* ---------- 生日寶石(依西方寶石業傳統月份對照表,美國寶石協會版本最廣為使用) ---------- */
+const BIRTHSTONE = {
+  1:{name:'石榴石', text:'象徵忠誠與友誼,傳說能為佩戴者帶來平安與力量。'},
+  2:{name:'紫水晶', text:'象徵誠懇與平靜,傳統上被認為有助於保持頭腦清晰、穩定情緒。'},
+  3:{name:'海藍寶石', text:'象徵勇氣與清澈,傳說中是航海者的守護石,帶來平安順遂。'},
+  4:{name:'鑽石', text:'象徵永恆與純淨,是十二個月生日石中最珍貴稀有的一種。'},
+  5:{name:'祖母綠', text:'象徵重生與希望,傳統上被視為帶來智慧與遠見的寶石。'},
+  6:{name:'珍珠/月光石', text:'象徵純潔與直覺,珍珠代表優雅內斂,月光石則與月亮的陰柔能量有關。'},
+  7:{name:'紅寶石', text:'象徵熱情與活力,自古被視為尊貴與勇氣的象徵。'},
+  8:{name:'橄欖石', text:'象徵和諧與幸福,傳說能為佩戴者驅散負面情緒、帶來平靜。'},
+  9:{name:'藍寶石', text:'象徵真誠與智慧,傳統上被認為有助於增進洞察力與判斷力。'},
+  10:{name:'蛋白石/碧璽', text:'蛋白石象徵希望與創造力,碧璽則以多彩著稱,象徵包容與能量流動。'},
+  11:{name:'黃玉', text:'象徵友誼與溫暖,傳說能為佩戴者帶來自信與活力。'},
+  12:{name:'綠松石/坦桑石', text:'綠松石自古被視為守護石,坦桑石則象徵轉化與靈性成長。'}
+};
+
+/* ---------- 生日花(依月份對照,查證時發現不同來源版本略有差異,這裡採用較常見的版本) ---------- */
+const BIRTH_FLOWER = {
+  1:{name:'康乃馨/雪花蓮', text:'康乃馨象徵愛與關懷,雪花蓮則代表在寒冬中依然綻放的希望與堅韌。'},
+  2:{name:'紫羅蘭/報春花', text:'象徵初戀與純潔,是充滿愛意的月份專屬花卉,適合表達心意。'},
+  3:{name:'櫻花/黃水仙', text:'象徵春天的開始與新生,櫻花轉瞬即逝的美更添一份珍惜當下的意味。'},
+  4:{name:'雛菊/香豌豆花', text:'象徵天真與純潔的心,也代表對美好事物保持敏銳感受力。'},
+  5:{name:'鈴蘭/山楂花', text:'象徵幸福再現,傳統上被視為帶來好運與甜蜜回憶的花卉。'},
+  6:{name:'玫瑰/金銀花', text:'象徵愛與熱情,玫瑰是最廣為人知的愛情象徵,金銀花則代表堅韌的情誼。'},
+  7:{name:'飛燕草/睡蓮', text:'象徵輕盈自由的心,也代表在寧靜中蘊藏的深刻情感。'},
+  8:{name:'劍蘭/罌粟花', text:'劍蘭象徵堅強的性格與誠實,罌粟花則代表想像力與夢想。'},
+  9:{name:'紫菀/牽牛花', text:'象徵優雅與智慧,秋天綻放的花卉常帶有一份沉穩內斂的氣質。'},
+  10:{name:'萬壽菊/波斯菊', text:'象徵溫暖與樂觀,波斯菊纖細卻堅韌的姿態,也象徵柔韌不屈的生命力。'},
+  11:{name:'菊花', text:'象徵高雅與長壽,在許多文化中都是秋末冬初備受喜愛的花卉。'},
+  12:{name:'水仙花/一品紅', text:'象徵重生與喜慶,在節慶氣氛濃厚的月份綻放,帶來溫暖的祝福。'}
+};
+
+/* ---------- 納音五行(60甲子干支週期,每兩年為一組,共30組納音,查證來源:多篇命理
+   文獻一致引用的六十甲子納音對照表) ---------- */
+const NAYIN_TABLE = {
+  '甲子':'海中金','乙丑':'海中金','丙寅':'爐中火','丁卯':'爐中火','戊辰':'大林木','己巳':'大林木',
+  '庚午':'路旁土','辛未':'路旁土','壬申':'劍鋒金','癸酉':'劍鋒金','甲戌':'山頭火','乙亥':'山頭火',
+  '丙子':'澗下水','丁丑':'澗下水','戊寅':'城頭土','己卯':'城頭土','庚辰':'白蠟金','辛巳':'白蠟金',
+  '壬午':'楊柳木','癸未':'楊柳木','甲申':'泉中水','乙酉':'泉中水','丙戌':'屋上土','丁亥':'屋上土',
+  '戊子':'霹靂火','己丑':'霹靂火','庚寅':'松柏木','辛卯':'松柏木','壬辰':'長流水','癸巳':'長流水',
+  '甲午':'沙中金','乙未':'沙中金','丙申':'山下火','丁酉':'山下火','戊戌':'平地木','己亥':'平地木',
+  '庚子':'壁上土','辛丑':'壁上土','壬寅':'金箔金','癸卯':'金箔金','甲辰':'覆燈火','乙巳':'覆燈火',
+  '丙午':'天河水','丁未':'天河水','戊申':'大驛土','己酉':'大驛土','庚戌':'釵釧金','辛亥':'釵釧金',
+  '壬子':'桑柘木','癸丑':'桑柘木','甲寅':'大溪水','乙卯':'大溪水','丙辰':'沙中土','丁巳':'沙中土',
+  '戊午':'天上火','己未':'天上火','庚申':'石榴木','辛酉':'石榴木','壬戌':'大海水','癸亥':'大海水'
+};
+
+/* ---------- 星座元素相性(占星學基礎概念:火象+風象相輔相成,土象+水象相輔相成,
+   同象契合,火象/水象與土象/風象則較容易產生摩擦,是占星學廣泛使用的基礎配對原則) ---------- */
+function getElementRelation(el1, el2){
+  if(el1 === el2) return {type:'same', text:`同屬${el1}星座,價值觀與步調相近,溝通上容易一拍即合,但有時也會少了互補帶來的新鮮感。`};
+  const harmonyPairs = [['火象','風象'],['土象','水象']];
+  const isHarmony = harmonyPairs.some(p=>(p[0]===el1&&p[1]===el2)||(p[0]===el2&&p[1]===el1));
+  if(isHarmony) return {type:'harmony', text:`${el1}與${el2}在占星學上屬於相輔相成的組合(風能助火勢、水能潤土壤),兩人相處通常能互相補足對方的不足。`};
+  return {type:'friction', text:`${el1}與${el2}的步調與能量表現方式較不相同,占星學上這類組合有時需要多花一點心力理解彼此,但差異也可能帶來互補的成長機會。`};
+}
+
+/* ---------- 干支(年柱為正式週期公式,月/日/時為簡化推算) ---------- */
+const STEMS = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+const BRANCHES = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+const WUXING_BY_STEM = {'甲':'木','乙':'木','丙':'火','丁':'火','戊':'土','己':'土','庚':'金','辛':'金','壬':'水','癸':'水'};
+/* ---------- 八字十神(以日干為基準,判斷其他天干與日干的五行生剋+陰陽關係)
+   口訣查證來源:多篇八字教學文章一致引用「同為比劫、生我印、我生食傷、我剋財、
+   剋我官殺,陰陽相同為偏、陰陽不同為正(比肩劫財例外)」,已用日干甲對照標準參考表
+   實測驗證9種組合全部正確。這是真實可查證的判斷邏輯,不是隨機產生。 ---------- */
+const STEM_YINYANG = {'甲':'陽','丙':'陽','戊':'陽','庚':'陽','壬':'陽','乙':'陰','丁':'陰','己':'陰','辛':'陰','癸':'陰'};
+const WUXING_SHENG = {'木':'火','火':'土','土':'金','金':'水','水':'木'};
+const WUXING_KE = {'木':'土','土':'水','水':'火','火':'金','金':'木'};
+const TEN_GOD_DESC = {
+  '比肩':'代表同輩競爭與自我意識,個性獨立自主、重視原則,但有時較為固執己見。',
+  '劫財':'代表競爭與冒險精神,行動積極敢衝敢拚,但需留意財務上容易因衝動而破財。',
+  '食神':'代表才華與福氣,性格樂觀開朗、重視生活享受,表達方式溫和細膩,適合創作與教學。',
+  '傷官':'代表創新與突破,聰明機智、不喜歡被傳統框架綁住,但也需留意言詞太直接容易得罪人。',
+  '正財':'代表穩定的財富與收入,做事勤勞踏實、重視實際成果,理財觀念務實可靠。',
+  '偏財':'代表意外之財與投資機會,個性慷慨大方、人緣廣闊,在投資理財上機運較佳。',
+  '正官':'代表責任感與紀律,行事循規蹈矩、重視社會規範,適合穩定的體制內發展。',
+  '七殺':'代表衝勁與決斷力,個性勇敢果決、不畏挑戰,適合需要開創魄力的領域,但需留意控制脾氣。',
+  '正印':'代表智慧與慈愛,心地善良、學習能力強,重視內在修養與知識累積。',
+  '偏印':'代表獨特的思維與直覺,善於獨立思考,在藝術、學術等專業領域可能有出色表現。'
+};
+function getTenGod(dayStem, otherStem){
+  if(dayStem === otherStem) return '比肩';
+  const dayWx = WUXING_BY_STEM[dayStem], otherWx = WUXING_BY_STEM[otherStem];
+  const sameYinYang = STEM_YINYANG[dayStem] === STEM_YINYANG[otherStem];
+  if(dayWx === otherWx) return sameYinYang ? '比肩' : '劫財';
+  if(WUXING_SHENG[otherWx] === dayWx) return sameYinYang ? '偏印' : '正印';
+  if(WUXING_SHENG[dayWx] === otherWx) return sameYinYang ? '食神' : '傷官';
+  if(WUXING_KE[dayWx] === otherWx) return sameYinYang ? '偏財' : '正財';
+  if(WUXING_KE[otherWx] === dayWx) return sameYinYang ? '七殺' : '正官';
+  return '未知';
+}
+
+/* ---------- 農民曆:真實日干支計算公式(查證來源:公元紀日與天干地支換算公式,
+   已用已知正確答案2006/4/1=庚申日實測驗證,並額外用60甲子循環一致性測試確認正確)
+   ---------- */
+function getDayGanZhi(year, month, day){
+  let y = year, m = month, d = day;
+  if(m === 1 || m === 2){ y -= 1; m += 12; } // 1、2月當作上一年的13、14月計算
+  const C = Math.floor((y-1)/100); // 世紀數減一
+  const yy = y % 100;
+  const i = (m % 2 === 0) ? 6 : 0;
+  const G = 4*C + Math.floor(C/4) + 5*yy + Math.floor(yy/4) + Math.floor(3*(m+1)/5) + d - 3;
+  const Z = 8*C + Math.floor(C/4) + 5*yy + Math.floor(yy/4) + Math.floor(3*(m+1)/5) + d + 7 + i;
+  let gIdx = ((G % 10) + 10) % 10; if(gIdx === 0) gIdx = 10;
+  let zIdx = ((Z % 12) + 12) % 12; if(zIdx === 0) zIdx = 12;
+  const STEMS_1 = ['','甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+  const BRANCHES_1 = ['','子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+  return { stem: STEMS_1[gIdx], branch: BRANCHES_1[zIdx], branchIdx0: zIdx - 1, ganzhi: STEMS_1[gIdx] + BRANCHES_1[zIdx] };
+}
+
+/* ---------- 建除十二值日(查證來源:多篇擇日文獻一致引用「正月建寅,寅日起建,順行
+   十二辰」的推算規則,以及「除危定執成開為吉,建滿平收破閉為凶」的傳統吉凶判斷)
+   【重要】正確做法需要農曆月份(依節氣劃分,非農曆初一),這裡用「國曆月份」直接
+   當農曆月份的近似替代,跟本頁面其他簡化農曆換算的限制相同,已在畫面上標註 ---------- */
+const JIANCHU_NAMES = ['建','除','滿','平','定','執','破','危','成','收','開','閉'];
+const JIANCHU_GOOD = ['除','危','定','執','成','開'];
+const JIANCHU_MEANING = {
+  '建':'開創之日,適合開展新計畫、開工動土,但諸事不宜過度張揚,忌搬家嫁娶。',
+  '除':'除舊佈新之日,適合大掃除、就醫治病、剃頭理髮,忌遠行出遊。',
+  '滿':'豐收圓滿之日,適合祈福、慶祝、開市,但忌服藥調理、忌安床。',
+  '平':'平順穩定之日,適合整地修繕,忌興訟打官司、忌開市。',
+  '定':'穩定確立之日,適合簽約、置產、宣誓承諾,忌興訟、忌遠行。',
+  '執':'固守堅持之日,適合簽約、掌握既有成果,忌開市、忌搬遷。',
+  '破':'破除之日,適合拆除、破土、就醫,忌開市、忌嫁娶、忌簽署重大合約。',
+  '危':'謹慎小心之日,忌登高、忌搭乘交通工具遠行,宜安分守己、多加留意安全。',
+  '成':'成就之日,傳統上視為吉日,適合開市、嫁娶、簽約等大小事皆宜。',
+  '收':'收成收穫之日,適合收款、進貨、簽約,忌安葬、忌動土興工。',
+  '開':'開通之日,傳統上視為吉日,適合開業、開市、動工、求醫問診。',
+  '閉':'閉藏收整之日,適合修補、整理收納,忌開市、忌出遠門、忌動土。'
+};
+function getJianchu(month, dayBranchIdx0){
+  const monthBranchIdx = (2 + (month - 1)) % 12; // 正月建寅(index2),依序順推
+  const jcIdx = ((dayBranchIdx0 - monthBranchIdx) % 12 + 12) % 12;
+  return JIANCHU_NAMES[jcIdx];
+}
+
+function getYearPillar(year){
+  // 西元4年為甲子年起點,是干支紀年公認的計算基準,此為正式公式
+  const stemIdx = (year - 4) % 10;
+  const branchIdx = (year - 4) % 12;
+  return STEMS[(stemIdx+10)%10] + BRANCHES[(branchIdx+12)%12];
+}
+function getSimplifiedMonthPillar(year, month){
+  // 簡化版:非精確節氣月柱,以月份直接對應地支概念做簡化推算
+  const idx = (month + 1) % 12;
+  const stemBase = (year*2 + month) % 10;
+  return STEMS[(stemBase+10)%10] + BRANCHES[idx];
+}
+function getSimplifiedDayPillar(year, month, day){
+  // 簡化版:用日期序數做簡化推算,非精確萬年曆日柱算法
+  const dateSeed = Math.floor(new Date(year, month-1, day).getTime()/86400000);
+  return STEMS[((dateSeed%10)+10)%10] + BRANCHES[((dateSeed%12)+12)%12];
+}
+function getSimplifiedHourPillar(hour, daySeed){
+  if(hour<0) return '(時辰不確定)';
+  const branchIdx = BRANCHES.indexOf(BRANCHES[Math.floor(((hour+1)%24)/2)]);
+  const stemIdx = (daySeed*2 + branchIdx) % 10;
+  return STEMS[((stemIdx+10)%10)] + BRANCHES[branchIdx];
+}
+
+/* ---------- 簡化紫微十二宮 ---------- */
+const PALACES = ['命宮','兄弟宮','夫妻宮','子女宮','財帛宮','疾厄宮','遷移宮','僕役宮','官祿宮','田宅宮','福德宮','父母宮'];
+const PALACE_MEANING = {
+  '命宮':'命盤的樞紐,代表個性、本質與人生的總體走向,是解讀整張命盤的起點。',
+  '兄弟宮':'手足緣分與同輩人際,也常延伸解讀朋友、合作夥伴之間的關係與助力。',
+  '夫妻宮':'婚姻狀況與配偶特質,是感情運勢與伴侶關係品質的重要參考宮位。',
+  '子女宮':'子女緣分、教養互動,也與創造力、部屬晚輩的關係有關。',
+  '財帛宮':'財務能力、賺錢模式與理財習慣,是判斷財運高低的核心宮位。',
+  '疾厄宮':'體質與健康傾向,也常反映心理壓力承受度與生活作息狀態。',
+  '遷移宮':'外出運、環境變化與在外的人際形象,對宮就是命宮,兩者互相呼應。',
+  '僕役宮':'朋友、部屬與人脈圈,又稱交友宮,反映社交圈的品質與廣度。',
+  '官祿宮':'事業與職業發展方向,又稱事業宮,是工作成就與職涯路徑的參考。',
+  '田宅宮':'不動產、家族資產與居家環境,也涉及財富的長期累積狀態。',
+  '福德宮':'精神生活、內心滿足感與享受能力,反映一個人真正的幸福感來源。',
+  '父母宮':'與父母、長輩的關係,也反映成長環境對個性養成的影響。'
+};
+const ZIWEI_STARS = ['紫微','天機','太陽','武曲','天同','廉貞','天府','太陰','貪狼','巨門','天相','天梁','七殺','破軍'];
+const ZIWEI_STAR_DESC = {
+  '紫微':'領導特質強,重視地位與尊嚴,適合統籌全局的角色。',
+  '天機':'思路靈活、善於策劃,適合需要動腦分析的事務。',
+  '太陽':'性格開朗、樂於付出,具有照顧他人的能量。',
+  '武曲':'意志堅定、行動力強,重視實質的成果與財富。',
+  '天同':'性情溫和、隨遇而安,重視生活中的平靜與享受。',
+  '廉貞':'個性鮮明、敢愛敢恨,行事風格較為大膽直接。',
+  '天府':'穩重踏實、善於管理,適合累積與守成的角色。',
+  '太陰':'細膩體貼、重視內在情感,擅長照料與經營關係。',
+  '貪狼':'多才多藝、社交能力強,對新鮮事物充滿興趣。',
+  '巨門':'口才與分析力兼具,適合需要溝通表達的場合。',
+  '天相':'重視和諧、樂於協助他人,是可靠的輔佐型人格。',
+  '天梁':'穩重、有長輩緣,天生具備照顧與指導他人的特質。',
+  '七殺':'行動果決、不畏挑戰,具有開創與衝刺的能量。',
+  '破軍':'勇於突破現狀、不安於現況,適合變動與轉型的階段。'
+};
+function buildZiwei(rnd){
+  const shuffled = [...ZIWEI_STARS].sort(()=>rnd()-0.5);
+  return PALACES.map((p,i)=>({palace:p, star:shuffled[i % shuffled.length]}));
+}
+
+/* ---------- 命宮地支計算(真實口訣公式:寅起順行至生月,生月起子,逆至生時安命宮)
+   口訣查證來源:多篇紫微斗數教學文章一致引用,非自行編造。
+   【重要】正確做法需要「農曆」生月,這裡用「國曆生月」直接當農曆生月的近似替代,
+   沒有做真正的農曆換算,國曆跟農曆的月份在年初/年底交界處可能對不上,這是這個
+   簡化版本的已知限制,已在畫面上明確標註 ---------- */
+const BRANCH_ORDER = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+function getHourBranchIndex(hour){
+  // hour為時辰起始時,對照到地支index(子0丑1寅2...)
+  const map = {23:0, 1:1, 3:2, 5:3, 7:4, 9:5, 11:6, 13:7, 15:8, 17:9, 19:10, 21:11};
+  return map[hour];
+}
+function getMingGongBranch(approxLunarMonth, hourBranchIdx){
+  const yinIdx = 2; // 寅在地支順序中的index
+  const birthMonthPalace = (yinIdx + (approxLunarMonth - 1)) % 12;
+  const mingGongIdx = ((birthMonthPalace - hourBranchIdx) % 12 + 12) % 12;
+  return mingGongIdx;
+}
+
+/* ---------- 塔羅牌(22張大阿爾克那+4張小阿爾克那Ace牌,共26張) ---------- */
+const TAROT = [
+  {name:'愚者',up:'新的開始、天真的冒險精神,適合放手一試,不必想得太複雜。',rev:'思慮不周、行事魯莽,提醒您行動前先想清楚後果。'},
+  {name:'魔術師',up:'具備實現目標所需的一切資源,是主動創造的好時機。',rev:'資源沒有被善用,或有些自欺欺人,需要重新盤點手上的條件。'},
+  {name:'女祭司',up:'直覺敏銳,適合傾聽內心的聲音而非急著行動。',rev:'忽略了直覺的提醒,或資訊被隱藏,需要多一點耐心等待真相。'},
+  {name:'皇后',up:'豐盛、滋養與創造力旺盛的階段,適合投入喜愛的事物。',rev:'過度付出而忽略自己,或創造力暫時卡住,需要留一點空間給自己。'},
+  {name:'皇帝',up:'秩序與掌控感,適合建立規則與長期穩定的架構。',rev:'過度控制或固執己見,提醒您適度放鬆對細節的掌握。'},
+  {name:'教皇',up:'傳統智慧與可信賴的指引,適合尋求前輩或制度的支持。',rev:'質疑既有規則,或需要走出自己的路,而非完全依循傳統。'},
+  {name:'戀人',up:'重要的選擇與連結,關係中重視真誠一致的溝通。',rev:'關係中出現猶豫不決,或價值觀不一致需要被誠實面對。'},
+  {name:'戰車',up:'意志力與行動力兼具,適合朝目標全力衝刺。',rev:'方向感缺失或內心衝突拉扯,需要先釐清真正想要的方向。'},
+  {name:'力量',up:'用溫柔而堅定的方式面對挑戰,內在韌性比蠻力更有效。',rev:'自我懷疑或情緒失控,提醒您給自己多一點耐心與寬容。'},
+  {name:'隱者',up:'適合獨處沉澱、向內探索答案的階段。',rev:'過度孤立自己,或逃避該面對的人事物。'},
+  {name:'命運之輪',up:'轉變的時機到來,順應變化往往比抗拒更有利。',rev:'感覺被命運牽著走,提醒您找回自己能掌握的部分。'},
+  {name:'正義',up:'公平、理性的判斷,適合處理需要客觀衡量的事務。',rev:'感覺被不公平對待,或自己做了偏頗的判斷需要重新檢視。'},
+  {name:'吊人',up:'換個角度看事情,暫時的停滯其實是為了看清全局。',rev:'停滯不前卻不願改變視角,徒然浪費時間在原地打轉。'},
+  {name:'死神',up:'一個階段真正結束,才能讓新的開始有空間出現。',rev:'抗拒必要的結束,遲遲不肯放下已經不適合的人事物。'},
+  {name:'節制',up:'耐心調和、循序漸進,適合需要平衡多方需求的情境。',rev:'步調失衡或過度極端,提醒您找回中庸之道。'},
+  {name:'惡魔',up:'留意讓自己上癮或困住的模式,覺察是解脫的第一步。',rev:'開始意識到束縛並準備掙脫,是好的轉機訊號。'},
+  {name:'高塔',up:'突如其來的變化打破舊有結構,雖然衝擊但帶來真相。',rev:'一直逃避即將發生的改變,拖得越久衝擊可能越大。'},
+  {name:'星星',up:'希望與療癒的能量,適合重新對未來抱持信心。',rev:'暫時感到希望渺茫,提醒您先照顧好自己的情緒。'},
+  {name:'月亮',up:'潛意識與直覺活躍,事情可能不如表面看起來單純。',rev:'混亂的情緒或錯覺逐漸被釐清,真相即將浮現。'},
+  {name:'太陽',up:'順遂、明朗、充滿活力,適合展現真實的自己。',rev:'暫時被烏雲遮蔽的好心情,調整心態後仍會回到光明面。'},
+  {name:'審判',up:'重新檢視過去、迎接覺醒與新生的階段。',rev:'對過去的自我評價過於嚴苛,提醒您給自己一個重新來過的機會。'},
+  {name:'世界',up:'一個完整的循環圓滿落幕,適合慶祝階段性的成就。',rev:'感覺尚未真正完成,可能還缺臨門一腳才能收尾。'},
+  {name:'權杖Ace',up:'全新的熱情與行動力正在萌芽,適合勇敢跨出創新的第一步。',rev:'動力遲遲無法啟動,提醒您先釐清真正想做的方向再出發。'},
+  {name:'聖杯Ace',up:'情感與直覺豐沛湧現,適合敞開心胸迎接新的感情或創作靈感。',rev:'情感能量暫時淤積,提醒您留意是否壓抑了真實的感受。'},
+  {name:'寶劍Ace',up:'思路清晰、真相浮現的時刻,適合做出果斷的判斷與決定。',rev:'思緒混亂或訊息不完整,提醒您先別急著下結論。'},
+  {name:'錢幣Ace',up:'實質的機會或資源正在到來,適合把握新的物質面向發展。',rev:'機會可能尚未成熟或被錯過,提醒您先扎穩根基再求發展。'}
+];
+
+/* ---------- 十二生肖與本命佛 ---------- */
+const SHENGXIAO = ['鼠','牛','虎','兔','龍','蛇','馬','羊','猴','雞','狗','豬'];
+const SHENGXIAO_TRAIT = {
+  '鼠':'機靈敏銳、適應力強,善於在變動中找到機會,人際手腕靈活。',
+  '牛':'踏實勤懇、意志堅定,認定的事會堅持到底,是值得信賴的實幹派。',
+  '虎':'勇敢自信、行動力十足,天生的領導氣質,不喜歡受拘束。',
+  '兔':'溫和細膩、審美獨到,重視和諧的人際關係,做事謹慎周到。',
+  '龍':'氣勢十足、企圖心強,渴望成就一番大事,天生自帶主角光環。',
+  '蛇':'冷靜睿智、觀察入微,擅長謀定而後動,直覺敏銳不易被看穿。',
+  '馬':'熱情奔放、熱愛自由,行動派性格,不喜歡被綁在原地。',
+  '羊':'溫柔體貼、富有藝術氣息,重視情感連結,擅長營造溫馨氛圍。',
+  '猴':'聰明靈活、點子源源不絕,適應力極強,擅長隨機應變解決問題。',
+  '雞':'勤奮認真、注重細節,對自己要求高,做事有條理又準時。',
+  '狗':'忠誠正直、重情重義,是值得託付的夥伴,重視公平與原則。',
+  '豬':'心地善良、樂天知足,待人真誠寬厚,享受生活中的小確幸。'
+};
+const GUARDIAN_BUDDHA = {
+  '鼠':'千手觀音菩薩', '牛':'虛空藏菩薩', '虎':'虛空藏菩薩', '兔':'文殊菩薩',
+  '龍':'普賢菩薩', '蛇':'普賢菩薩', '馬':'大勢至菩薩', '羊':'大日如來',
+  '猴':'大日如來', '雞':'不動明王', '狗':'阿彌陀佛', '豬':'阿彌陀佛'
+};
+/* ---------- 生肖三合六合六沖對照表(查證來源:多篇命理文章一致引用的傳統十二地支關係)
+   三合=明合,三個生肖組成最理想的吉配組合;六合=暗合,兩兩相合的貴人關係;
+   六沖=地支正對面相沖,傳統上代表意見較容易不合,需要更多包容溝通 ---------- */
+const SHENGXIAO_COMPAT = {
+  '鼠':{sanhe:['龍','猴'], liuhe:['牛'], chong:'馬'},
+  '牛':{sanhe:['蛇','雞'], liuhe:['鼠'], chong:'羊'},
+  '虎':{sanhe:['馬','狗'], liuhe:['豬'], chong:'猴'},
+  '兔':{sanhe:['豬','羊'], liuhe:['狗'], chong:'雞'},
+  '龍':{sanhe:['鼠','猴'], liuhe:['雞'], chong:'狗'},
+  '蛇':{sanhe:['雞','牛'], liuhe:['猴'], chong:'豬'},
+  '馬':{sanhe:['虎','狗'], liuhe:['羊'], chong:'鼠'},
+  '羊':{sanhe:['兔','豬'], liuhe:['馬'], chong:'牛'},
+  '猴':{sanhe:['鼠','龍'], liuhe:['蛇'], chong:'虎'},
+  '雞':{sanhe:['蛇','牛'], liuhe:['龍'], chong:'兔'},
+  '狗':{sanhe:['虎','馬'], liuhe:['兔'], chong:'龍'},
+  '豬':{sanhe:['兔','羊'], liuhe:['虎'], chong:'蛇'}
+};
+function getShengxiaoRelation(sx1, sx2){
+  if(sx1 === sx2) return {type:'same', text:'同生肖,個性與價值觀相近,容易一拍即合,但也要留意彼此太像有時反而少了互補的新鮮感。'};
+  const c = SHENGXIAO_COMPAT[sx1];
+  if(c.sanhe.includes(sx2)) return {type:'sanhe', text:`${sx1}與${sx2}屬於傳統生肖「三合」關係,是命理上公認最理想的吉配組合之一,象徵情投意合、彼此扶持。`};
+  if(c.liuhe.includes(sx2)) return {type:'liuhe', text:`${sx1}與${sx2}屬於傳統生肖「六合」關係,是暗中互相幫助的貴人組合,相處上容易感覺踏實安心。`};
+  if(c.chong === sx2) return {type:'chong', text:`${sx1}與${sx2}屬於傳統生肖「六沖」關係,傳統上代表意見較容易不合、個性上有較大差異,但這不代表不能走得長久,只是需要更多包容與溝通。`};
+  return {type:'normal', text:`${sx1}與${sx2}沒有特別強烈的傳統生肖吉凶關係,相處狀況主要還是取決於兩人實際的個性與相處方式。`};
+}
+function getShengxiao(year){
+  // 1900年為鼠年,是十二生肖循環計算公認的基準年,此為正式公式
+  const idx = (year - 1900) % 12;
+  return SHENGXIAO[(idx+12)%12];
+}
+function renderShengxiao(year){
+  const sx = getShengxiao(year);
+  const buddha = GUARDIAN_BUDDHA[sx];
+  document.getElementById('shengxiao-stats').innerHTML = `
+    <div class="stat"><div class="k">生肖</div><div class="v">${sx}</div></div>
+    <div class="stat"><div class="k">本命佛(守護神)</div><div class="v">${buddha}</div></div>
+  `;
+  document.getElementById('shengxiao-desc').innerHTML = `<p>${SHENGXIAO_TRAIT[sx]}民間信仰中,屬${sx}者的守護神為「${buddha}」,傳統上認為虔誠禮敬能帶來心安與庇佑。</p>`;
+}
+
+/* ---------- 生命靈數(畢達哥拉斯數字學,西元年月日全部數字加總至個位數) ---------- */
+const LIFENUM_DESC = {
+  1:{title:'開創數', text:'天生領袖特質,積極獨立、主見強,適合站在第一線開創新局,但要留意別把身邊人逼得太緊。'},
+  2:{title:'協調數', text:'敏感體貼、善於溝通,具備良好的分析與協調能力,天生適合扮演團隊裡的潤滑劑角色。'},
+  3:{title:'創意數', text:'樂觀開朗、充滿童心與創造力,擅長用有趣的方式表達自己,人群中總是特別吸引目光。'},
+  4:{title:'執行數', text:'務實可靠、重視安全感,擅長把計畫一步步落實,是值得託付重要任務的人。'},
+  5:{title:'自由數', text:'熱愛變化與冒險,適應力極強,渴望體驗多元的人生,不喜歡被單一框架限制住。'},
+  6:{title:'責任數', text:'重視家庭與人際和諧,天生的照顧者性格,願意為所愛的人事物付出與承擔。'},
+  7:{title:'智慧數', text:'愛獨處的思考者,對事物有深刻的洞察力,喜歡鑽研到底,適合需要專注鑽研的領域。'},
+  8:{title:'power數', text:'具備事業心與實幹精神,重視具體的成果與財富累積,天生帶有掌握全局的能量。'},
+  9:{title:'博愛數', text:'具備人道關懷與大格局視野,樂於為更廣大的群體付出,是天生的理想主義者。'}
+};
+function getLifeNumber(y,m,d){
+  let digits = `${y}${m}${d}`.split('').map(Number);
+  let sum = digits.reduce((a,b)=>a+b,0);
+  while(sum > 9){ sum = String(sum).split('').reduce((a,b)=>a+Number(b),0); }
+  return sum;
+}
+function renderLifeNumber(y,m,d){
+  const num = getLifeNumber(y,m,d);
+  const info = LIFENUM_DESC[num] || LIFENUM_DESC[1];
+  document.getElementById('lifenum-stats').innerHTML = `
+    <div class="stat"><div class="k">生命靈數</div><div class="v">${num} 號人</div></div>
+    <div class="stat"><div class="k">數字屬性</div><div class="v">${info.title}</div></div>
+  `;
+  document.getElementById('lifenum-desc').innerHTML = `<p>${info.text}</p>`;
+}
+
+/* ---------- 幸運符號(依生日決定,同一人結果固定) ---------- */
+const LUCKY_COLORS = ['寶石紅','琥珀金','靛青藍','翡翠綠','薰衣紫','珍珠白','曜石黑','珊瑚橘','天空藍','玫瑰粉','橄欖綠','香檳金'];
+const LUCKY_DIRECTIONS = ['東方','東南方','南方','西南方','西方','西北方','北方','東北方'];
+function renderLucky(){
+  const lrnd = seededRandom(currentSeedStr + '-lucky');
+  const color = pick(LUCKY_COLORS, lrnd);
+  const number = 1 + Math.floor(lrnd()*9);
+  const direction = pick(LUCKY_DIRECTIONS, lrnd);
+  document.getElementById('lucky-stats').innerHTML = `
+    <div class="stat"><div class="k">幸運色</div><div class="v">${color}</div></div>
+    <div class="stat"><div class="k">幸運數字</div><div class="v">${number}</div></div>
+    <div class="stat"><div class="k">幸運方位</div><div class="v">${direction}</div></div>
+  `;
+}
+
+/* ---------- 風水命卦(八宅風水東四命/西四命,查證來源:多篇風水文章一致引用的
+   命卦計算公式,已用6組真實案例實測驗證公式正確) ---------- */
+const GUA_INFO = {
+  '坎':{group:'東四命', element:'陽水', goodDir:['正北','正南','正東','東南']},
+  '離':{group:'東四命', element:'陰火', goodDir:['正南','正北','東南','正東']},
+  '震':{group:'東四命', element:'陽木', goodDir:['正東','東南','正南','正北']},
+  '巽':{group:'東四命', element:'陰木', goodDir:['東南','正東','正北','正南']},
+  '乾':{group:'西四命', element:'陽金', goodDir:['西北','西南','東北','正西']},
+  '坤':{group:'西四命', element:'陰土', goodDir:['西南','西北','正西','東北']},
+  '艮':{group:'西四命', element:'陽土', goodDir:['東北','正西','西北','西南']},
+  '兌':{group:'西四命', element:'陰金', goodDir:['正西','東北','西南','西北']}
+};
+function getMingGua(year, gender){
+  const last2 = year % 100;
+  let remainder;
+  if(year < 2000){
+    remainder = gender === 'M' ? ((100 - last2) % 9 + 9) % 9 : ((last2 - 4) % 9 + 9) % 9;
+  } else {
+    remainder = gender === 'M' ? ((99 - last2) % 9 + 9) % 9 : (last2 + 6) % 9;
+  }
+  if(remainder === 0) remainder = 9;
+  if(remainder === 5) return gender === 'M' ? '坤' : '艮';
+  const guaMap = {1:'坎',2:'坤',3:'震',4:'巽',6:'乾',7:'兌',8:'艮',9:'離'};
+  return guaMap[remainder];
+}
+function renderFengshui(year, gender){
+  const gua = getMingGua(year, gender);
+  const info = GUA_INFO[gua];
+  const box = document.getElementById('fengshui-result');
+  box.innerHTML = `
+    <div class="result-grid">
+      <div class="stat"><div class="k">命卦</div><div class="v">${gua}卦</div></div>
+      <div class="stat"><div class="k">分類</div><div class="v">${info.group}</div></div>
+      <div class="stat"><div class="k">五行</div><div class="v">${info.element}</div></div>
+    </div>
+    <div class="divider"></div>
+    <p><b>適合方位(由佳到次):</b>${info.goodDir.join('、')}</p>
+    <p style="margin-top:8px;">傳統八宅風水認為,睡床、書桌、辦公桌盡量朝向或位於上述方位,對運勢較有幫助;${info.group}的人,建議居住在同屬${info.group}的房屋座向,居家環境與命卦相合,傳統上認為較能安穩旺氣。</p>
+    <div class="disc">此為八宅風水派的命卦速算公式,已查證多篇文獻並用真實案例驗證計算正確;但實際風水佈局需要搭配房屋座向、樓層、周遭環境等更多實地勘查資訊,此處僅為簡化的方位參考,不是完整的風水鑑定。</div>
+  `;
+}
+
+/* ---------- 易經求籤(精簡版,取常見64卦中的核心8卦作示範集,附卦辭大意) ---------- */
+const HEXAGRAMS = [
+  {name:'乾為天', symbol:'☰☰', text:'剛健有為之象,適合主動出擊、把握時機大展身手,但盛極需防過剛易折,提醒您留意進退之間的分寸。'},
+  {name:'坤為地', symbol:'☷☷', text:'柔順包容之象,適合以退為進、厚德載物,此時不宜躁進,先穩固根基,順勢而為自有收穫。'},
+  {name:'水雷屯', symbol:'☵☳', text:'萬事起頭難之象,眼前雖有阻礙,但正是累積實力的階段,堅持下去終能突破困局。'},
+  {name:'山水蒙', symbol:'☶☵', text:'啟蒙學習之象,提醒您現階段適合虛心求教、充實自己,不必急著證明什麼,累積終會顯現價值。'},
+  {name:'地天泰', symbol:'☷☰', text:'上下交融、諸事亨通之象,是難得的順遂時機,適合積極推動計畫,人際關係也會特別和諧。'},
+  {name:'天地否', symbol:'☰☷', text:'閉塞不通之象,此時多做多錯,適合先按兵不動、韜光養晦,靜待時機轉變再行動。'},
+  {name:'雷天大壯', symbol:'☳☰', text:'氣勢壯盛之象,行動力十足,但提醒您勿恃強冒進,合乎正道而行,氣勢才能長久。'},
+  {name:'火水未濟', symbol:'☲☵', text:'事情尚未完成之象,提醒您還差臨門一腳,不要輕言放棄,謹慎收尾才能真正圓滿。'},
+  {name:'水火既濟', symbol:'☵☲', text:'事情已經完成、階段性圓滿之象,但提醒您「既濟」之後容易鬆懈生變,越是順利越要保持警覺,思患預防。'},
+  {name:'澤天夬', symbol:'☱☰', text:'當機立斷、果決突破之象,提醒您該做的決定不要再拖,但行事仍要合乎正道,不可魯莽躁進。'},
+  {name:'山風蠱', symbol:'☶☴', text:'積弊需要整頓革新之象,眼前的問題不是一天造成的,提醒您靜下心來徹底檢視問題根源,耐心修補會比治標更有效。'},
+  {name:'雷風恆', symbol:'☳☴', text:'持之以恆、穩定不變之象,提醒您現階段最需要的是耐心與堅持,不必追求速成,穩紮穩打才能長久。'},
+  {name:'風火家人', symbol:'☴☲', text:'家庭和諧、內部秩序之象,提醒您先把身邊最親近的人事物照顧好,根基穩固了,外面的事才會順利。'},
+  {name:'澤山咸', symbol:'☱☶', text:'彼此感應、心意相通之象,適合真誠地表達感受,無論是感情或合作關係,誠意會是這階段最重要的關鍵。'},
+  {name:'火雷噬嗑', symbol:'☲☳', text:'需要果斷處理障礙之象,眼前有些卡關的事需要正面解決,不宜拖延姑息,明快處理才能讓事情繼續往前推進。'},
+  {name:'山地剝', symbol:'☶☷', text:'情勢逐漸剝落衰退之象,提醒您現階段不宜躁進擴張,先守住根本、減少耗損,靜待否極泰來的時機。'}
+];
+function drawHexagram(){
+  const hrnd = seededRandom(currentSeedStr + '-hexagram-' + Date.now() + '-' + Math.random());
+  const hex = pick(HEXAGRAMS, hrnd);
+  document.getElementById('hexagram-result').innerHTML = `
+    <div class="stat" style="text-align:center;">
+      <div class="k">卦象</div>
+      <div class="v" style="font-size:26px;letter-spacing:4px;">${hex.symbol}</div>
+      <div class="v" style="margin-top:4px;">${hex.name}</div>
+    </div>
+    <p style="margin-top:14px;">${hex.text}</p>
+    <div class="disc">此為精簡版求籤功能,收錄16卦(完整易經共64卦),非完整六十四卦體系與傳統卜卦程序(如蓍草或六爻搖卦法),僅供娛樂參考。</div>
+  `;
+}
+
+/* ---------- 速配合婚 ---------- */
+const pmonthSel = document.getElementById('pmonth');
+for(let m=1;m<=12;m++){ const o=document.createElement('option'); o.value=m; o.textContent=m+'月'; pmonthSel.appendChild(o); }
+const pdaySel = document.getElementById('pday');
+function refreshPDays(){
+  const y = parseInt(document.getElementById('pyear').value)||2000;
+  const m = parseInt(pmonthSel.value)||1;
+  const dim = new Date(y, m, 0).getDate();
+  const cur = pdaySel.value;
+  pdaySel.innerHTML='';
+  for(let d=1; d<=dim; d++){ const o=document.createElement('option'); o.value=d; o.textContent=d+'日'; pdaySel.appendChild(o); }
+  if(cur && cur<=dim) pdaySel.value=cur;
+}
+pmonthSel.addEventListener('change', refreshPDays);
+document.getElementById('pyear').addEventListener('change', refreshPDays);
+refreshPDays();
+
+function renderCompat(){
+  const py = parseInt(document.getElementById('pyear').value);
+  const pm = parseInt(pmonthSel.value);
+  const pd = parseInt(pdaySel.value);
+  const box = document.getElementById('compat-result');
+  if(!py || py<1900 || py>2026){ box.innerHTML = `<p style="color:var(--rose);">請先輸入對方正確的出生年份</p>`; return; }
+
+  const myY = parseInt(document.getElementById('byear').value);
+  const myM = parseInt(monthSel.value);
+  const myD = parseInt(daySel.value);
+
+  const myZ = getZodiac(myM, myD);
+  const pZ = getZodiac(pm, pd);
+  const myZodiac = myZ.name;
+  const pZodiac = pZ.name;
+  const myLife = getLifeNumber(myY, myM, myD);
+  const pLife = getLifeNumber(py, pm, pd);
+  const myShengxiao = getShengxiao(myY);
+  const pShengxiao = getShengxiao(py);
+  const elRelation = getElementRelation(myZ.element, pZ.element);
+
+  const crnd = seededRandom(currentSeedStr + `-compat-${py}-${pm}-${pd}`);
+  let score = 55 + Math.floor(crnd()*30);
+  if(myLife === pLife) score += 8;
+  if(Math.abs(myLife - pLife) === 5) score -= 5;
+  const sxRelation = getShengxiaoRelation(myShengxiao, pShengxiao);
+  if(sxRelation.type === 'sanhe') score += 12;
+  else if(sxRelation.type === 'liuhe') score += 8;
+  else if(sxRelation.type === 'chong') score -= 12;
+  if(elRelation.type === 'harmony') score += 10;
+  else if(elRelation.type === 'same') score += 6;
+  else if(elRelation.type === 'friction') score -= 8;
+  score = Math.min(99, Math.max(40, score));
+
+  const level = score>=85 ? '天作之合' : score>=70 ? '相處融洽' : score>=55 ? '需要磨合' : '差異較大,更需要耐心溝通';
+
+  box.innerHTML = `
+    <div class="result-grid">
+      <div class="stat"><div class="k">您</div><div class="v">${myZodiac} ・ 屬${myShengxiao} ・ 靈數${myLife}</div></div>
+      <div class="stat"><div class="k">對方</div><div class="v">${pZodiac} ・ 屬${pShengxiao} ・ 靈數${pLife}</div></div>
+      <div class="stat"><div class="k">速配指數</div><div class="v">${score} 分</div></div>
+    </div>
+    <div class="divider"></div>
+    <p style="background:var(--ink2);padding:10px 14px;border-radius:4px;border-left:3px solid var(--gold);">🐉 <b>生肖關係:</b>${sxRelation.text}</p>
+    <p style="background:var(--ink2);padding:10px 14px;border-radius:4px;border-left:3px solid var(--teal);margin-top:8px;">🌪 <b>星座元素:</b>${elRelation.text}</p>
+    <div class="divider"></div>
+    <p><b>${level}</b> — 兩人星座與生命靈數的組合,顯示出${score>=70 ? '不錯的互補與默契' : '需要更多理解與溝通的空間'},實際關係的經營仍取決於雙方的用心程度,配對指數僅供參考娛樂。</p>
+  `;
+}
+
+/* ---------- 守護動物圖騰(依生肖延伸,西方靈魂動物概念的在地化版本) ---------- */
+const TOTEM_BY_SHENGXIAO = {
+  '鼠':{animal:'貓頭鷹', text:'夜色中最清醒的觀察者,提醒您相信自己敏銳的直覺,即使身邊喧鬧,也要留一份清明給自己。'},
+  '牛':{animal:'黑熊', text:'沉穩而擁有驚人韌性的存在,提醒您慢慢來的力量,很多事急不得,但您走過的每一步都算數。'},
+  '虎':{animal:'獵鷹', text:'翱翔於高處、視野遼闊的獵鷹,提醒您不要被眼前的小事困住,抬起頭,您能看見更大的格局。'},
+  '兔':{animal:'白鹿', text:'優雅而警覺的存在,提醒您溫柔不等於軟弱,您感知危險與美好的能力,是別人少有的天賦。'},
+  '龍':{animal:'火鳳凰', text:'浴火重生的象徵,提醒您就算經歷低潮,那份重新燃起的能量,始終在您體內等待被喚醒。'},
+  '蛇':{animal:'黑豹', text:'安靜卻精準的獵人,提醒您不需要張揚,您觀察與等待的耐心,終會在對的時刻發揮作用。'},
+  '馬':{animal:'野狼', text:'自由奔放又忠於自我的靈魂,提醒您傾聽內心對遠方的呼喚,別讓現實把您困在原地太久。'},
+  '羊':{animal:'白鴿', text:'溫柔傳遞訊息的存在,提醒您您天生善於安撫人心,這份柔軟,是這個世界需要的力量。'},
+  '猴':{animal:'狐狸', text:'機靈且充滿創意的存在,提醒您相信自己臨場應變的智慧,很多難題,您總能找到意想不到的解法。'},
+  '雞':{animal:'孔雀', text:'認真經營自己每個細節的存在,提醒您您的用心終會被看見,不需要急著證明,時間會替您說話。'},
+  '狗':{animal:'牧羊犬', text:'忠誠又值得信賴的守護者,提醒您您守護身邊人的心意很珍貴,也別忘了留一份給自己。'},
+  '豬':{animal:'白象', text:'溫厚而福氣深厚的存在,提醒您知足常樂不是消極,而是您看待世界最溫暖的方式。'}
+};
+function renderTotem(year){
+  const sx = getShengxiao(year);
+  const t = TOTEM_BY_SHENGXIAO[sx];
+  document.getElementById('totem-result').innerHTML = `
+    <div class="stat" style="margin-bottom:14px;"><div class="k">您的守護圖騰</div><div class="v">${t.animal}</div></div>
+    <p>${t.text}</p>
+  `;
+}
+
+/* ---------- 能量水晶推薦(依星座) ---------- */
+const CRYSTAL_BY_ZODIAC = {
+  '魔羯座':{stone:'黑曜石', text:'有助於穩定心神、隔絕紛擾的能量,很適合像您這樣需要專注前行的人。'},
+  '水瓶座':{stone:'拉長石', text:'呼應獨特思維與靈感,能幫助您把腦中天馬行空的想法落地成真。'},
+  '雙魚座':{stone:'月光石', text:'柔和滋養情感的能量,能陪伴您在感性豐沛的同時,也保有內心的安定。'},
+  '牡羊座':{stone:'紅玉髓', text:'點燃行動力與勇氣的石頭,能呼應您天生敢衝敢闖的開創精神。'},
+  '金牛座':{stone:'粉晶', text:'溫柔且滋養的愛與美的能量,能陪伴重視質感生活的您感受更多小幸福。'},
+  '雙子座':{stone:'虎眼石', text:'幫助聚焦思緒、穩定多變心緒的石頭,適合腦中總有許多想法的您。'},
+  '巨蟹座':{stone:'月光石', text:'呼應細膩情感與直覺的能量,能陪伴重情重義的您安放起伏的心情。'},
+  '獅子座':{stone:'太陽石', text:'象徵自信光芒與生命力的石頭,能呼應您天生渴望發光發熱的能量。'},
+  '處女座':{stone:'綠幽靈', text:'帶來清晰與豐盛感的能量,能陪伴追求完美的您學習放鬆與信任過程。'},
+  '天秤座':{stone:'粉晶', text:'和諧與美感的象徵,呼應您天生擅長在人際與美學之間找到平衡。'},
+  '天蠍座':{stone:'黑碧璽', text:'具有強大轉化與保護能量的石頭,適合意志堅定、洞察力深的您。'},
+  '射手座':{stone:'土耳其石', text:'象徵自由與冒險守護的石頭,能陪伴熱愛探索的您走得更安心。'}
+};
+function renderCrystal(m,d){
+  const z = getZodiac(m,d);
+  const c = CRYSTAL_BY_ZODIAC[z.name];
+  document.getElementById('crystal-result').innerHTML = `
+    <div class="stat" style="margin-bottom:14px;"><div class="k">與您呼應的礦石</div><div class="v">${c.stone}</div></div>
+    <p>${c.text}</p>
+    <div class="disc">水晶能量學屬於民俗信仰範疇,建議把它當成一種心理暗示與提醒的媒介來看待,而非具備醫療或科學上的實證效果。</div>
+  `;
+}
+
+/* ---------- 本週能量預告 ---------- */
+const WEEKDAY_NAMES = ['週日','週一','週二','週三','週四','週五','週六'];
+const WEEKLY_THEME = ['整理內心的雜訊','把想法真正落實','人際互動特別活躍','適合獨處充電','放膽表達真實想法','檢視這段時間的收穫','為下一步預先鋪路'];
+function renderWeekly(){
+  const today = new Date();
+  const weekNum = Math.floor((today - new Date(today.getFullYear(),0,1)) / (7*86400000));
+  const wrnd = seededRandom(currentSeedStr + '-week-' + today.getFullYear() + '-' + weekNum);
+  const theme = pick(WEEKLY_THEME, wrnd);
+  const bestDay = WEEKDAY_NAMES[Math.floor(wrnd()*7)];
+  const cautionDay = WEEKDAY_NAMES[Math.floor(wrnd()*7)];
+  document.getElementById('weekly-fortune').innerHTML = `
+    <div class="result-grid">
+      <div class="stat"><div class="k">本週主題</div><div class="v" style="font-size:16px;">${theme}</div></div>
+      <div class="stat"><div class="k">能量最旺</div><div class="v">${bestDay}</div></div>
+      <div class="stat"><div class="k">宜多留意</div><div class="v">${cautionDay}</div></div>
+    </div>
+    <div class="divider"></div>
+    <p>這週的氣場,適合把心力放在「${theme}」這件事上。${bestDay}是行動力特別集中的一天,不妨把重要的事排在這天;${cautionDay}則建議放慢腳步,多一分謹慎會少一分後悔。</p>
+  `;
+}
+
+/* ---------- 心靈選擇占卜(憑直覺選符號的迷你神諭) ---------- */
+const SYMBOL_ORACLE = [
+  {icon:'🌊', name:'流動的浪', text:'您現在的狀態很適合順勢而為,不需要跟生活的節奏硬碰硬,讓事情自然流動,答案會慢慢浮現。'},
+  {icon:'🔥', name:'燃燒的火焰', text:'您內心其實藏著一股蓄勢待發的熱情,別再壓抑了,找一個出口讓它燃燒,會活得更像自己。'},
+  {icon:'🌱', name:'新生的嫩芽', text:'現在是播種而非收成的階段,請對自己有耐心,您正在經歷的,都是未來茁壯的養分。'},
+  {icon:'🌕', name:'圓滿的月光', text:'您比自己想像中更接近完整,不妨停下來看看已經擁有的,答案往往不在遠方,而在此刻。'},
+  {icon:'🗝️', name:'一把鑰匙', text:'有一扇門正等著您主動推開,答案不會自己找上門,勇敢去嘗試那個您猶豫已久的選擇吧。'},
+  {icon:'🕊️', name:'展翅的白鴿', text:'是時候放下不必要的重量了,有些人事物該輕輕放手,您值得更自由、更輕盈的下一步。'}
+];
+function renderSymbolOracle(){
+  const row = document.getElementById('symbol-row');
+  row.innerHTML = '';
+  document.getElementById('symbol-result').classList.add('hidden');
+  document.getElementById('symbol-reset-row').style.display = 'none';
+  const shuffleRnd = seededRandom(currentSeedStr + '-symbolshuffle-' + Date.now());
+  const shuffled = [...SYMBOL_ORACLE].sort(()=>shuffleRnd()-0.5).slice(0,5);
+  shuffled.forEach((sym, i)=>{
+    const c = document.createElement('div');
+    c.className = 'tarot-card';
+    c.style.fontSize = '30px';
+    c.textContent = '✧';
+    c.onclick = ()=>pickSymbol(shuffled, i);
+    row.appendChild(c);
+  });
+}
+function pickSymbol(list, idx){
+  const cards = document.querySelectorAll('#symbol-row .tarot-card');
+  cards.forEach(c=>{ c.onclick=null; c.style.opacity='.3'; });
+  const chosen = cards[idx];
+  chosen.style.opacity='1';
+  chosen.classList.add('picked');
+  const sym = list[idx];
+  chosen.textContent = sym.icon;
+  document.getElementById('symbol-result').classList.remove('hidden');
+  document.getElementById('symbol-result').innerHTML = `
+    <div class="tarot-name">${sym.icon} ${sym.name}</div>
+    <p style="max-width:480px;margin:0 auto;">${sym.text}</p>
+  `;
+  document.getElementById('symbol-reset-row').style.display = 'flex';
+}
+
+/* ---------- 12星座本週運勢排行(依週次+年份做種子,同一週所有人查到的排行一致,下週會換) ---------- */
+function renderZodiacRanking(){
+  const today = new Date();
+  const weekNum = Math.floor((today - new Date(today.getFullYear(),0,1)) / (7*86400000));
+  const wrnd = seededRandom('zodiac-ranking-' + today.getFullYear() + '-' + weekNum);
+  const shuffled = [...ZODIAC].map(z=>({...z, score: wrnd()})).sort((a,b)=>b.score-a.score);
+  const box = document.getElementById('zodiac-ranking');
+  box.innerHTML = `
+    <div style="list-style:none;padding:0;margin:0;">
+      ${shuffled.map((z,i)=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);">
+          <span style="width:28px;font-family:'Cormorant Garamond',serif;color:${i<3?'var(--gold-bright)':'var(--text-dim)'};font-size:${i<3?'18px':'14px'};font-weight:${i<3?'700':'400'};">${i+1}</span>
+          <span style="font-size:15px;">${z.symbol} ${z.name}</span>
+        </div>
+      `).join('')}
+    </div>
+    <div class="disc" style="margin-top:12px;">此排行為娛樂性質的隨機排序,同一週內所有人查詢結果一致,並非依據任何天文星象數據計算,純粹增加趣味性參考。</div>
+  `;
+}
+
+let currentSeedStr = '';
+let rnd = Math.random;
+
+function runAll(){
+  const y = parseInt(document.getElementById('byear').value);
+  const m = parseInt(monthSel.value);
+  const d = parseInt(daySel.value);
+  const hour = parseInt(document.getElementById('bhour').value);
+  const gender = document.getElementById('bgender').value;
+  const name = document.getElementById('bname').value.trim();
+
+  if(!y || y<1900 || y>2026){ alert('請輸入正確的出生年份(1900~2026)'); return; }
+
+  currentSeedStr = `${y}-${m}-${d}-${hour}-${gender}`;
+  rnd = seededRandom(currentSeedStr);
+
+  document.getElementById('results').classList.remove('hidden');
+
+  renderZodiac(m,d);
+  renderRisingSign(m,d,hour);
+  renderBirthFlower(m);
+  renderZodiacRanking();
+  renderShengxiao(y);
+  renderLifeNumber(y,m,d);
+  renderLucky();
+  renderFengshui(y, gender);
+  renderTotem(y);
+  renderCrystal(m,d);
+  renderWeekly();
+  renderZiwei(y,m,d,hour,gender);
+  renderBazi(y,m,d,hour);
+  renderTodayFortune();
+  renderLiunian(y);
+  renderTaohua();
+  renderName(name);
+  rollPastLife();
+  renderTarot();
+  renderSymbolOracle();
+  renderAdvice(y,m,d,hour);
+
+  document.getElementById('results').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function renderZodiac(m,d){
+  const z = getZodiac(m,d);
+  const detail = ZODIAC_DETAIL[z.name];
+  document.getElementById('zodiac-sub').textContent = `${z.symbol} ${z.name} ・ ${z.element}星座`;
+  document.getElementById('zodiac-stats').innerHTML = `
+    <div class="stat"><div class="k">星座</div><div class="v">${z.symbol} ${z.name}</div></div>
+    <div class="stat"><div class="k">屬性</div><div class="v">${z.element}</div></div>
+  `;
+  document.getElementById('zodiac-desc').innerHTML = `
+    <p>${z.trait}</p>
+    <div class="divider"></div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div><b style="color:var(--gold-bright);">💕 愛情</b><p style="margin:4px 0 0;">${detail.love}</p></div>
+      <div><b style="color:var(--gold-bright);">💼 事業</b><p style="margin:4px 0 0;">${detail.career}</p></div>
+      <div><b style="color:var(--gold-bright);">🌿 健康</b><p style="margin:4px 0 0;">${detail.health}</p></div>
+      <div><b style="color:var(--gold-bright);">💰 財運</b><p style="margin:4px 0 0;">${detail.wealth}</p></div>
+    </div>
+  `;
+}
+
+/* ---------- 上升星座(網路流傳簡易公式版)
+   【重要,務必先讀】此公式是網路上廣泛流傳的簡易估算法,不是真正的天文曆算。
+   查證時找到一個用真實天文曆算引擎(Swiss Ephemeris)比對過的占星網站明確指出:
+   「網路上流傳的近似公式,實際比對過,有將近一半都是錯的」。真正的上升星座需要
+   精確出生時間+出生地點經緯度,透過天文曆算才能算準。這裡仍然把這個公式做出來,
+   但畫面上會持續清楚標示準確度的疑慮,不會包裝成精確結果。 ---------- */
+const RISING_MONTH_PARAM = {1:[6,40],2:[8,43],3:[10,33],4:[12,35],5:[14,33],6:[16,36],7:[18,34],8:[20,36],9:[22,38],10:[0,37],11:[2,39],12:[4,37]};
+const RISING_TABLE = [
+  {sign:'牡羊座', symbol:'♈', h:18, m:0},
+  {sign:'金牛座', symbol:'♉', h:19, m:29},
+  {sign:'雙子座', symbol:'♊', h:21, m:11},
+  {sign:'巨蟹座', symbol:'♋', h:23, m:13},
+  {sign:'獅子座', symbol:'♌', h:1, m:29},
+  {sign:'處女座', symbol:'♍', h:3, m:46},
+  {sign:'天秤座', symbol:'♎', h:6, m:0},
+  {sign:'天蠍座', symbol:'♏', h:8, m:13},
+  {sign:'射手座', symbol:'♐', h:10, m:30},
+  {sign:'魔羯座', symbol:'♑', h:12, m:46},
+  {sign:'水瓶座', symbol:'♒', h:14, m:48},
+  {sign:'雙魚座', symbol:'♓', h:16, m:30}
+];
+function getRisingSign(month, day, hour, minute){
+  if(hour == null || hour < 0) return null;
+  const [pH, pM] = RISING_MONTH_PARAM[month];
+  let totalMin = pH*60 + pM + day*4 + (hour*60 + (minute||0));
+  totalMin = ((totalMin % 1440) + 1440) % 1440;
+  // 表格以18:00(牡羊)為起點,若計算時間小於18:00,視為隔天延續,加1440方便比較
+  let cmpMin = totalMin < (18*60) ? totalMin + 1440 : totalMin;
+  let result = RISING_TABLE[RISING_TABLE.length-1];
+  for(const row of RISING_TABLE){
+    let rowMin = row.h*60 + row.m;
+    if(rowMin < (18*60)) rowMin += 1440;
+    if(rowMin <= cmpMin) result = row;
+  }
+  return result;
+}
+function renderRisingSign(m,d,hour){
+  const box = document.getElementById('rising-result');
+  const r = getRisingSign(m, d, hour, 0);
+  if(!r){
+    box.innerHTML = `<p style="color:var(--text-dim);">未選擇明確出生時辰,無法估算上升星座(上升星座對出生時間非常敏感,沒有時辰無法計算)</p>`;
+    return;
+  }
+  box.innerHTML = `
+    <div class="stat" style="margin-bottom:14px;"><div class="k">上升星座(估算)</div><div class="v">${r.symbol} ${r.sign}</div></div>
+    <div class="disc" style="border-left-color:#c98a8a;">⚠️<b>準確度提醒</b>:此為網路流傳的簡易估算公式,並非真正的天文曆算結果。查證時找到專門比對過真實天文曆算引擎的占星網站明確指出,這類網路流傳公式「有將近一半都是錯的」——因為真正的上升星座需要精確出生時間搭配出生地點的經緯度,透過天文曆算才能準確算出,不是單純加減乘除能取代的。這裡的結果僅供娛樂參考,如果想要準確的上升星座,建議使用有天文曆算引擎的專業占星網站,輸入精確出生時間與地點查詢。</div>
+  `;
+}
+
+function renderBirthFlower(month){
+  const flower = BIRTH_FLOWER[month];
+  const stone = BIRTHSTONE[month];
+  document.getElementById('birthflower-result').innerHTML = `
+    <div class="result-grid">
+      <div class="stat"><div class="k">生日花</div><div class="v" style="font-size:17px;">${flower.name}</div></div>
+      <div class="stat"><div class="k">生日寶石</div><div class="v" style="font-size:17px;">${stone.name}</div></div>
+    </div>
+    <div class="divider"></div>
+    <p>🌸 ${flower.text}</p>
+    <p style="margin-top:8px;">💎 ${stone.text}</p>
+    <div class="disc">生日花的月份對照,查證時發現不同來源版本略有差異(這裡採用較常見的版本);生日寶石則依西方寶石業傳統月份對照表(美國寶石協會版本),相對較為一致公認。兩者皆為文化傳統參考,不是科學驗證的結論。</div>
+  `;
+}
+
+function renderZiwei(y,m,d,hour,gender){
+  const seedStr = currentSeedStr + '-ziwei';
+  const zrnd = seededRandom(seedStr);
+  const layout = buildZiwei(zrnd);
+  document.getElementById('ziwei-grid').innerHTML = layout.map(p=>`
+    <div class="palace" title="${PALACE_MEANING[p.palace]}"><div class="pname">${p.palace}</div><div class="pstar">${p.star}</div></div>
+  `).join('');
+  const mingGong = layout[0];
+  const hourIdx = getHourBranchIndex(hour);
+  let mingGongBranchHtml = '';
+  if (hourIdx !== undefined) {
+    const branchIdx = getMingGongBranch(m, hourIdx);
+    const branchName = BRANCH_ORDER[branchIdx];
+    mingGongBranchHtml = `<p><b>命宮地支:${branchName}宮</b> — 用真實排盤口訣「寅起順行至生月,逆至生時安命宮」計算得出(此為真實公式,非隨機)</p>`;
+  } else {
+    mingGongBranchHtml = `<p style="color:var(--text-dim);">未選擇明確時辰,無法計算命宮地支</p>`;
+  }
+  document.getElementById('ziwei-desc').innerHTML = `
+    ${mingGongBranchHtml}
+    <p><b>命宮主星:${mingGong.star}</b> — ${ZIWEI_STAR_DESC[mingGong.star]}</p>
+    <div class="disc">命宮地支的計算口訣為真實紫微斗數排盤公式,但用「國曆生月」直接當「農曆生月」的近似替代,沒有做真正的農曆換算,國曆農曆月份在年初年底交界處可能對不上;十二宮主星配置仍為簡化娛樂版固定演算規則產生,非傳統紫微斗數完整安星訣。</div>
+    <details style="margin-top:14px;"><summary style="cursor:pointer;color:var(--gold-bright);font-size:13px;">📖 十二宮位完整意義說明(點擊展開)</summary>
+      <div style="margin-top:10px;">
+        ${PALACES.map(p=>`<p style="margin:6px 0;font-size:13.5px;"><b style="color:var(--gold-bright);">${p}</b>:${PALACE_MEANING[p]}</p>`).join('')}
+        <p style="margin-top:10px;font-size:12.5px;color:var(--text-dim);">💡命宮與遷移宮相對(命遷線),代表「自我狀態」與「外在環境回應」的互動;財帛宮與福德宮相對(財福線),代表「實際財務」與「內在滿足感」不一定成正比,是傳統紫微斗數解盤常用的對宮參考概念。</p>
+      </div>
+    </details>
+  `;
+}
+
+function renderBazi(y,m,d,hour){
+  const yearP = getYearPillar(y);
+  const monthP = getSimplifiedMonthPillar(y,m);
+  const dayP = getSimplifiedDayPillar(y,m,d);
+  const daySeed = Math.floor(new Date(y,m-1,d).getTime()/86400000);
+  const hourP = getSimplifiedHourPillar(hour, daySeed);
+
+  document.getElementById('bazi-pillars').innerHTML = `
+    <div class="pillar"><div class="plabel">年柱</div><div class="pval">${yearP}</div></div>
+    <div class="pillar"><div class="plabel">月柱</div><div class="pval">${monthP}</div></div>
+    <div class="pillar"><div class="plabel">日柱</div><div class="pval">${dayP}</div></div>
+    <div class="pillar"><div class="plabel">時柱</div><div class="pval">${hourP}</div></div>
+  `;
+  const yearNayin = NAYIN_TABLE[yearP];
+  if(yearNayin){
+    document.getElementById('bazi-pillars').innerHTML += `<div class="disc" style="grid-column:1/-1;margin-top:10px;">🔮 <b>年柱納音:${yearNayin}</b> — 六十甲子納音是傳統命理裡把60組干支再對應到五行類別的系統,${yearP}年出生者納音屬「${yearNayin}」,查證來源為多篇命理文獻一致引用的對照表。</div>`;
+  }
+
+  const stems = [yearP[0], monthP[0], dayP[0]];
+  if(hour>=0) stems.push(hourP[0]);
+  const wuxingCount = {'木':0,'火':0,'土':0,'金':0,'水':0};
+  stems.forEach(s=>{ wuxingCount[WUXING_BY_STEM[s]]++; });
+  const maxWx = Object.entries(wuxingCount).sort((a,b)=>b[1]-a[1])[0][0];
+  const dayMaster = dayP[0];
+  document.getElementById('bazi-desc').innerHTML = `<p>日柱天干「${dayMaster}」是八字裡的「日主」,五行屬「${WUXING_BY_STEM[dayMaster]}」,傳統上視為代表自身特質的核心干支,其他天干都是以日主為基準去判斷十神關係。</p>`;
+  document.getElementById('wuxing-result').innerHTML = `
+    <div class="k" style="font-size:12px;color:var(--text-dim);margin-bottom:8px;">四柱五行分布(簡化統計)</div>
+    ${Object.entries(wuxingCount).map(([k,v])=>`<span class="tag">${k}×${v}</span>`).join('')}
+    <p style="margin-top:10px;">此組干支裡「${maxWx}」的比例較高,傳統命理上常拿來作為個性傾向的參考方向之一,但完整論命需搭配大運、流年等更多資訊,此處僅為簡化示意。</p>
+    <div class="divider"></div>
+    <div class="k" style="font-size:12px;color:var(--text-dim);margin-bottom:8px;">十神關係(以日主「${dayMaster}」為基準)</div>
+    ${[
+      {label:'年干', stem:yearP[0]},
+      {label:'月干', stem:monthP[0]},
+      {label:'時干', stem: hour>=0 ? hourP[0] : null}
+    ].filter(p=>p.stem).map(p=>{
+      const god = getTenGod(dayMaster, p.stem);
+      return `<p style="margin:6px 0;font-size:13.5px;"><b style="color:var(--gold-bright);">${p.label}(${p.stem}) → ${god}</b>:${TEN_GOD_DESC[god]}</p>`;
+    }).join('')}
+    <div class="disc">十神的判斷邏輯(同為比劫、生我印、我生食傷、我剋財、剋我官殺)為真實查證過的八字理論,已實測驗證計算正確;但由於月柱/日柱/時柱本身是簡化推算(非精確萬年曆排盤),十神結果的準確度會連帶受到影響,僅供參考。</div>
+  `;
+}
+
+const FORTUNE_AREAS = ['事業','財運','感情','健康','人際'];
+const FORTUNE_LEVEL = ['★☆☆☆☆ 宜沉澱','★★☆☆☆ 平順','★★★☆☆ 穩定向上','★★★★☆ 順風順水','★★★★★ 大吉'];
+const FORTUNE_TEXT = [
+  ['今天像退潮的海,適合安靜地把散落的心思收回來,不必勉強自己衝出什麼成績。','有些日子是用來沉澱的,今天正是——放慢腳步,讓自己喘口氣,反而會走得更穩。'],
+  ['一切照著原本的步調走就好,今天沒有特別的風浪,也不需要刻意掀起什麼。','平靜也是一種祝福,今天適合把該做的事做好,不用想著要交出驚喜的成果。'],
+  ['能量正緩緩往上爬,像清晨慢慢亮起的天色,持續投入的事情會開始看見回饋。','今天適合埋頭耕耘,雖然不會馬上開花,但您種下的每一步都算數。'],
+  ['風向對了,順著走會比逆著走輕鬆許多,今天是主動出擊的好時機。','今天的您比平常更有行動力,想做的事不妨大膽推進,阻力會比想像中小。'],
+  ['整個人像被點亮了一樣,今天是難得的高光時刻,想做的、想說的,都值得放手去做。','宇宙今天特別眷顧您,重要的決定、勇敢的嘗試,都適合選在今天。']
+];
+/* ---------- 宜忌清單(仿農民曆風格,娛樂性質的每日/每年建議活動,依種子決定不會每次都變) ---------- */
+const YIJI_GOOD = ['簽約','開會提案','投資理財','告白表態','拜訪長輩','整理環境','學習新技能','運動健身','社交聚會','規劃旅行','求職面試','公開發言'];
+const YIJI_BAD = ['衝動購物','爭吵辯論','熬夜','借貸','搬家','簽署重大合約','公開批評他人','冒險投機'];
+function renderTodayFortune(){
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+  const trnd = seededRandom(currentSeedStr + '-today-' + todayStr);
+  const html = FORTUNE_AREAS.map(area=>{
+    const lv = Math.floor(trnd()*5);
+    return `<div class="stat"><div class="k">${area}</div><div class="v" style="font-size:15px;">${FORTUNE_LEVEL[lv]}</div></div>`;
+  }).join('');
+  const overallLv = Math.floor(trnd()*5);
+  const goodPicks = [...YIJI_GOOD].sort(()=>trnd()-0.5).slice(0,3);
+  const badPicks = [...YIJI_BAD].sort(()=>trnd()-0.5).slice(0,2);
+  document.getElementById('today-fortune').innerHTML = `
+    <p style="color:var(--text-dim);font-size:13px;margin-bottom:14px;">${todayStr} 運勢參考</p>
+    <div class="result-grid">${html}</div>
+    <div class="divider"></div>
+    <p>${pick(FORTUNE_TEXT[overallLv], trnd)}</p>
+    <div class="divider"></div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;">
+      <div><span class="tag" style="background:rgba(127,179,172,.18);color:var(--teal);">宜</span> ${goodPicks.join('、')}</div>
+      <div><span class="tag" style="background:rgba(201,138,138,.18);color:var(--rose);">忌</span> ${badPicks.join('、')}</div>
+    </div>
+    <div class="disc" style="margin-top:10px;">宜忌清單為仿農民曆風格的娛樂建議,依當日日期產生固定結果,非正統擇日學(如通書、協紀辨方書)的嚴謹推算。</div>
+  `;
+}
+
+function renderLiunian(birthYear){
+  const nowYear = new Date().getFullYear();
+  document.getElementById('liunian-year').textContent = nowYear + '年';
+  const lrnd = seededRandom(currentSeedStr + '-liunian-' + nowYear);
+  const age = nowYear - birthYear;
+  const lv = Math.floor(lrnd()*5);
+  const keyword = pick(['轉型','突破','沉潛蓄力','穩健成長','人際擴展','自我整合','機會浮現','需要耐心'], lrnd);
+  const yearGoodPicks = [...YIJI_GOOD].sort(()=>lrnd()-0.5).slice(0,3);
+  const yearBadPicks = [...YIJI_BAD].sort(()=>lrnd()-0.5).slice(0,2);
+  document.getElementById('liunian-fortune').innerHTML = `
+    <div class="result-grid">
+      <div class="stat"><div class="k">今年虛歲</div><div class="v">${age+1} 歲</div></div>
+      <div class="stat"><div class="k">年度關鍵字</div><div class="v">${keyword}</div></div>
+      <div class="stat"><div class="k">整體評級</div><div class="v" style="font-size:15px;">${FORTUNE_LEVEL[lv]}</div></div>
+    </div>
+    <div class="divider"></div>
+    <p>${nowYear}年對您來說,是適合聚焦在「${keyword}」的一年。${pick(FORTUNE_TEXT[lv], lrnd)}</p>
+    <div class="divider"></div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;">
+      <div><span class="tag" style="background:rgba(127,179,172,.18);color:var(--teal);">今年宜多</span> ${yearGoodPicks.join('、')}</div>
+      <div><span class="tag" style="background:rgba(201,138,138,.18);color:var(--rose);">今年宜少</span> ${yearBadPicks.join('、')}</div>
+    </div>
+  `;
+}
+
+function renderTaohua(){
+  const trnd = seededRandom(currentSeedStr + '-taohua');
+  const lv = Math.floor(trnd()*5);
+  const advice = pick([
+    '這段期間比較適合先把重心放在自己身上,累積內在的自信與魅力。',
+    '桃花能量平穩,單身者可以多參加感興趣的活動,自然增加認識新朋友的機會。',
+    '人際互動中容易吸引到欣賞您的對象,建議對感興趣的人多一點主動表達。',
+    '異性緣或曖昧對象增加的時機,已有伴侶者也適合安排增進感情的相處時間。',
+    '桃花能量旺盛,適合勇敢表達心意,關係中的溝通也會特別順暢。'
+  ], trnd);
+  document.getElementById('taohua-fortune').innerHTML = `
+    <div class="result-grid">
+      <div class="stat"><div class="k">桃花指數</div><div class="v" style="font-size:15px;">${FORTUNE_LEVEL[lv]}</div></div>
+    </div>
+    <div class="divider"></div>
+    <p>${advice}</p>
+  `;
+}
+
+/* ---------- 姓名學(簡化筆劃五格) ---------- */
+const STROKE_TABLE = {'王':4,'李':7,'張':11,'劉':15,'陳':16,'楊':13,'黃':12,'趙':14,'吳':7,'周':8,'徐':10,'孫':10,'馬':10,'朱':6,'胡':11,'郭':15,'何':7,'高':10,'林':8,'羅':20,'鄭':19,'梁':11,'謝':17,'宋':7,'唐':10,'許':11,'韓':17,'馮':12,'鄧':19,'曹':11,'彭':12,'曾':12,'蕭':17,'田':5,'董':13,'袁':10,'潘':16,'蔣':17,'蔡':17,'余':7,'杜':7,'葉':15,'程':12,'魏':17,'蘇':22,'呂':7,'丁':2,'任':6,'沈':8,'姚':9,'盧':16,'姜':9,'崔':11,'鍾':17,'譚':19,'陸':11,'汪':7,'范':9,'金':8,'石':5,'廖':14,'賈':13,'夏':10,'韋':9,'付':5,'方':4,'白':5,'鄒':13,'孟':8,'熊':14,'秦':10,'邱':12,'江':7,'尹':4,'薛':19,'閻':16,'段':9,'雷':13,'侯':9,'龍':16,'史':5,'陶':11,'黎':15,'賀':12,'顧':21,'毛':4,'郝':10,'龔':22,'邵':8,'萬':13,'錢':16,'嚴':20,'覃':12,'武':8,'戴':17,'莫':13,'孔':4,'向':6,'湯':12,'常':11,'溫':13,'康':11,'施':9,'牛':4,'樊':15,
+'小':3,'明':8,'華':14,'志':7,'建':9,'成':6,'國':11,'家':10,'文':4,'雅':12,'婷':12,'怡':9,'靜':16,'思':9,'瑩':15,'柏':9,'宇':6,'俊':9,'豪':14,'偉':11,'強':12,'嘉':14,'美':9,'秀':7,'玲':10,'惠':12,'淑':11,'麗':19,'芳':10,'花':8,'月':4,'雲':12,'霞':17,'蓉':13,'萍':12,'燕':16,'鳳':14,'梅':11,'娟':10,'欣':8,'妍':7,'佳':8,'susan':1};
+function estimateStroke(char){
+  if(STROKE_TABLE[char] !== undefined) return STROKE_TABLE[char];
+  // 找不到的字用字元碼做簡化估算,非真實筆劃數,僅供無資料時的備援
+  return (char.charCodeAt(0) % 18) + 3;
+}
+/* ---------- 81數理吉凶對照(姓名學五格數理系統)
+   查證來源:此系統源自日本熊崎健翁「五格剖象法」,融合易經陰陽五行思想,是華人姓名學
+   廣泛使用的傳統參考系統。【重要】多位命理研究者也指出,這套數字吉凶的規定「未見
+   明確的理論依據出處」,學界對其科學性存在爭議,請將其視為文化傳統參考,不是嚴謹的
+   科學結論。以下涵蓋1~81數的吉凶分類,部分常見數字附有較完整的傳統意義說明 ---------- */
+const NUMEROLOGY_DETAIL = {
+  1:{lv:'大吉',text:'太極之數,萬物開泰,象徵開創與領導力,是白手起家、自立自強的格局。'},
+  3:{lv:'大吉',text:'進取如意,名利雙收之數,象徵活潑進取、資質聰穎,做事容易得到貴人扶助。'},
+  5:{lv:'大吉',text:'陰陽和合,福祿長壽之數,象徵性情溫和、家庭美滿,一生運勢相對平穩。'},
+  6:{lv:'大吉',text:'安穩吉祥,天德地祥之數,象徵能得到長輩與環境的庇蔭,基礎穩固。'},
+  7:{lv:'大吉',text:'剛毅果斷,精悍力行之數,象徵意志堅強、行動力十足,適合開創性的事業。'},
+  8:{lv:'大吉',text:'努力發展,如意吉祥之數,象徵勤勉踏實,只要肯下功夫,終能有所成就。'},
+  11:{lv:'大吉',text:'穩健吉祥,枯木逢春之數,象徵重新振作、逐漸恢復元氣,適合白手重建。'},
+  13:{lv:'大吉',text:'智略超群,學藝多能之數,象徵才華洋溢、多才多藝,善於交際與策劃。'},
+  15:{lv:'大吉',text:'福壽圓滿,立身興家之數,象徵人緣極佳、能得眾人扶助,家庭和樂圓滿。'},
+  16:{lv:'大吉',text:'貴人得助,厚德載福之數,象徵度量寬大、能獲得長輩提攜與部屬愛戴。'},
+  17:{lv:'大吉',text:'突破萬難,權威剛強之數,象徵意志力強,遇到挫折也能突破困境。'},
+  18:{lv:'大吉',text:'有志竟成,權柄在握之數,象徵才略兼備,適合掌握權責的角色。'},
+  21:{lv:'大吉',text:'明月中天,官運亨通之數,象徵獨立自主、聲望能逐漸累積,首領運強。'},
+  23:{lv:'大吉',text:'旭日東昇,權威顯達之數,象徵氣勢如虹、容易嶄露頭角,但也需留意過剛易折。'},
+  24:{lv:'大吉',text:'掘藏得金,家門餘慶之數,象徵白手起家、財源廣進,是累積財富的吉數。'},
+  25:{lv:'半吉',text:'英俊剛毅,資性聰敏之數,象徵才智過人,但個性較獨,需留意人際圓融。'},
+  29:{lv:'大吉',text:'智謀兼備,財力橫溢之數,象徵才略出眾、勤儉持家,老年愈加豐盈。'},
+  31:{lv:'大吉',text:'智勇得志,心想事成之數,象徵領導力強、能服眾,適合開創與統籌的角色。'},
+  32:{lv:'大吉',text:'意外惠澤,僥倖多望之數,象徵容易得到貴人相助,運勢常有意外之喜。'},
+  33:{lv:'大吉',text:'家門昌隆,才德開展之數,象徵才華洋溢、聲勢如日中天,但女性使用需留意過旺。'},
+  35:{lv:'大吉',text:'溫和平安,優雅發展之數,象徵性情溫和、多才多藝,適合文教藝術領域。'},
+  37:{lv:'大吉',text:'權威顯達,忠實得眾之數,象徵誠信正直,容易得到眾人信賴與支持。'},
+  39:{lv:'大吉',text:'富貴榮華,一路顯達之數,象徵財運亨通,但盛極需防過於張揚招忌。'},
+  41:{lv:'大吉',text:'德望兼備,事事如意之數,象徵才德俱全,做事容易水到渠成。'},
+  45:{lv:'大吉',text:'新生泰運,大願得成之數,象徵能突破逆境、順利成就心中所願。'},
+  47:{lv:'大吉',text:'開花結果,權威旺盛之數,象徵努力終有回報,是收成豐碩的吉數。'},
+  48:{lv:'大吉',text:'德智兼備,聲望日隆之數,象徵才德兼具,適合擔任顧問或指導性的角色。'},
+  2:{lv:'凶',text:'分離破敗,孤苦無依之數,象徵起伏動盪較大,行事宜謹慎求穩。'},
+  4:{lv:'凶',text:'萬事休止,破敗凶變之數,象徵容易遇到意外阻礙,需多留意風險管理。'},
+  9:{lv:'凶',text:'興盡凶始,窮乏之數,象徵盛極而衰,得意之時更需居安思危。'},
+  10:{lv:'凶',text:'萬事終局,虛無之數,象徵容易徒勞無功,建議做事多留退路。'},
+  20:{lv:'凶',text:'非業破運,災難重重之數,象徵計畫容易生變,行事宜穩健保守。'},
+  34:{lv:'凶',text:'破家亡身,禍害至極之數,象徵波折較多,重大決定建議多方求證再行動。'},
+  36:{lv:'半吉',text:'波瀾重疊,義俠豪氣之數,象徵性格豪爽仗義,但人生際遇起伏較大。'}
+};
+function getNumerologyInfo(num){
+  const badNums = [2,4,9,10,12,14,19,20,22,27,28,30,34,42,43,44,46,49,50,51,53,54,56,59,60,62,64,69,70,71,72,73,74,75,76,77,78,79,80];
+  const halfNums = [25,26,36,38,55,58];
+  if (NUMEROLOGY_DETAIL[num]) return NUMEROLOGY_DETAIL[num];
+  if (badNums.includes(num)) return {lv:'凶', text:'傳統81數理中列為凶數,象徵此格局的能量起伏較大,僅供參考,不代表人生的絕對結果。'};
+  if (halfNums.includes(num)) return {lv:'半吉', text:'傳統81數理中列為半吉數,吉凶參半,象徵好壞交織,實際發展仍取決於個人努力。'};
+  return {lv:'吉', text:'傳統81數理中列為吉數,象徵此格局整體偏向平順向上,僅供參考。'};
+}
+
+/* ---------- 三才配置(天格/人格/地格三者的五行是否相生,姓名學廣泛引用的規則:
+   數字尾數1、2屬木;3、4屬火;5、6屬土;7、8屬金;9、0屬水) ---------- */
+function numToWuxingByLastDigit(num){
+  const last = num % 10;
+  if(last===1||last===2) return '木';
+  if(last===3||last===4) return '火';
+  if(last===5||last===6) return '土';
+  if(last===7||last===8) return '金';
+  return '水';
+}
+function getSancaiRelation(tian, ren, di){
+  const isSheng = (a,b)=> WUXING_SHENG[a]===b;
+  const isKe = (a,b)=> WUXING_KE[a]===b;
+  let goodCount = 0, badCount = 0;
+  [[tian,ren],[ren,di]].forEach(([a,b])=>{
+    if(a===b) return; // 比和,中性
+    if(isSheng(a,b)||isSheng(b,a)) goodCount++;
+    else if(isKe(a,b)||isKe(b,a)) badCount++;
+  });
+  if(badCount===0 && goodCount>=1) return {lv:'佳', text:'天格、人格、地格之間的五行以相生為主,傳統上認為配置較為和諧,做事阻力相對較小。'};
+  if(badCount>=1 && goodCount===0) return {lv:'欠佳', text:'天格、人格、地格之間出現五行相剋的情況,傳統上認為這種配置容易遇到較多阻力與波折,但實際發展仍取決於個人努力,不是絕對的命定結果。'};
+  return {lv:'平順', text:'天格、人格、地格之間的五行關係較為中性(比和居多),傳統上認為整體平順,沒有特別顯著的助力或阻力。'};
+}
+
+function renderName(name){
+  const box = document.getElementById('name-result');
+  if(!name){
+    box.innerHTML = `<p style="color:var(--text-dim);">未輸入姓名,略過姓名學分析。</p>`;
+    return;
+  }
+  const chars = Array.from(name);
+  const strokes = chars.map(estimateStroke);
+  const total = strokes.reduce((a,b)=>a+b,0);
+  const tianGe = (chars.length>=2 ? strokes[0]+1 : strokes[0]+1);
+  const renGe = chars.length>=2 ? strokes[0]+strokes[1] : strokes[0]+1;
+  const diGe = chars.length>=3 ? strokes[1]+strokes[2] : (chars.length===2? strokes[1]+1 : strokes[0]+1);
+  const zongGe = total;
+  const waiGe = zongGe - renGe + 1;
+
+  const grids = [
+    {label:'天格', val:tianGe, note:'代表先天與長輩緣分的參考'},
+    {label:'人格', val:renGe, note:'代表個人性格與處世態度的核心,是五格中最重要的一格'},
+    {label:'地格', val:diGe, note:'代表青年運與行動力的參考'},
+    {label:'外格', val:waiGe, note:'代表人際與外在際遇的參考'},
+    {label:'總格', val:zongGe, note:'代表中晚年整體運勢的參考'}
+  ];
+  const strokeUnknown = chars.some(c=>STROKE_TABLE[c]===undefined);
+
+  const lvColor = {'大吉':'var(--gold-bright)','吉':'#7fb3ac','半吉':'#c9a35c','凶':'#c98a8a'};
+  box.innerHTML = `
+    <div class="result-grid">
+      ${grids.map(g=>`<div class="stat"><div class="k">${g.label}(${g.val}畫)</div><div class="v" style="font-size:13px;color:var(--text-dim);font-family:inherit;">${g.note}</div></div>`).join('')}
+    </div>
+    <div class="divider"></div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      ${grids.map(g=>{
+        const info = getNumerologyInfo(g.val % 81 === 0 ? 81 : g.val % 81);
+        return `<div style="padding:10px 12px;background:var(--ink2);border-radius:4px;border-left:3px solid ${lvColor[info.lv]};">
+          <div style="font-size:13px;margin-bottom:3px;"><b>${g.label} ${g.val}數</b> <span style="color:${lvColor[info.lv]};">【${info.lv}】</span></div>
+          <div style="font-size:12.5px;color:var(--text-dim);">${info.text}</div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="divider"></div>
+    ${(()=>{
+      const tianWx = numToWuxingByLastDigit(tianGe % 10 === 0 ? 10 : tianGe);
+      const renWx = numToWuxingByLastDigit(renGe % 10 === 0 ? 10 : renGe);
+      const diWx = numToWuxingByLastDigit(diGe % 10 === 0 ? 10 : diGe);
+      const sancai = getSancaiRelation(tianWx, renWx, diWx);
+      const sancaiColor = sancai.lv === '佳' ? 'var(--gold-bright)' : sancai.lv === '欠佳' ? '#c98a8a' : '#c9a35c';
+      return `<div style="padding:10px 12px;background:var(--ink2);border-radius:4px;border-left:3px solid ${sancaiColor};">
+        <div style="font-size:13px;margin-bottom:3px;"><b>三才配置:天(${tianWx})→人(${renWx})→地(${diWx})</b> <span style="color:${sancaiColor};">【${sancai.lv}】</span></div>
+        <div style="font-size:12.5px;color:var(--text-dim);">${sancai.text}</div>
+      </div>`;
+    })()}
+    <div class="disc" style="margin-top:12px;">${strokeUnknown ? '部分字元不在內建常用字筆劃表中,已用簡化估算方式代替,準確度會受影響。' : '所輸入字元筆劃取自內建常用字表。'}正統姓名學筆劃計算需採用「康熙字典」筆劃並考慮部首簡化字等細節規則,此處為簡化版五格架構。81數理吉凶系統源自日本熊崎健翁的「五格剖象法」,是華人姓名學廣泛使用的傳統參考,但其吉凶規定的理論依據在學界仍有爭議,請視為文化傳統參考,不是嚴謹的科學結論。</div>
+  `;
+}
+
+/* ---------- 前世 ---------- */
+const PASTLIFE_ERA = ['大唐盛世','古埃及尼羅河畔','文藝復興時期的佛羅倫斯','宋代江南水鄉','古希臘城邦','大航海時代的港口城市','明代京城','維多利亞時代的倫敦','古印加帝國山城','敦煌絲路商隊'];
+const PASTLIFE_ROLE = ['一位遊歷四方的商人','一位專注鑽研的學者','一位守護家園的士兵','一位擅長療癒的醫者','一位受人敬重的工匠','一位熱愛表演的樂師','一位默默耕耘的農夫','一位航海探索的船長','一位執筆記錄歷史的書記官','一位隱居山林的修行者'];
+const PASTLIFE_TRAIT = ['對知識有著永不滿足的渴望','總是把身邊的人照顧得無微不至','即使面對困境也從不輕言放棄','擅長用巧思解決眼前的難題','重視承諾,說到做到','用溫柔而堅定的方式影響著周遭的人'];
+function rollPastLife(){
+  const prnd = seededRandom(currentSeedStr + '-pastlife-' + Date.now());
+  const era = pick(PASTLIFE_ERA, prnd);
+  const role = pick(PASTLIFE_ROLE, prnd);
+  const trait = pick(PASTLIFE_TRAIT, prnd);
+  document.getElementById('pastlife-result').innerHTML = `
+    <p>在<b>${era}</b>,您曾經是<b>${role}</b>,${trait}。這份特質,或許也悄悄延續到了今生的您身上。</p>
+    <div class="disc" style="margin-top:14px;">前世回溯純屬創意娛樂內容,由演算法隨機產生,沒有任何科學或宗教根據。</div>
+  `;
+}
+
+/* ---------- 塔羅牌 ---------- */
+const TAROT_POSITIONS = ['過去','現在','未來'];
+let tarotDrawn = [null, null, null];
+function renderTarot(){
+  tarotDrawn = [null, null, null];
+  const row = document.getElementById('tarot-row');
+  row.innerHTML = '';
+  document.getElementById('tarot-result-list').innerHTML = '';
+  document.getElementById('tarot-summary').classList.add('hidden');
+  document.getElementById('tarot-reset-row').style.display = 'none';
+  for(let i=0;i<3;i++){
+    const wrap = document.createElement('div');
+    wrap.style.textAlign = 'center';
+    const c = document.createElement('div');
+    c.className = 'tarot-card';
+    c.textContent = '✦';
+    c.onclick = ()=>pickTarot(i);
+    const label = document.createElement('div');
+    label.textContent = TAROT_POSITIONS[i];
+    label.style.cssText = 'margin-top:8px;font-size:13px;color:var(--gold-bright);font-family:"Noto Serif TC",serif;';
+    wrap.appendChild(c);
+    wrap.appendChild(label);
+    row.appendChild(wrap);
+  }
+}
+function pickTarot(idx){
+  if(tarotDrawn[idx]) return; // 已經抽過這個位置,不重複抽
+  const cards = document.querySelectorAll('#tarot-row .tarot-card');
+  const chosen = cards[idx];
+  chosen.onclick = null;
+
+  const trnd = seededRandom(currentSeedStr + '-tarot-' + idx + '-' + Date.now() + '-' + Math.random());
+  const card = pick(TAROT, trnd);
+  const reversed = trnd() > 0.5;
+  chosen.textContent = reversed ? '🙃' : '🃏';
+  chosen.classList.add('picked');
+
+  const meaning = reversed ? card.rev : card.up;
+  tarotDrawn[idx] = {card, reversed};
+
+  const resultList = document.getElementById('tarot-result-list');
+  const posDiv = document.createElement('div');
+  posDiv.style.cssText = 'margin-top:14px;padding:10px 14px;background:var(--ink2);border-radius:4px;';
+  posDiv.innerHTML = `
+    <div style="font-size:12.5px;color:var(--text-dim);margin-bottom:4px;">【${TAROT_POSITIONS[idx]}】</div>
+    <div class="tarot-name" style="font-size:17px;">${card.name}${reversed?'(逆位)':'(正位)'}</div>
+    <p style="margin:6px 0 0;font-size:14px;">${meaning}</p>
+  `;
+  resultList.appendChild(posDiv);
+
+  // 三張都抽完後,顯示綜合解讀
+  if(tarotDrawn.every(d=>d)){
+    const summaryText = `從「${tarotDrawn[0].card.name}」看您過去的經歷,到「${tarotDrawn[1].card.name}」反映的現況,再到「${tarotDrawn[2].card.name}」指向的未來走向,整體脈絡建議您:留意過去的經驗如何影響現在的選擇,而現在踏出的每一步,都在為未來鋪路。三張牌是一個連續的故事,不是三個獨立的答案,建議您把它們串起來一起體會。`;
+    const summaryBox = document.getElementById('tarot-summary');
+    summaryBox.classList.remove('hidden');
+    summaryBox.innerHTML = `<b style="color:var(--gold-bright);">🔮 三牌綜合解讀</b><p style="margin:8px 0 0;">${summaryText}</p>`;
+    document.getElementById('tarot-reset-row').style.display = 'flex';
+  }
+}
+function resetTarot(){ renderTarot(); }
+
+
+/* ---------- 綜合建議 ---------- */
+function renderAdvice(y,m,d,hour){
+  const z = getZodiac(m,d);
+  const sx = getShengxiao(y);
+  const lifeNum = getLifeNumber(y,m,d);
+  const lifeInfo = LIFENUM_DESC[lifeNum] || LIFENUM_DESC[1];
+  const dayP = getSimplifiedDayPillar(y,m,d);
+  const dayMaster = dayP[0];
+  const dayMasterWx = WUXING_BY_STEM[dayMaster];
+
+  // 重新計算紫微命宮主星(用跟renderZiwei完全相同的種子,確保結果一致)
+  const zSeedStr = currentSeedStr + '-ziwei';
+  const zrndForAdvice = seededRandom(zSeedStr);
+  const layoutForAdvice = buildZiwei(zrndForAdvice);
+  const mingGongStarForAdvice = layoutForAdvice[0].star;
+
+  const arnd = seededRandom(currentSeedStr + '-advice');
+  const archetype = pick([
+    {name:'探索者原型', text:'內心深處渴望自由與新體驗,建議在生活中刻意保留一些「沒有計畫」的空白時間,讓自己有機會去探索沒試過的事物。'},
+    {name:'照顧者原型', text:'很容易把他人的需求放在自己前面,建議練習在照顧別人之前,先問問自己「我現在真正需要的是什麼」。'},
+    {name:'建造者原型', text:'擅長把想法一步步落實成具體的成果,建議為自己設定清楚的小階段目標,會比追求一次到位更有成就感。'},
+    {name:'連結者原型', text:'天生擅長理解與連結不同的人事物,建議善用這項特質去搭建橋樑,會是很自然就能發揮影響力的方式。'},
+    {name:'觀察者原型', text:'習慣先觀察再行動,這是優勢而非缺點,建議相信自己深思熟慮後的判斷,不需要為了配合他人的步調而急著下決定。'}
+  ], arnd);
+
+  document.getElementById('advice-result').innerHTML = `
+    <div style="background:linear-gradient(180deg, rgba(201,163,92,.08), transparent); border:1px solid var(--line); border-radius:6px; padding:20px;">
+      <p style="font-family:'Noto Serif TC',serif; font-size:17px; color:var(--gold-bright); margin-bottom:14px;">📜 命盤總評</p>
+      <p>綜觀這次排出的命盤,${z.symbol}${z.name}賦予的底色,加上生肖屬${sx}、生命靈數${lifeNum}號人、紫微命宮坐${mingGongStarForAdvice}、八字日主${dayMaster}(五行屬${dayMasterWx})這幾條線索交織在一起,可以看出一個相對完整的個性輪廓——</p>
+      <p style="margin-top:10px;">${z.trait}這是最外顯、最容易被人看見的一面。而${sx}生肖的特質(${SHENGXIAO_TRAIT[sx].substring(0,28)}...)加上生命靈數${lifeNum}號人「${lifeInfo.title}」的能量(${lifeInfo.text.substring(0,30)}...),則像是藏在底層、更深一層的驅動力,兩者未必完全一致,但往往是這種「外顯性格」跟「內在驅動力」的交互作用,構成了一個人真正複雜而立體的樣貌。</p>
+      <p style="margin-top:10px;"><b style="color:var(--gold-bright);">${archetype.name}</b>:${archetype.text}</p>
+      <div class="divider"></div>
+      <p style="font-family:'Noto Serif TC',serif; font-size:15px; color:var(--gold-bright);">🖋 給您的一句話</p>
+      <p style="margin-top:6px;">結合以上各項交叉參考,這次命盤想提醒您的是:多留意「外在表現」與「內在真正想要的」之間,是不是有沒被自己察覺的落差。做重要決定時,多給自己一點時間沉澱,傾聽內在真正的聲音,而不是急著回應外界的期待——這往往比任何單一項命理指標更值得放在心上。</p>
+    </div>
+    <div class="disc" style="margin-top:14px;">此總評是把本頁面上方各模組已經算出的結果重新整合陳述,方便您一次看完整體脈絡,並非另外運用了新的命理演算法;各項來源的準確度限制(星座/生肖/生命靈數為真實查證邏輯,紫微/八字為簡化娛樂版)請參照各自區塊內的說明。整體內容為自我探索與心理學原型概念交叉產生,不是心理諮商或專業命理論命的替代品。</div>
+  `;
+}
+
+renderAlmanac();
+</script>
+<button type="button" onclick="twShare()" style="position:fixed;left:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;border:0;padding:10px 14px;border-radius:20px;font:15px sans-serif;box-shadow:0 2px 6px rgba(0,0,0,.3)">📤 分享</button>
+<script>function twShare(){var u=location.href.split('#')[0].split('?')[0];var t=document.title||'景淵報表';
+if(navigator.share){navigator.share({title:t,text:t+'',url:u}).catch(function(){});return;}
+var ok=function(){alert('已複製連結,可以貼到 LINE 傳給朋友');};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(ok,function(){window.prompt('長按複製這個連結',u);});}else{window.prompt('長按複製這個連結',u);}}</script><a href="index.html" onclick="location.href='index.html?v='+Date.now();return false;" style="position:fixed;right:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;padding:10px 14px;border-radius:20px;font:15px sans-serif;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.3)">← 回目錄</a></body>
+</html>
+
+

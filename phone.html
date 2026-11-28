@@ -1,0 +1,417 @@
+<!DOCTYPE html><html><head><meta name="robots" content="noindex,nofollow"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>手機效能與CP值報表</title><style>
+* { box-sizing: border-box; }
+body{background:#0a0b0d;color:#e4e4e7;font-family:'Microsoft JhengHei','PingFang TC',sans-serif;margin:0;padding:0;font-size:15px;}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 60px;}
+h1{font-size:24px;color:#f0d789;margin:4px 0 8px;}
+h2{font-size:16px;color:#f0d789;margin:22px 0 10px;}
+.meta{color:#a1a1aa;font-size:13px;margin-bottom:12px;line-height:1.8;}
+.warn{background:rgba(234,179,8,0.10);border:1px solid rgba(234,179,8,0.35);color:#eab308;font-size:12.5px;padding:10px 14px;border-radius:10px;margin-bottom:16px;line-height:1.8;}
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:8px;}
+.pick{background:#131417;border:1px solid #23252b;border-radius:12px;padding:12px 14px;}
+.pick .pl{font-size:12px;color:#a1a1aa;} .pick .pn{font-size:16px;font-weight:800;margin:4px 0;} .pick .ps{font-size:12.5px;color:#c7ccd6;}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;align-items:center;}
+input[type=text]{flex:1;min-width:200px;background:#131417;border:1px solid #262a33;border-radius:8px;padding:10px 12px;color:#e4e4e7;font-size:14px;}
+select{background:#131417;border:1px solid #262a33;border-radius:8px;padding:9px 10px;color:#e4e4e7;font-size:13.5px;}
+.seg{display:flex;gap:6px;}
+.seg button{padding:8px 14px;border-radius:8px;border:1px solid #262a33;background:#131417;color:#c7ccd6;cursor:pointer;font-size:13px;}
+.seg button.active{background:#f0d789;color:#1a1408;font-weight:700;}
+#cardList{display:grid;grid-template-columns:repeat(auto-fill,minmax(500px,1fr));gap:12px;}
+.card{background:#131417;border:1px solid #1c1d21;border-radius:12px;padding:14px 16px 14px 60px;position:relative;}
+.rank{position:absolute;left:0;top:0;bottom:0;width:46px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#5f6672;background:#0e0f11;border-radius:12px 0 0 12px;}
+.rank.top3{color:#1a1408;background:#f0d789;}
+.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px;}
+.gname{font-weight:800;font-size:17px;}
+.badge{font-size:11px;padding:2px 8px;border-radius:6px;font-weight:700;white-space:nowrap;}
+.b-redmi{background:rgba(255,107,53,0.18);color:#ff8f5c;} .b-poco{background:rgba(255,214,0,0.18);color:#ffd600;} .b-iphone{background:rgba(160,160,170,0.18);color:#c7ccd6;}
+.specs{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:12.5px;color:#a1a1aa;margin-bottom:10px;}
+.specs b{color:#e4e4e7;font-weight:600;}
+.usage{font-size:12px;color:#f0d789;background:rgba(240,215,137,0.08);border-radius:6px;padding:4px 9px;margin-bottom:10px;display:inline-block;}
+.rk-high{color:#9fd830;font-weight:600;} .rk-mid{color:#eab308;font-weight:600;} .rk-low{color:#8a93a3;font-weight:600;}
+.stats{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:8px;}
+.stat{background:#1a1d22;border-radius:8px;padding:8px 10px;}
+.stat-label{display:block;font-size:11px;color:#8a93a3;margin-bottom:3px;}
+.stat-value{display:block;font-size:15px;font-weight:800;color:#e4e4e7;}
+.stat-value.price{color:#f0d789;font-size:14px;}
+.nodata{color:#6b7280;font-size:12.5px;font-weight:400;}
+.src{font-size:10.5px;color:#8a93a3;font-weight:400;display:block;margin-top:2px;}
+.newbox{background:#131417;border:1px solid #23252b;border-radius:12px;padding:14px 16px;margin-top:20px;font-size:13px;color:#c7ccd6;line-height:1.9;}
+.newTag{display:inline-block;margin:3px 4px 3px 0;padding:2px 8px;border-radius:6px;background:#1f2127;border:1px solid #2a2d33;font-size:12.5px;}
+@media (max-width:640px){#cardList{grid-template-columns:1fr;} .card{padding-left:50px;} .rank{width:40px;font-size:15px;} .gname{font-size:15px;} .stats{grid-template-columns:1fr 1fr;} .stats .stat:nth-child(2){grid-column:1 / span 2;grid-row:1;}}
+</style></head><body><div class='wrap'>
+<h1>📱 手機效能與CP值報表</h1>
+<div class='meta'>更新時間:2026/11/27 07:51 ・ 收錄 33 款(Redmi / POCO / iPhone)・價格即時取自米可手機館,抓不到再用傑昇通信,新機兩家都還沒上架時用官方建議售價 ・ <b style='color:#e4e4e7'>CP值 = 安兔兔跑分 ÷ (最低價/1000)</b>,也就是「每花1000元買到多少跑分」,越高越划算</div>
+<div class='warn'>⚠️iPhone用的是iOS版安兔兔,與Android版計算基準不同,iPhone和Android互相比較只能當概念參考<br>💡「適合」標籤是依鏡頭數量/跑分/電池容量的規則式簡易分類,非AI生成<br>📊處理器排名為本報表收錄的 19 顆晶片互相比較的相對名次,不是完整業界天梯圖<br>🆕2026/10新增的機型(POCO F9系列、iPhone 18 Pro系列等)跑分取自nanoreview(AnTuTu 11平均),查不到可靠跑分的(例如iPhone Duo、Redmi 17 5G)只列價格與規格、不列入CP排名</div>
+<h2>💰 各預算區間 CP 值最高</h2><div class='picks'>
+<div class='pick'><div class='pl'>8,000元以下</div><div class='pn' style='color:#ff8f5c'>Redmi 15C</div><div class='ps'>NT$3,690 起 ・ 安兔兔 466,000 ・ CP 126,287</div></div>
+<div class='pick'><div class='pl'>8,000~15,000元</div><div class='pn' style='color:#ffd600'>POCO X8 Pro</div><div class='ps'>NT$10,790 起 ・ 安兔兔 2,283,558 ・ CP 211,637</div></div>
+<div class='pick'><div class='pl'>15,000~25,000元</div><div class='pn' style='color:#ffd600'>POCO F8 Ultra</div><div class='ps'>NT$19,790 起 ・ 安兔兔 3,900,000 ・ CP 197,069</div></div>
+<div class='pick'><div class='pl'>25,000元以上</div><div class='pn' style='color:#e4e4e7'>iPhone 18 Pro</div><div class='ps'>NT$41,890 起 ・ 安兔兔 3,659,652 ・ CP 87,363</div></div>
+</div>
+<div class='controls'><input type='text' id='searchBox' placeholder='輸入型號關鍵字,例如 F9 或 18 Pro' oninput='applyView()'>
+<div class='seg' id='brandSeg'><button class='active' data-b='all' onclick="setBrand('all',this)">全部</button><button data-b='redmi' onclick="setBrand('redmi',this)">Redmi</button><button data-b='poco' onclick="setBrand('poco',this)">POCO</button><button data-b='iphone' onclick="setBrand('iphone',this)">iPhone</button></div>
+<select id='sortSel' onchange='applyView()'><option value='cp'>依CP值排序</option><option value='antutu'>依跑分排序</option><option value='price'>依價格(低→高)</option></select></div>
+<div id='cardList'>
+<div class='card' data-name='poco x8 pro' data-brand='poco' data-cp='211637' data-antutu='2283558' data-price='10790'>
+<div class='rank top3'>1</div>
+<div class='card-head'><span class='gname'>POCO X8 Pro</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>天璣8500-Ultra</b> (<span class='rk-mid'>本報表第7/19名</span>)</span><span>記憶體</span><span><b>8GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡+200萬微距</b></span><span>電池/快充</span><span><b style='color:#76b900'>6500mAh</b> ・ <b style='color:#76b900'>100W</b></span></div>
+<div class='usage'>💡適合:重度遊戲、長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>2,283,558</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$10,790~13,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>211,637</span></div>
+</div></div>
+<div class='card' data-name='poco x8 pro max' data-brand='poco' data-cp='205870' data-antutu='3085998' data-price='14990'>
+<div class='rank top3'>2</div>
+<div class='card-head'><span class='gname'>POCO X8 Pro Max</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>天璣9500s</b> (<span class='rk-high'>本報表第5/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡OIS+800萬超廣</b></span><span>電池/快充</span><span><b style='color:#76b900'>8500mAh</b> ・ <b style='color:#76b900'>100W</b></span></div>
+<div class='usage'>💡適合:日常拍照防手震、重度遊戲、長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>3,085,998</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$14,990~19,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>205,870</span></div>
+</div></div>
+<div class='card' data-name='poco f8 ultra' data-brand='poco' data-cp='197069' data-antutu='3900000' data-price='19790'>
+<div class='rank top3'>3</div>
+<div class='card-head'><span class='gname'>POCO F8 Ultra</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 8 Elite Gen5</b> (<span class='rk-high'>本報表第1/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡+5000萬5x長焦潛望+5000萬超廣</b></span><span>電池/快充</span><span><b style='color:#76b900'>6500mAh</b> ・ <b style='color:#76b900'>100W</b></span></div>
+<div class='usage'>💡適合:多鏡頭拍照、重度遊戲、長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>3,900,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$19,790~21,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>197,069</span></div>
+</div></div>
+<div class='card' data-name='poco f9 ultra' data-brand='poco' data-cp='175078' data-antutu='4165108' data-price='23790'>
+<div class='rank'>4</div>
+<div class='card-head'><span class='gname'>POCO F9 Ultra</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 8 Elite Gen5</b> (<span class='rk-high'>本報表第1/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>2億主鏡+5000萬長焦+5000萬超廣</b></span><span>電池/快充</span><span><b style='color:#76b900'>8050mAh</b> ・ <b style='color:#76b900'>100W</b></span></div>
+<div class='usage'>💡適合:多鏡頭拍照、重度遊戲、長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>4,165,108</span><span class='src'>nanoreview AnTuTu 11</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$23,790~29,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>175,078</span></div>
+</div></div>
+<div class='card' data-name='poco f9 pro' data-brand='poco' data-cp='162314' data-antutu='3228426' data-price='19890'>
+<div class='rank'>5</div>
+<div class='card-head'><span class='gname'>POCO F9 Pro</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 8 Elite Gen5 V</b> (<span class='rk-high'>本報表第3/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>2億主鏡+5000萬長焦+800萬超廣</b></span><span>電池/快充</span><span><b style='color:#76b900'>6330mAh</b> ・ <b style='color:#76b900'>100W</b></span></div>
+<div class='usage'>💡適合:多鏡頭拍照、重度遊戲、長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>3,228,426</span><span class='src'>nanoreview AnTuTu 11</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$19,890~24,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>162,314</span></div>
+</div></div>
+<div class='card' data-name='redmi 15c' data-brand='redmi' data-cp='126287' data-antutu='466000' data-price='3690'>
+<div class='rank'>6</div>
+<div class='card-head'><span class='gname'>Redmi 15C</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>天璣6300</b> (<span class='rk-low'>本報表第19/19名</span>)</span><span>記憶體</span><span><b>8GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡</b></span><span>電池/快充</span><span><b style='color:#9fd830'>5230mAh</b> ・ <b style='color:#ff9500'>18W</b></span></div>
+<div class='usage'>💡適合:日常輕度使用</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>466,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$3,690~4,499<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>126,287</span></div>
+</div></div>
+<div class='card' data-name='redmi note 15' data-brand='redmi' data-cp='96115' data-antutu='470000' data-price='4890'>
+<div class='rank'>7</div>
+<div class='card-head'><span class='gname'>Redmi Note 15</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>Helio G100-Ultra</b> (<span class='rk-low'>本報表第18/19名</span>)</span><span>記憶體</span><span><b>8GB + 256GB</b></span><span>相機</span><span><b>1億主鏡</b></span><span>電池/快充</span><span><b style='color:#76b900'>6300mAh</b> ・ <b style='color:#eab308'>33W</b></span></div>
+<div class='usage'>💡適合:長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>470,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$4,890~5,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>96,115</span></div>
+</div></div>
+<div class='card' data-name='redmi note 15 pro 5g' data-brand='redmi' data-cp='95095' data-antutu='950000' data-price='9990'>
+<div class='rank'>8</div>
+<div class='card-head'><span class='gname'>Redmi Note 15 Pro 5G</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>天璣7400-Ultra</b> (<span class='rk-mid'>本報表第12/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>2億主鏡+800萬超廣</b></span><span>電池/快充</span><span><b style='color:#76b900'>6580mAh</b> ・ <b style='color:#9fd830'>45W</b></span></div>
+<div class='usage'>💡適合:一般遊戲、長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>950,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$9,990~11,999<span class='src'>傑昇通信備援,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>95,095</span></div>
+</div></div>
+<div class='card' data-name='iphone 18 pro' data-brand='iphone' data-cp='87363' data-antutu='3659652' data-price='41890'>
+<div class='rank'>9</div>
+<div class='card-head'><span class='gname'>iPhone 18 Pro</span><span class='badge b-iphone'>iPhone</span></div>
+<div class='specs'><span>處理器</span><span><b>A20 Pro</b> (<span class='rk-high'>本報表第2/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>4800萬三鏡頭(主+超廣+長焦)</b></span><span>電池/快充</span><span><b style='color:#eab308'>4288mAh</b> ・ <span class='nodata'>官方未公布</span></span></div>
+<div class='usage'>💡適合:多鏡頭拍照、重度遊戲</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>3,659,652</span><span class='src'>nanoreview AnTuTu 11</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$41,890~66,900<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>87,363</span></div>
+</div></div>
+<div class='card' data-name='poco m8s' data-brand='poco' data-cp='86116' data-antutu='490000' data-price='5690'>
+<div class='rank'>10</div>
+<div class='card-head'><span class='gname'>POCO M8s</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 6s Gen3</b> (<span class='rk-low'>本報表第17/19名</span>)</span><span>記憶體</span><span><b>6GB + 128GB</b></span><span>相機</span><span><b>5000萬主鏡</b></span><span>電池/快充</span><span><b style='color:#76b900'>6300mAh</b> ・ <b style='color:#eab308'>33W</b></span></div>
+<div class='usage'>💡適合:長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>490,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$5,690~8,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>86,116</span></div>
+</div></div>
+<div class='card' data-name='redmi note 15 pro+ 5g' data-brand='redmi' data-cp='84697' data-antutu='880000' data-price='10390'>
+<div class='rank'>11</div>
+<div class='card-head'><span class='gname'>Redmi Note 15 Pro+ 5G</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 7s Gen4</b> (<span class='rk-mid'>本報表第13/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>2億主鏡OIS+800萬超廣+200萬微距</b></span><span>電池/快充</span><span><b style='color:#76b900'>6500mAh</b> ・ <b style='color:#76b900'>90W</b></span></div>
+<div class='usage'>💡適合:多鏡頭拍照、長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>880,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$10,390~12,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>84,697</span></div>
+</div></div>
+<div class='card' data-name='iphone 17e' data-brand='iphone' data-cp='81136' data-antutu='1946451' data-price='23990'>
+<div class='rank'>12</div>
+<div class='card-head'><span class='gname'>iPhone 17e</span><span class='badge b-iphone'>iPhone</span></div>
+<div class='specs'><span>處理器</span><span><b>A19</b> (<span class='rk-mid'>本報表第8/19名</span>)</span><span>記憶體</span><span><b>8GB + 256GB</b></span><span>相機</span><span><b>4800萬單主鏡</b></span><span>電池/快充</span><span><b style='color:#ff9500'>3692mAh</b> ・ <b style='color:#ff9500'>20W</b></span></div>
+<div class='usage'>💡適合:一般遊戲</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>1,946,451</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$23,990~32,900<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>81,136</span></div>
+</div></div>
+<div class='card' data-name='redmi note 17 pro max 5g' data-brand='redmi' data-cp='81068' data-antutu='972000' data-price='11990'>
+<div class='rank'>13</div>
+<div class='card-head'><span class='gname'>Redmi Note 17 Pro Max 5G</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 6 Gen 5</b> (<span class='rk-mid'>本報表第11/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡OIS+800萬超廣</b></span><span>電池/快充</span><span><b style='color:#76b900'>9210mAh</b> ・ <b style='color:#76b900'>100W</b></span></div>
+<div class='usage'>💡適合:日常拍照防手震、一般遊戲、長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>972,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$11,990~16,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>81,068</span></div>
+</div></div>
+<div class='card' data-name='iphone 17' data-brand='iphone' data-cp='76794' data-antutu='2280000' data-price='29690'>
+<div class='rank'>14</div>
+<div class='card-head'><span class='gname'>iPhone 17</span><span class='badge b-iphone'>iPhone</span></div>
+<div class='specs'><span>處理器</span><span><b>A19</b> (<span class='rk-mid'>本報表第8/19名</span>)</span><span>記憶體</span><span><b>8GB + 256GB</b></span><span>相機</span><span><b>4800萬雙鏡頭(主+超廣)</b></span><span>電池/快充</span><span><b style='color:#ff9500'>3692mAh</b> ・ <b style='color:#eab308'>30W</b></span></div>
+<div class='usage'>💡適合:重度遊戲</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>2,280,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$29,690~39,900<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>76,794</span></div>
+</div></div>
+<div class='card' data-name='iphone 18 pro max' data-brand='iphone' data-cp='74573' data-antutu='3504165' data-price='46990'>
+<div class='rank'>15</div>
+<div class='card-head'><span class='gname'>iPhone 18 Pro Max</span><span class='badge b-iphone'>iPhone</span></div>
+<div class='specs'><span>處理器</span><span><b>A20 Pro</b> (<span class='rk-high'>本報表第2/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>4800萬三鏡頭(主+超廣+長焦)</b></span><span>電池/快充</span><span><b style='color:#9fd830'>5567mAh</b> ・ <span class='nodata'>官方未公布</span></span></div>
+<div class='usage'>💡適合:多鏡頭拍照、重度遊戲</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>3,504,165</span><span class='src'>nanoreview AnTuTu 11</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$46,990~71,900<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>74,573</span></div>
+</div></div>
+<div class='card' data-name='redmi note 17 pro 5g' data-brand='redmi' data-cp='68554' data-antutu='678000' data-price='9890'>
+<div class='rank'>16</div>
+<div class='card-head'><span class='gname'>Redmi Note 17 Pro 5G</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 6s Gen 4</b> (<span class='rk-low'>本報表第14/19名</span>)</span><span>記憶體</span><span><b>8GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡OIS+800萬超廣</b></span><span>電池/快充</span><span><b style='color:#76b900'>8340mAh</b> ・ <b style='color:#9fd830'>67W</b></span></div>
+<div class='usage'>💡適合:日常拍照防手震、長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>678,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$9,890~14,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>68,554</span></div>
+</div></div>
+<div class='card' data-name='iphone 17 pro' data-brand='iphone' data-cp='65030' data-antutu='2320908' data-price='35690'>
+<div class='rank'>17</div>
+<div class='card-head'><span class='gname'>iPhone 17 Pro</span><span class='badge b-iphone'>iPhone</span></div>
+<div class='specs'><span>處理器</span><span><b>A19 Pro</b> (<span class='rk-high'>本報表第6/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>4800萬三鏡頭(主+超廣+長焦)</b></span><span>電池/快充</span><span><b style='color:#eab308'>4252mAh</b> ・ <b style='color:#eab308'>40W</b></span></div>
+<div class='usage'>💡適合:多鏡頭拍照、重度遊戲</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>2,320,908</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$35,690~46,900<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#76b900;'>65,030</span></div>
+</div></div>
+<div class='card' data-name='iphone 17 pro max' data-brand='iphone' data-cp='58794' data-antutu='2374676' data-price='40390'>
+<div class='rank'>18</div>
+<div class='card-head'><span class='gname'>iPhone 17 Pro Max</span><span class='badge b-iphone'>iPhone</span></div>
+<div class='specs'><span>處理器</span><span><b>A19 Pro</b> (<span class='rk-high'>本報表第6/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>4800萬三鏡頭(主+超廣+5x長焦)</b></span><span>電池/快充</span><span><b style='color:#9fd830'>5088mAh</b> ・ <b style='color:#eab308'>40W</b></span></div>
+<div class='usage'>💡適合:多鏡頭拍照、重度遊戲</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>2,374,676</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$40,390~58,900<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#9fd830;'>58,794</span></div>
+</div></div>
+<div class='card' data-name='poco f8 pro' data-brand='poco' data-cp='-1' data-antutu='3182083' data-price='99999999'>
+<div class='rank'>19</div>
+<div class='card-head'><span class='gname'>POCO F8 Pro</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 8 Elite</b> (<span class='rk-high'>本報表第4/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡OIS+5000萬長焦+800萬超廣</b></span><span>電池/快充</span><span><b style='color:#76b900'>6210mAh</b> ・ <b style='color:#76b900'>100W</b></span></div>
+<div class='usage'>💡適合:多鏡頭拍照、重度遊戲</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>3,182,083</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'><span class='nodata'>兩家通路都沒賣</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='poco f7' data-brand='poco' data-cp='-1' data-antutu='2084535' data-price='99999999'>
+<div class='rank'>20</div>
+<div class='card-head'><span class='gname'>POCO F7</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 8s Gen4</b> (<span class='rk-mid'>本報表第9/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡OIS+800萬超廣</b></span><span>電池/快充</span><span><b style='color:#76b900'>6500mAh</b> ・ <b style='color:#76b900'>90W</b></span></div>
+<div class='usage'>💡適合:日常拍照防手震、重度遊戲、長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>2,084,535</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'><span class='nodata'>兩家通路都沒賣</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='iphone 16' data-brand='iphone' data-cp='-1' data-antutu='1864120' data-price='99999999'>
+<div class='rank'>21</div>
+<div class='card-head'><span class='gname'>iPhone 16</span><span class='badge b-iphone'>iPhone</span></div>
+<div class='specs'><span>處理器</span><span><b>A18</b> (<span class='rk-mid'>本報表第10/19名</span>)</span><span>記憶體</span><span><b>8GB + 128GB</b></span><span>相機</span><span><b>4800萬雙鏡頭(主+超廣)</b></span><span>電池/快充</span><span><b style='color:#ff9500'>3561mAh</b> ・ <b style='color:#ff9500'>20W</b></span></div>
+<div class='usage'>💡適合:一般遊戲</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>1,864,120</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'><span class='nodata'>兩家通路都沒賣</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='iphone air' data-brand='iphone' data-cp='-1' data-antutu='1707172' data-price='99999999'>
+<div class='rank'>22</div>
+<div class='card-head'><span class='gname'>iPhone Air</span><span class='badge b-iphone'>iPhone</span></div>
+<div class='specs'><span>處理器</span><span><b>A19 Pro</b> (<span class='rk-high'>本報表第6/19名</span>)</span><span>記憶體</span><span><b>12GB + 256GB</b></span><span>相機</span><span><b>4800萬單主鏡</b></span><span>電池/快充</span><span><b style='color:#ff9500'>3149mAh</b> ・ <b style='color:#eab308'>30W</b></span></div>
+<div class='usage'>💡適合:一般遊戲</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>1,707,172</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'><span class='nodata'>兩家通路都沒賣</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='poco x7' data-brand='poco' data-cp='-1' data-antutu='660000' data-price='99999999'>
+<div class='rank'>23</div>
+<div class='card-head'><span class='gname'>POCO X7</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>天璣7300-Ultra</b> (<span class='rk-low'>本報表第15/19名</span>)</span><span>記憶體</span><span><b>8GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡+200萬微距</b></span><span>電池/快充</span><span><b style='color:#76b900'>6550mAh</b> ・ <b style='color:#eab308'>44W</b></span></div>
+<div class='usage'>💡適合:長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>660,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'><span class='nodata'>兩家通路都沒賣</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='redmi note 15 5g' data-brand='redmi' data-cp='-1' data-antutu='580000' data-price='99999999'>
+<div class='rank'>24</div>
+<div class='card-head'><span class='gname'>Redmi Note 15 5G</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 6 Gen3</b> (<span class='rk-low'>本報表第16/19名</span>)</span><span>記憶體</span><span><b>8GB + 256GB</b></span><span>相機</span><span><b>1億主鏡+800萬超廣</b></span><span>電池/快充</span><span><b style='color:#76b900'>6300mAh</b> ・ <b style='color:#eab308'>33W</b></span></div>
+<div class='usage'>💡適合:長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>580,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'><span class='nodata'>兩家通路都沒賣</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='poco m8' data-brand='poco' data-cp='-1' data-antutu='580000' data-price='99999999'>
+<div class='rank'>25</div>
+<div class='card-head'><span class='gname'>POCO M8</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 6 Gen3</b> (<span class='rk-low'>本報表第16/19名</span>)</span><span>記憶體</span><span><b>8GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡</b></span><span>電池/快充</span><span><b style='color:#76b900'>6980mAh</b> ・ <b style='color:#eab308'>33W</b></span></div>
+<div class='usage'>💡適合:長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>580,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'><span class='nodata'>兩家通路都沒賣</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='redmi 15 5g' data-brand='redmi' data-cp='-1' data-antutu='490000' data-price='99999999'>
+<div class='rank'>26</div>
+<div class='card-head'><span class='gname'>Redmi 15 5G</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 6s Gen3</b> (<span class='rk-low'>本報表第17/19名</span>)</span><span>記憶體</span><span><b>8GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡</b></span><span>電池/快充</span><span><b style='color:#76b900'>6800mAh</b> ・ <b style='color:#eab308'>33W</b></span></div>
+<div class='usage'>💡適合:長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'>490,000</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'><span class='nodata'>兩家通路都沒賣</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='poco c95 pro' data-brand='poco' data-cp='-1' data-antutu='0' data-price='6490'>
+<div class='rank'>27</div>
+<div class='card-head'><span class='gname'>POCO C95 Pro</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>Helio G91-Ultra</b> (<span class='rk-low'>跑分不明,未排名</span>)</span><span>記憶體</span><span><b>6GB + 128GB</b></span><span>相機</span><span><b>5000萬主鏡</b></span><span>電池/快充</span><span><b style='color:#76b900'>7500mAh</b> ・ <b style='color:#9fd830'>45W</b></span></div>
+<div class='usage'>💡適合:長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'><span class='nodata'>查無可靠跑分</span></span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$6,490~7,599<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='iphone duo' data-brand='iphone' data-cp='-1' data-antutu='0' data-price='71890'>
+<div class='rank'>28</div>
+<div class='card-head'><span class='gname'>iPhone Duo</span><span class='badge b-iphone'>iPhone</span></div>
+<div class='specs'><span>處理器</span><span><b>A20 Pro</b> (<span class='rk-high'>本報表第2/19名</span>)</span><span>記憶體</span><span><b>未公布 + 256GB</b></span><span>相機</span><span><b>4800萬雙鏡頭(主+超廣)</b></span><span>電池/快充</span><span><span class='nodata'>官方未公布</span> ・ <span class='nodata'>官方未公布</span></span></div>
+<div class='usage'>💡適合:日常輕度使用</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'><span class='nodata'>查無可靠跑分</span></span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$71,890~74,900<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='redmi note 14 pro+ 5g' data-brand='redmi' data-cp='-1' data-antutu='0' data-price='99999999'>
+<div class='rank'>29</div>
+<div class='card-head'><span class='gname'>Redmi Note 14 Pro+ 5G</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 7s Gen 3</b> (<span class='rk-low'>跑分不明,未排名</span>)</span><span>記憶體</span><span><b>12GB + 512GB</b></span><span>相機</span><span><b>2億主鏡OIS+800萬超廣+200萬微距</b></span><span>電池/快充</span><span><b style='color:#76b900'>6200mAh</b> ・ <b style='color:#76b900'>120W</b></span></div>
+<div class='usage'>💡適合:多鏡頭拍照</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'><span class='nodata'>查無可靠跑分</span></span><span class='src'>SOGI、傑昇通信</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'><span class='nodata'>兩家通路都沒賣</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='redmi note 17 5g' data-brand='redmi' data-cp='-1' data-antutu='0' data-price='6890'>
+<div class='rank'>30</div>
+<div class='card-head'><span class='gname'>Redmi Note 17 5G</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 4 Gen 4</b> (<span class='rk-low'>跑分不明,未排名</span>)</span><span>記憶體</span><span><b>6GB + 128GB</b></span><span>相機</span><span><b>5000萬主鏡</b></span><span>電池/快充</span><span><b style='color:#76b900'>7700mAh</b> ・ <b style='color:#9fd830'>45W</b></span></div>
+<div class='usage'>💡適合:長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'><span class='nodata'>查無可靠跑分</span></span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$6,890~11,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='poco x8' data-brand='poco' data-cp='-1' data-antutu='0' data-price='9790'>
+<div class='rank'>31</div>
+<div class='card-head'><span class='gname'>POCO X8</span><span class='badge b-poco'>POCO</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 6s Gen 4</b> (<span class='rk-low'>本報表第14/19名</span>)</span><span>記憶體</span><span><b>8GB + 256GB</b></span><span>相機</span><span><b>5000萬主鏡OIS+200萬景深</b></span><span>電池/快充</span><span><b style='color:#76b900'>8340mAh</b> ・ <b style='color:#9fd830'>67W</b></span></div>
+<div class='usage'>💡適合:日常拍照防手震、長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'><span class='nodata'>查無可靠跑分</span></span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$9,790~11,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='redmi note 17 4g' data-brand='redmi' data-cp='-1' data-antutu='0' data-price='5990'>
+<div class='rank'>32</div>
+<div class='card-head'><span class='gname'>Redmi Note 17 4G</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 6s 4G Gen 2</b> (<span class='rk-low'>跑分不明,未排名</span>)</span><span>記憶體</span><span><b>6GB + 128GB</b></span><span>相機</span><span><b>5000萬主鏡</b></span><span>電池/快充</span><span><b style='color:#76b900'>7700mAh</b> ・ <b style='color:#9fd830'>45W</b></span></div>
+<div class='usage'>💡適合:長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'><span class='nodata'>查無可靠跑分</span></span><span class='src'>洋蔥網通 Note 17 系列規格比較</span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$5,990~6,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+<div class='card' data-name='redmi 17 5g' data-brand='redmi' data-cp='-1' data-antutu='0' data-price='5390'>
+<div class='rank'>33</div>
+<div class='card-head'><span class='gname'>Redmi 17 5G</span><span class='badge b-redmi'>Redmi</span></div>
+<div class='specs'><span>處理器</span><span><b>Snapdragon 4 Gen 5</b> (<span class='rk-low'>跑分不明,未排名</span>)</span><span>記憶體</span><span><b>4GB + 128GB</b></span><span>相機</span><span><b>5000萬主鏡</b></span><span>電池/快充</span><span><b style='color:#76b900'>7500mAh</b> ・ <b style='color:#9fd830'>45W</b></span></div>
+<div class='usage'>💡適合:長時間追劇</div>
+<div class='stats'>
+<div class='stat'><span class='stat-label'>安兔兔跑分</span><span class='stat-value'><span class='nodata'>查無可靠跑分</span></span></div>
+<div class='stat'><span class='stat-label'>目前售價</span><span class='stat-value price'>NT$5,390~9,999<span class='src'>米可手機館,依容量/通路不同</span></span></div>
+<div class='stat'><span class='stat-label'>CP值</span><span class='stat-value' style='color:#71717a;'><span class='nodata'>—</span></span></div>
+</div></div>
+</div>
+<div class='newbox'><b style='color:#f0d789'>📌 賣場有賣、但本報表還沒收錄的機型(1 款,已合併同型號不同容量)</b><br><span class='newTag'>Redmi:紅米 Note 17</span><br><span style='color:#8a93a3;font-size:12px;'>這些機型還沒有可靠跑分,所以先不列入。想加入的話,打開「桌面\台股工具箱\共用設定\手機機型補充.txt」照說明加一行即可,不用改程式。</span></div>
+<script>
+var curBrand = 'all';
+function applyView() {
+    var kw = document.getElementById('searchBox').value.toLowerCase();
+    var sortBy = document.getElementById('sortSel').value;
+    var list = document.getElementById('cardList');
+    var cards = Array.prototype.slice.call(list.querySelectorAll('.card'));
+    cards.sort(function(a, b) {
+        if (sortBy === 'price') return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+        return parseFloat(b.dataset[sortBy]) - parseFloat(a.dataset[sortBy]);
+    });
+    var n = 0;
+    cards.forEach(function(c) {
+        list.appendChild(c);
+        var show = c.dataset.name.indexOf(kw) >= 0 && (curBrand === 'all' || c.dataset.brand === curBrand);
+        c.style.display = show ? '' : 'none';
+        if (show) { n++; var r = c.querySelector('.rank'); r.textContent = n; r.className = (n <= 3 && parseFloat(c.dataset.cp) > 0 && sortBy === 'cp') ? 'rank top3' : 'rank'; }
+    });
+}
+function setBrand(brand, btn) {
+    document.querySelectorAll('#brandSeg button').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    curBrand = brand;
+    applyView();
+}
+</script>
+</div><button type="button" onclick="twShare()" style="position:fixed;left:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;border:0;padding:10px 14px;border-radius:20px;font:15px sans-serif;box-shadow:0 2px 6px rgba(0,0,0,.3)">📤 分享</button>
+<script>function twShare(){var u=location.href.split('#')[0].split('?')[0];var t=document.title||'景淵報表';
+if(navigator.share){navigator.share({title:t,text:t+'',url:u}).catch(function(){});return;}
+var ok=function(){alert('已複製連結,可以貼到 LINE 傳給朋友');};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(ok,function(){window.prompt('長按複製這個連結',u);});}else{window.prompt('長按複製這個連結',u);}}</script><a href="index.html" onclick="location.href='index.html?v='+Date.now();return false;" style="position:fixed;right:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;padding:10px 14px;border-radius:20px;font:15px sans-serif;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.3)">← 回目錄</a></body></html>
+

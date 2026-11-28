@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex,nofollow"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>景淵旅遊行前規劃室</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+  :root{
+    --sky:#eef6f6;
+    --paper:#fbf8f2;
+    --ink:#1f2b2e;
+    --line:#d8cdb8;
+    --terracotta:#c1622f;
+    --terracotta-dim:#e8ceb9;
+    --teal:#2f6d68;
+    --teal-dim:#dbe9e6;
+    --gold:#c99a3f;
+    --card:#ffffff;
+    --muted:#6b6558;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 500px at 100% -10%, rgba(193,98,47,.07), transparent 55%),
+      radial-gradient(900px 500px at -10% 20%, rgba(47,109,104,.08), transparent 55%),
+      var(--sky);
+    color:var(--ink);
+    font-family:'Noto Sans TC', sans-serif;
+    line-height:1.7;
+  }
+  .wrap{max-width:960px; margin:0 auto; padding:44px 22px 100px;}
+
+  header.hero{text-align:center; margin-bottom:36px;}
+  .kicker{font-family:'Fraunces', serif; font-style:italic; color:var(--terracotta); letter-spacing:.06em; font-size:14px; margin-bottom:8px;}
+  h1.title{font-family:'Fraunces', serif; font-weight:600; font-size:clamp(28px,4.6vw,40px); margin:0 0 12px;}
+  .route-line{display:flex; align-items:center; justify-content:center; gap:10px; color:var(--teal); font-size:14px; margin-bottom:14px;}
+  .route-line .dots{flex:0 0 auto; width:60px; height:1px; background:repeating-linear-gradient(90deg, var(--teal) 0 5px, transparent 5px 10px);}
+  p.lede{color:var(--muted); max-width:560px; margin:0 auto; font-size:15px;}
+
+  nav.tabs{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:30px 0 8px; position:sticky; top:0; background:var(--sky); padding:10px 0; z-index:5;}
+  nav.tabs a{
+    font-size:13.5px; padding:8px 16px; border-radius:20px; text-decoration:none;
+    background:var(--card); border:1px solid var(--line); color:var(--ink);
+  }
+  nav.tabs a:hover{border-color:var(--terracotta); color:var(--terracotta);}
+
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:28px; margin-bottom:26px; position:relative;
+    box-shadow:0 2px 10px rgba(60,50,30,.04);
+  }
+  .stamp{
+    position:absolute; top:20px; right:24px; width:52px; height:52px; border-radius:50%;
+    border:2px dashed var(--terracotta); color:var(--terracotta); font-size:10px;
+    display:flex; align-items:center; justify-content:center; text-align:center; opacity:.55;
+    transform:rotate(8deg); font-weight:700; line-height:1.2;
+  }
+
+  .section-title{font-family:'Fraunces', serif; font-size:23px; margin:0 0 4px; display:flex; align-items:center; gap:10px;}
+  .section-sub{color:var(--muted); font-size:13px; margin-bottom:18px;}
+
+  .timeline{list-style:none; margin:0; padding:0;}
+  .timeline li{
+    display:grid; grid-template-columns:110px 1fr; gap:16px; padding:14px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .timeline li:last-child{border-bottom:none;}
+  .timeline .when{font-family:'Fraunces', serif; color:var(--terracotta); font-weight:600; font-size:14px;}
+  .timeline .what label{display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:14.5px;}
+  .timeline .what input[type=checkbox]{margin-top:3px; width:16px; height:16px; accent-color:var(--teal);}
+  .timeline .what .sub{color:var(--muted); font-size:12.5px; margin-top:2px;}
+
+  .chip-grid{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .chip{background:var(--teal-dim); color:var(--teal); border-radius:16px; padding:5px 13px; font-size:12.5px;}
+  .chip.warn{background:#fbe4d8; color:var(--terracotta);}
+  .chip.danger{background:#fadbdb; color:#b23a3a; font-weight:700;}
+  .chip.safe{background:#dcedd9; color:#3f7d3a;}
+
+  .sev-high{border-left:4px solid #b23a3a; background:#fdf3f3;}
+  .sev-mid{border-left:4px solid var(--gold); background:#fdf7ea;}
+  .sev-low{border-left:4px solid var(--teal); background:var(--teal-dim);}
+  .sev-box{padding:12px 16px; border-radius:6px; margin-bottom:10px; font-size:14px;}
+  .sev-box b.sev-tag{display:inline-block; font-size:11px; padding:2px 8px; border-radius:10px; margin-right:8px; vertical-align:middle;}
+  .sev-high b.sev-tag{background:#b23a3a; color:#fff;}
+  .sev-mid b.sev-tag{background:var(--gold); color:#fff;}
+  .sev-low b.sev-tag{background:var(--teal); color:#fff;}
+
+  table.rules{width:100%; border-collapse:collapse; font-size:14px; margin-top:6px;}
+  table.rules th, table.rules td{padding:9px 10px; border-bottom:1px solid var(--line); text-align:left;}
+  table.rules th{color:var(--muted); font-weight:600; font-size:12.5px;}
+
+  .formgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:14px; margin-bottom:14px;}
+  .field label{display:block; font-size:12.5px; color:var(--muted); margin-bottom:6px;}
+  .field input, .field select{
+    width:100%; background:#fff; border:1px solid var(--line); color:var(--ink);
+    padding:9px 11px; border-radius:6px; font-size:14.5px; font-family:inherit;
+  }
+  .field input:focus, .field select:focus{outline:none; border-color:var(--terracotta);}
+
+  button.primary{
+    background:var(--terracotta); color:#fff; border:none; font-weight:700;
+    padding:11px 24px; border-radius:22px; cursor:pointer; font-size:14.5px;
+    font-family:'Noto Sans TC', sans-serif;
+  }
+  button.primary:hover{background:#a8511f;}
+  button.ghost{
+    background:transparent; border:1px solid var(--line); color:var(--ink);
+    padding:11px 20px; border-radius:22px; cursor:pointer; font-size:14px;
+    font-family:'Noto Sans TC', sans-serif;
+  }
+  button.ghost:hover{border-color:var(--terracotta); color:var(--terracotta);}
+  button.small{
+    background:var(--teal-dim); color:var(--teal); border:none; border-radius:14px;
+    padding:4px 12px; font-size:12px; cursor:pointer;
+  }
+
+  .result-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px;}
+  .stat{background:var(--sky); border:1px solid var(--line); border-radius:8px; padding:14px 16px;}
+  .stat .k{font-size:12px; color:var(--muted); margin-bottom:4px;}
+  .stat .v{font-family:'Fraunces', serif; font-size:20px; color:var(--terracotta);}
+
+  .divider{height:1px; background:repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 12px); margin:20px 0;}
+
+  .disc{font-size:12.5px; color:var(--muted); background:var(--sky); border-left:3px solid var(--terracotta); padding:10px 14px; border-radius:4px; margin-top:14px;}
+
+  .exrate-row{display:flex; gap:10px; align-items:center; margin-bottom:8px; flex-wrap:wrap;}
+  .exrate-row input{width:100px;}
+  .exrate-row span{font-size:13.5px; color:var(--muted);}
+
+  .pack-cats{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-top:16px;}
+  .pack-cat h4{font-family:'Fraunces', serif; margin:0 0 10px; font-size:16px; color:var(--teal);}
+  .pack-cat ul{list-style:none; margin:0; padding:0;}
+  .pack-cat li{padding:5px 0; font-size:14px; display:flex; gap:8px; align-items:flex-start;}
+  .pack-cat li input{margin-top:4px; accent-color:var(--terracotta);}
+
+  .checklist{list-style:none; margin:0; padding:0;}
+  .checklist li{padding:8px 0; border-bottom:1px solid var(--line); font-size:14.5px; display:flex; gap:10px; align-items:flex-start;}
+  .checklist li:last-child{border-bottom:none;}
+  .checklist input{margin-top:3px; accent-color:var(--terracotta);}
+
+  footer{text-align:center; color:var(--muted); font-size:12px; margin-top:36px; padding-top:20px; border-top:1px solid var(--line);}
+
+  @media (max-width:560px){ .timeline li{grid-template-columns:1fr;} }
+
+  @media print{
+    nav.tabs, #back-to-top, button{display:none !important;}
+    body{background:#fff;}
+    .card{box-shadow:none; border:1px solid #999; page-break-inside:avoid;}
+    a{color:inherit; text-decoration:none;}
+  }
+
+  #back-to-top{
+    position:fixed; bottom:24px; right:24px; width:44px; height:44px; border-radius:50%;
+    background:var(--terracotta); color:#fff; border:none; font-size:18px; cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,.2); display:none; z-index:20;
+  }
+  #back-to-top.show{display:flex; align-items:center; justify-content:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">Bon Voyage</div>
+    <h1 class="title">景淵旅遊行前規劃室</h1>
+    <div class="route-line">✈ <span class="dots"></span> 🧳 <span class="dots"></span> 🗺️</div>
+    <p class="lede">出發前該想到、該準備、該檢查的事,一次列給您看。這是通用型的規劃工具,不含特定城市的景點/餐廳/交通資料——確定目的地後,直接拿著這份清單來問我,我會用即時搜尋幫您查當地實際的資訊。</p>
+  </header>
+
+  <nav class="tabs">
+    <a href="#timeline">行前時間軸</a>
+    <a href="#baggage">行李規範</a>
+    <a href="#budget">花費試算</a>
+    <a href="#packing">打包清單</a>
+    <a href="#booking">訂票訂房檢查</a>
+    <a href="#plugs">插座電壓</a>
+    <a href="#jetlag">時差速算</a>
+    <a href="#scams">詐騙提醒</a>
+    <a href="#tipping">小費文化</a>
+    <a href="#onsite">在地資訊怎麼問我</a>
+  </nav>
+  <div style="text-align:center;margin-bottom:8px;">
+    <button class="ghost" style="font-size:12.5px;padding:6px 16px;" onclick="window.print()">🖨️ 列印本頁</button>
+  </div>
+
+  <div class="card" id="timeline">
+    <div class="stamp">READY<br>TO GO</div>
+    <div class="section-title">🗓️ 行前準備時間軸</div>
+    <div class="section-sub">依常見出國流程排列,實際時程請依簽證/航班規定調整;勾選狀態會自動存在這台電腦的瀏覽器裡,關掉視窗下次打開仍會記得</div>
+    <div class="formgrid" style="max-width:280px;">
+      <div class="field"><label>出發日期(選填,填了會換算實際日期)</label><input type="date" id="departDate" onchange="renderTimeline()"></div>
+    </div>
+    <div id="countdown-box"></div>
+    <div id="timeline-progress"></div>
+    <ul class="timeline" id="timeline-list"></ul>
+    <button class="ghost" style="margin-top:14px;font-size:12.5px;" onclick="resetChecklist('#timeline-list','travelplan-tl-','timeline-progress')">清空這份清單的勾選</button>
+    <div class="disc">簽證審理時間、護照效期規定依國家而異(常見要求為「入境時效期6個月以上」),請務必以目的地官方或該國駐台辦事處公告為準;確定目的地後也可以直接問我,我能查當下最新的簽證/入境規定。</div>
+  </div>
+
+  <div class="card" id="baggage">
+    <div class="section-title">🧳 行李託運與隨身規範</div>
+    <div class="section-sub">國際航空常見通用規範,實際限制仍以您搭乘的航空公司公告為準</div>
+
+    <h4 style="font-family:'Fraunces',serif;margin-bottom:6px;">隨身行李液體規範(俗稱3-1-1原則)</h4>
+    <div class="chip-grid">
+      <span class="chip safe">單一容器上限100ml</span>
+      <span class="chip safe">全部裝進1個透明夾鏈袋</span>
+      <span class="chip safe">夾鏈袋容量上限約1公升</span>
+      <span class="chip danger">每人限帶1袋通過安檢</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <h4 style="font-family:'Fraunces',serif;margin-bottom:10px;">常見隨身/託運違禁品對照(僅列常見項目)</h4>
+    <table class="rules">
+      <tr><th>物品</th><th>隨身攜帶</th><th>託運行李</th></tr>
+      <tr><td>打火機</td><td><span class="chip warn">限攜帶1個,需隨身</span></td><td><span class="chip danger">❌ 不可託運</span></td></tr>
+      <tr><td>行動電源/鋰電池</td><td><span class="chip safe">✅ 需隨身攜帶</span></td><td><span class="chip danger">❌ 通常不可託運</span></td></tr>
+      <tr><td>剪刀/水果刀/瑞士刀</td><td><span class="chip danger">❌ 不可隨身</span></td><td><span class="chip safe">✅ 可託運</span></td></tr>
+      <tr><td>超過100ml的液體/噴霧</td><td><span class="chip danger">❌ 不可隨身</span></td><td><span class="chip warn">可託運(需符合包裝規定)</span></td></tr>
+      <tr><td>自拍棒/腳架(金屬尖銳)</td><td><span class="chip warn">視長度可能需託運</span></td><td><span class="chip safe">✅ 可託運</span></td></tr>
+      <tr><td>護照/現金/貴重物品</td><td><span class="chip safe">✅ 建議隨身</span></td><td><span class="chip danger">❌ 不建議託運</span></td></tr>
+    </table>
+    <div class="disc">各國安檢細節與航空公司規定會不定期調整,鋰電池瓦數限制、刀具長度限制等細節請務必在訂票後查詢該航空公司官網最新公告,或直接問我,我能查到當下最新的規定。</div>
+
+    <div class="divider"></div>
+    <h4 style="font-family:'Fraunces',serif;margin-bottom:6px;">託運行李重量,常見等艙級距(僅供概念參考)</h4>
+    <div class="chip-grid">
+      <span class="chip">經濟艙 常見20~23kg/件</span>
+      <span class="chip">商務艙 常見30~32kg/件</span>
+      <span class="chip warn">廉價航空常需額外購買託運額度</span>
+      <span class="chip warn">超重通常按每公斤計費,現場加購更貴</span>
+    </div>
+  </div>
+
+  <div class="card" id="budget">
+    <div class="section-title">💰 粗估花費與換匯試算</div>
+    <div class="section-sub" style="color:#b23a3a;font-weight:600;">⚠️選幣別後自動帶入的匯率只是概略參考值(製作時間點的大略印象),不是即時匯率——匯率天天在變,像日圓最近幾個月就在0.204~0.231之間大幅波動,請務必出發前自行查詢當下真實匯率再填入</div>
+
+    <div class="formgrid">
+      <div class="field"><label>旅遊天數</label><input type="number" id="tripDays" value="5" min="1"></div>
+      <div class="field"><label>同行人數</label><input type="number" id="tripPeople" value="1" min="1"></div>
+      <div class="field"><label>幣別</label>
+        <select id="currCode" onchange="onCurrencyChange()">
+          <option value="JPY" data-rate="0.21">日幣 JPY</option>
+          <option value="USD" data-rate="31.5">美元 USD</option>
+          <option value="EUR" data-rate="34.2">歐元 EUR</option>
+          <option value="GBP" data-rate="40.1">英鎊 GBP</option>
+          <option value="KRW" data-rate="0.023">韓元 KRW</option>
+          <option value="CNY" data-rate="4.4">人民幣 CNY</option>
+          <option value="HKD" data-rate="4.05">港幣 HKD</option>
+          <option value="THB" data-rate="0.92">泰銖 THB</option>
+          <option value="VND" data-rate="0.00126">越南盾 VND</option>
+          <option value="SGD" data-rate="23.4">新加坡幣 SGD</option>
+          <option value="MYR" data-rate="7.1">馬來西亞令吉 MYR</option>
+          <option value="AUD" data-rate="20.6">澳幣 AUD</option>
+          <option value="CAD" data-rate="22.8">加幣 CAD</option>
+          <option value="CHF" data-rate="36.5">瑞士法郎 CHF</option>
+          <option value="PHP" data-rate="0.54">菲律賓披索 PHP</option>
+          <option value="IDR" data-rate="0.00195">印尼盾 IDR</option>
+          <option value="TRY" data-rate="0.92">土耳其里拉 TRY</option>
+          <option value="CUSTOM">其他(自行輸入幣別名稱)</option>
+        </select>
+      </div>
+      <div class="field" id="customCurrWrap" style="display:none;"><label>自訂幣別名稱</label><input type="text" id="customCurrName" placeholder="例如 印度盧比" maxlength="10"></div>
+      <div class="field"><label>換算匯率(1當地幣 = ? 台幣) <span style="color:#b23a3a;">請自行核對更新</span></label><input type="number" id="exRate" value="0.21" step="0.0001"></div>
+    </div>
+
+    <div class="formgrid">
+      <div class="field"><label>住宿/晚(當地幣,每房)</label><input type="number" id="costHotel" value="3000"></div>
+      <div class="field"><label>餐飲/天(當地幣,每人)</label><input type="number" id="costFood" value="1500"></div>
+      <div class="field"><label>交通/天(當地幣,每人)</label><input type="number" id="costTransport" value="1000"></div>
+      <div class="field"><label>門票娛樂/天(當地幣,每人)</label><input type="number" id="costActivity" value="1000"></div>
+      <div class="field"><label>購物預算(當地幣,總額)</label><input type="number" id="costShopping" value="5000"></div>
+      <div class="field"><label>機動預備金比例(%)</label><input type="number" id="costBuffer" value="10"></div>
+    </div>
+
+    <button class="primary" onclick="calcBudget()">計算總花費</button>
+    <div id="budget-result" style="margin-top:18px;"></div>
+  </div>
+
+  <div class="card" id="packing">
+    <div class="section-title">🎒 打包行李清單產生器</div>
+    <div class="section-sub">依天數與行程類型自動產生建議清單,勾選項目方便您邊看邊打包</div>
+    <div class="formgrid">
+      <div class="field"><label>旅遊天數</label><input type="number" id="packDays" value="5" min="1"></div>
+      <div class="field"><label>氣候類型</label>
+        <select id="packClimate">
+          <option value="hot">炎熱/夏季</option>
+          <option value="cold">寒冷/冬季</option>
+          <option value="mild">溫和/春秋</option>
+          <option value="mixed">早晚溫差大</option>
+        </select>
+      </div>
+      <div class="field"><label>行程類型</label>
+        <select id="packType">
+          <option value="leisure">觀光休閒</option>
+          <option value="business">商務出差</option>
+          <option value="adventure">戶外/健行</option>
+          <option value="beach">海島/海邊</option>
+        </select>
+      </div>
+    </div>
+    <button class="primary" onclick="genPackingList()">產生打包清單</button>
+    <div id="packing-result" style="margin-top:18px;"></div>
+  </div>
+
+  <div class="card" id="booking">
+    <div class="section-title">✅ 訂機票 / 訂房前檢查清單</div>
+    <div class="section-sub">下訂前先過一次這份清單,能避開多數常見的踩雷情況</div>
+    <h4 style="font-family:'Fraunces',serif;margin-bottom:6px;">訂機票</h4>
+    <div id="flight-progress"></div>
+    <ul class="checklist" id="flight-checklist"></ul>
+    <button class="ghost" style="margin-top:10px;font-size:12.5px;" onclick="resetChecklist('#flight-checklist','travelplan-fc-','flight-progress')">清空機票清單勾選</button>
+    <div class="divider"></div>
+    <h4 style="font-family:'Fraunces',serif;margin-bottom:6px;">訂住宿</h4>
+    <div id="hotel-progress"></div>
+    <ul class="checklist" id="hotel-checklist"></ul>
+    <button class="ghost" style="margin-top:10px;font-size:12.5px;" onclick="resetChecklist('#hotel-checklist','travelplan-hc-','hotel-progress')">清空住宿清單勾選</button>
+  </div>
+
+  <div class="card" id="plugs">
+    <div class="section-title">🔌 世界插座與電壓速查</div>
+    <div class="section-sub">全球插座共15種類型,依地區歸類常見類型;實際仍請以目的地當下規格為準</div>
+    <table class="rules">
+      <tr><th>類型</th><th>常見地區</th><th>電壓</th></tr>
+      <tr><td><b>A/B型</b>(雙平腳/三腳)</td><td>美國、加拿大、日本、部分中南美洲</td><td><span class="chip warn">110~120V</span></td></tr>
+      <tr><td><b>C/F型</b>(雙圓腳)</td><td>歐洲大部分國家、南美洲、亞洲多國(含中國、韓國)</td><td><span class="chip danger">220~230V</span></td></tr>
+      <tr><td><b>G型</b>(三方腳)</td><td>英國、愛爾蘭、香港、新加坡、馬來西亞</td><td><span class="chip danger">230V</span></td></tr>
+      <tr><td><b>I型</b></td><td>澳洲、紐西蘭、中國、阿根廷</td><td><span class="chip danger">220~240V</span></td></tr>
+      <tr><td><b>D型</b></td><td>印度、尼泊爾、斯里蘭卡</td><td><span class="chip danger">220~240V</span></td></tr>
+      <tr><td><b>O型</b></td><td>泰國(常與A/C型混用)</td><td><span class="chip danger">220V</span></td></tr>
+    </table>
+    <div class="disc"><b style="color:#b23a3a;">重要提醒</b>:轉接頭只負責「轉孔」,不會「變電壓」——若電器本身不支援當地電壓(多數手機/筆電支援100~240V寬電壓,但吹風機、電棒捲等高功率電器常常不支援),插了轉接頭一樣可能燒毀電器或跳電,務必先確認電器背後標示的輸入電壓範圍。</div>
+  </div>
+
+  <div class="card" id="jetlag">
+    <div class="section-title">🕐 時差速算器</div>
+    <div class="section-sub">輸入目的地與台灣的時差(小時),快速換算兩地時間</div>
+    <div class="formgrid">
+      <div class="field"><label>目的地時區(相對台灣UTC+8的時差,例如東京+1、倫敦-7)</label><input type="number" id="tzOffset" value="0" step="1"></div>
+      <div class="field"><label>台灣現在時間</label><input type="time" id="twTime"></div>
+    </div>
+    <button class="ghost" onclick="calcJetlag()">換算目的地時間</button>
+    <div id="jetlag-result" style="margin-top:14px;"></div>
+    <div class="disc">時差請自行查詢目的地當下是否實施夏令時間(日光節約時間),部分國家夏季/冬季時差會相差1小時。</div>
+  </div>
+
+  <div class="card" id="scams">
+    <div class="section-title">🚨 常見旅遊詐騙提醒</div>
+    <div class="section-sub">整理自2026年旅遊詐騙趨勢報告,含AI時代的新型態手法</div>
+    <div class="sev-box sev-high"><b class="sev-tag">高風險</b>訂房網站上的「假房源」——詐騙者複製真實房源的照片與介紹重新刊登,對話中若要求電匯、禮品卡、或引導您離開原平台改用其他方式付款,務必提高警覺,一律透過原訂房平台溝通與付款。</div>
+    <div class="sev-box sev-high"><b class="sev-tag">高風險</b>「Quishing」QR Code釣魚——詐騙者會在停車繳費機、菜單等合法QR Code上覆蓋假貼紙,掃描前先檢查QR Code有沒有被覆蓋痕跡,掃描後務必檢查網址是否為官方網域。</div>
+    <div class="sev-box sev-mid"><b class="sev-tag">中風險</b>誇大到不合理的優惠廣告——五星飯店汽車旅館價、頭等艙超低價,常搭配倒數計時製造搶購壓力,看到明顯低於市場行情的優惠,先回官網比對再決定。</div>
+    <div class="sev-box sev-mid"><b class="sev-tag">中風險</b>假冒客服電話——上網搜尋到的客服電話可能是付費廣告置頂的詐騙號碼,建議直接從航空公司/飯店官方App或官網取得客服聯絡方式。</div>
+    <div class="sev-box sev-mid"><b class="sev-tag">中風險</b>假訂位異動通知——出發前夕收到「付款失敗」「班機異動」「訂房取消」等簡訊或郵件,先別點連結,直接登入官方App或官網查詢確認。</div>
+    <div class="sev-box sev-low"><b class="sev-tag">街頭常見</b>熱情搭訕/強迫消費——熱門景點常見主動搭訕、事後強索高額費用的手法(如街頭擦鞋、街頭合照),婉拒陌生人的主動熱情通常是上策。</div>
+    <div class="sev-box sev-low"><b class="sev-tag">街頭常見</b>換錢/找零混淆——部分國家貨幣面額多、零多容易眼花,換錢或付款時建議清楚點算、確認找零金額再收好。</div>
+  </div>
+
+  <div class="card" id="tipping">
+    <div class="section-title">💵 小費文化速查</div>
+    <div class="section-sub">依地區類型概略區分,實際習慣仍會因場合(餐廳/計程車/飯店)略有不同</div>
+    <table class="rules">
+      <tr><th>地區</th><th>常見習慣</th></tr>
+      <tr><td>北美(美國/加拿大)</td><td><span class="chip danger">習慣給小費</span> 餐廳常見15~20%,計程車/飯店房務也普遍給小費</td></tr>
+      <tr><td>歐洲多數國家</td><td><span class="chip warn">彈性給予</span> 帳單常已含服務費,額外給5~10%表示滿意即可</td></tr>
+      <tr><td>日本</td><td><span class="chip safe">不需要小費</span> 主動給小費有時反而會造成店家困擾</td></tr>
+      <tr><td>台灣/中國/韓國</td><td><span class="chip safe">通常不需要</span> 服務費多半已內含在帳單中</td></tr>
+      <tr><td>東南亞(泰國/越南等)</td><td><span class="chip warn">視情況給予</span> 非強制,但小額小費常被視為友善的心意</td></tr>
+    </table>
+  </div>
+
+  <div class="card" id="onsite">
+    <div class="section-title">🔍 目的地確定後,這樣問我最有效率</div>
+    <div class="section-sub">以下這些內容,交給我用即時搜尋幫您查,會比任何內建資料庫都準確即時——尤其是簽證、海關、入境規定這類會因國家而異、又會隨時間調整的法規類資訊,離線工具沒辦法內建一份隨時更新的全世界法規資料庫,直接問我查證會準確得多</div>
+
+    <div class="formgrid" style="max-width:500px;">
+      <div class="field"><label>目的地城市</label><input type="text" id="destCity" placeholder="例如 大阪"></div>
+      <div class="field"><label>目的地國家</label><input type="text" id="destCountry" placeholder="例如 日本"></div>
+      <div class="field"><label>飲食限制(選填)</label><input type="text" id="destDiet" placeholder="例如 素食/不吃海鮮"></div>
+    </div>
+    <button class="primary" onclick="genDestPrompts()">產生專屬問句</button>
+    <div id="dest-prompts-result" style="margin-top:16px;"></div>
+
+    <div class="divider"></div>
+    <div class="section-sub" style="margin-top:0;">通用問句範本(尚未填目的地時可參考這份):</div>
+    <ul class="checklist">
+      <li>「幫我查[城市]3天2夜行程,含[飲食限制,如素食/不吃海鮮]的餐廳推薦」</li>
+      <li>「[城市]機場到市區,有哪些交通方式跟大概票價」</li>
+      <li>「[城市][季節]去,有哪些必去景點跟在地人才知道的私房景點」</li>
+      <li>「[國家]現在對台灣護照的簽證規定是什麼」</li>
+      <li>「[城市]這幾天天氣預報,行李該怎麼準備」</li>
+      <li>「[國家]當地有什麼文化禁忌或小費習慣要注意」</li>
+      <li>「[國家]海關對於攜帶[物品,如肉製品/藥品/現金]有什麼申報規定」</li>
+    </ul>
+    <div class="disc">飲食限制、餐廳推薦、當地交通、景點、簽證、海關規定這幾項都會隨季節/店家營業狀況/即時新聞/官方政策而變動,離線工具做不到,但這正是我能即時查證、給您當下最準確答案的部分。</div>
+  </div>
+
+  <footer>景淵旅遊行前規劃室 ・ 台股工具箱附屬功能 ・ 通用型行前準備工具,不含特定城市資料</footer>
+</div>
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到頂部">↑</button>
+
+<script>
+window.addEventListener('scroll', ()=>{
+  const btn = document.getElementById('back-to-top');
+  if(window.scrollY > 400) btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+
+/* ---------- 時差速算器 ---------- */
+function calcJetlag(){
+  const offset = parseFloat(document.getElementById('tzOffset').value) || 0;
+  const twTimeStr = document.getElementById('twTime').value;
+  if(!twTimeStr){
+    document.getElementById('jetlag-result').innerHTML = `<p style="color:#b23a3a;">請先輸入台灣現在時間</p>`;
+    return;
+  }
+  const [h,m] = twTimeStr.split(':').map(Number);
+  // 改用總分鐘數計算,才能正確處理半小時/45分等非整數時區(如印度+5:30、尼泊爾+5:45)
+  let totalMin = h*60 + m + Math.round(offset*60);
+  let dayShift = '';
+  if(totalMin >= 24*60){ totalMin -= 24*60; dayShift = '(隔天)'; }
+  if(totalMin < 0){ totalMin += 24*60; dayShift = '(前一天)'; }
+  const destHStr = String(Math.floor(totalMin/60)).padStart(2,'0');
+  const destMStr = String(totalMin%60).padStart(2,'0');
+  document.getElementById('jetlag-result').innerHTML = `
+    <div class="result-grid">
+      <div class="stat"><div class="k">台灣時間</div><div class="v">${twTimeStr}</div></div>
+      <div class="stat"><div class="k">目的地時間</div><div class="v">${destHStr}:${destMStr} ${dayShift}</div></div>
+    </div>
+  `;
+}
+
+/* ---------- 行前時間軸 ---------- */
+const TIMELINE_ITEMS = [
+  {when:'出發前3~6個月', daysBefore:180, title:'確認護照效期', sub:'多數國家要求入境時效期需在6個月以上,效期不足要提前換發新護照', sev:'high'},
+  {when:'出發前1~3個月', daysBefore:90, title:'確認簽證/電子簽證需求', sub:'不同國家規定差異大,務必查該國最新規定,部分國家可能需要提早申請面談', sev:'high'},
+  {when:'出發前1~2個月', daysBefore:60, title:'訂機票與訂房', sub:'早訂通常價格較有彈性,同時確認轉機時間、退改政策', sev:'mid'},
+  {when:'出發前1個月', daysBefore:30, title:'投保旅遊平安險/不便險', sub:'留意保單是否涵蓋醫療後送、行李延誤/遺失、班機延誤', sev:'mid'},
+  {when:'出發前2~3週', daysBefore:21, title:'確認當地電壓與插座規格', sub:'需要的話準備轉接頭,部分國家電壓不同也需注意變壓器', sev:'low'},
+  {when:'出發前2週', daysBefore:14, title:'確認信用卡/現金/換匯規劃', sub:'部分地區信用卡不普及,建議先了解當地支付習慣', sev:'low'},
+  {when:'出發前1週', daysBefore:7, title:'列印/下載重要文件', sub:'機票、訂房確認信、保險單、簽證資料,建議雲端與紙本都留一份', sev:'mid'},
+  {when:'出發前1週', daysBefore:7, title:'申請國際漫遊或當地網卡/eSIM', sub:'比較漫遊方案與當地SIM卡/eSIM的費率與涵蓋範圍', sev:'low'},
+  {when:'出發前3天', daysBefore:3, title:'開始打包行李', sub:'參考下方打包清單產生器,分裝隨身與託運', sev:'low'},
+  {when:'出發前1天', daysBefore:1, title:'網路報到/選位', sub:'多數航空開放24小時前線上報到,可提前選位、列印或下載電子登機證', sev:'mid'},
+  {when:'出發當天', daysBefore:0, title:'預留充足交通與安檢時間', sub:'國際線建議提前2.5~3小時抵達機場,確認航廈與登機門', sev:'high'}
+];
+function renderTimeline(){
+  const list = document.getElementById('timeline-list');
+  const sevLabel = {high:'重要', mid:'需留意', low:'一般'};
+  const departStr = document.getElementById('departDate') ? document.getElementById('departDate').value : '';
+  const departDate = departStr ? new Date(departStr + 'T00:00:00') : null;
+
+  const countdownBox = document.getElementById('countdown-box');
+  if(departDate){
+    const today = new Date(); today.setHours(0,0,0,0);
+    const diffDays = Math.round((departDate - today) / 86400000);
+    let countText = '';
+    if(diffDays > 0) countText = `距離出發還有 <b style="color:var(--terracotta);font-size:18px;">${diffDays}</b> 天`;
+    else if(diffDays === 0) countText = `<b style="color:var(--terracotta);">就是今天出發!祝旅途順利 ✈️</b>`;
+    else countText = `出發日期已過 ${Math.abs(diffDays)} 天`;
+    countdownBox.innerHTML = `<div class="stat" style="max-width:280px;margin-bottom:16px;"><div class="k">倒數計時</div><div class="v" style="font-size:15px;">${countText}</div></div>`;
+  } else {
+    countdownBox.innerHTML = '';
+  }
+
+  list.innerHTML = TIMELINE_ITEMS.map((item,i)=>{
+    let dateNote = '';
+    if(departDate){
+      const target = new Date(departDate);
+      target.setDate(target.getDate() - item.daysBefore);
+      const dStr = `${target.getFullYear()}/${String(target.getMonth()+1).padStart(2,'0')}/${String(target.getDate()).padStart(2,'0')}`;
+      dateNote = `<div class="sub" style="color:var(--terracotta);font-weight:600;">建議日期:約 ${dStr}</div>`;
+    }
+    return `
+    <li class="sev-${item.sev}" style="padding-left:14px;">
+      <div class="when"><span class="sev-tag">${sevLabel[item.sev]}</span><br>${item.when}</div>
+      <div class="what">
+        <label><input type="checkbox" id="tl-${i}"><span>${item.title}<div class="sub">${item.sub}</div>${dateNote}</span></label>
+      </div>
+    </li>
+  `;
+  }).join('');
+  bindCheckboxPersistence('#timeline-list', 'travelplan-tl-', 'timeline-progress');
+}
+renderTimeline();
+
+/* ---------- 幣別選單邏輯 ---------- */
+function onCurrencyChange(){
+  const sel = document.getElementById('currCode');
+  const customWrap = document.getElementById('customCurrWrap');
+  if(sel.value === 'CUSTOM'){
+    customWrap.style.display = 'block';
+  } else {
+    customWrap.style.display = 'none';
+    const rate = sel.options[sel.selectedIndex].getAttribute('data-rate');
+    if(rate) document.getElementById('exRate').value = rate;
+  }
+}
+function getCurrencyLabel(){
+  const sel = document.getElementById('currCode');
+  if(sel.value === 'CUSTOM'){
+    return document.getElementById('customCurrName').value.trim() || '當地幣';
+  }
+  return sel.options[sel.selectedIndex].textContent;
+}
+
+/* ---------- 花費試算 ---------- */
+function calcBudget(){
+  const days = parseInt(document.getElementById('tripDays').value)||1;
+  const people = parseInt(document.getElementById('tripPeople').value)||1;
+  const code = getCurrencyLabel();
+  const rate = parseFloat(document.getElementById('exRate').value)||1;
+  const hotel = parseFloat(document.getElementById('costHotel').value)||0;
+  const food = parseFloat(document.getElementById('costFood').value)||0;
+  const transport = parseFloat(document.getElementById('costTransport').value)||0;
+  const activity = parseFloat(document.getElementById('costActivity').value)||0;
+  const shopping = parseFloat(document.getElementById('costShopping').value)||0;
+  const bufferPct = parseFloat(document.getElementById('costBuffer').value)||0;
+
+  const hotelTotal = hotel * days; // 每房計價,不乘人數
+  const foodTotal = food * days * people;
+  const transportTotal = transport * days * people;
+  const activityTotal = activity * days * people;
+  const shoppingTotal = shopping; // 總額,不乘天數
+  const subtotal = hotelTotal + foodTotal + transportTotal + activityTotal + shoppingTotal;
+  const buffer = subtotal * (bufferPct/100);
+  const total = subtotal + buffer;
+  const totalTWD = total * rate;
+
+  document.getElementById('budget-result').innerHTML = `
+    <div class="result-grid">
+      <div class="stat"><div class="k">住宿小計</div><div class="v">${hotelTotal.toLocaleString()} ${code}</div></div>
+      <div class="stat"><div class="k">餐飲小計</div><div class="v">${foodTotal.toLocaleString()} ${code}</div></div>
+      <div class="stat"><div class="k">交通小計</div><div class="v">${transportTotal.toLocaleString()} ${code}</div></div>
+      <div class="stat"><div class="k">門票娛樂小計</div><div class="v">${activityTotal.toLocaleString()} ${code}</div></div>
+      <div class="stat"><div class="k">購物預算</div><div class="v">${shoppingTotal.toLocaleString()} ${code}</div></div>
+      <div class="stat"><div class="k">機動預備金</div><div class="v">${buffer.toLocaleString(undefined,{maximumFractionDigits:0})} ${code}</div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="result-grid">
+      <div class="stat" style="background:var(--terracotta-dim);"><div class="k">總花費(當地幣)</div><div class="v">${total.toLocaleString(undefined,{maximumFractionDigits:0})} ${code}</div></div>
+      <div class="stat" style="background:var(--terracotta-dim);"><div class="k">約合新台幣</div><div class="v">NT$ ${Math.round(totalTWD).toLocaleString()}</div></div>
+    </div>
+    <div class="disc">
+      快速心算參考:100 ${code} ≈ NT$ ${(100*rate).toLocaleString(undefined,{maximumFractionDigits:1})},現場消費時可以此概算換算,不用每次拿出手機算。<br>
+      匯率為您自行輸入的數字,請在出發前用最新即時匯率重新試算;此為粗估數字,實際花費會因個人消費習慣、季節與匯率波動而有落差。
+    </div>
+  `;
+}
+
+/* ---------- 打包清單產生器 ---------- */
+const PACK_BASE = ['護照(正本+影本)','手機、充電線、行動電源','錢包、少量現金、信用卡','個人藥品(含慢性病用藥、常備成藥)','盥洗用品(可分裝成100ml以下)','眼鏡/隱形眼鏡備品','轉接頭(依目的地電壓規格)'];
+const PACK_CLIMATE = {
+  hot:['輕薄透氣衣物','短袖×多件','防曬乳、太陽眼鏡、遮陽帽','拖鞋或涼鞋'],
+  cold:['保暖大衣/羽絨外套','發熱衣、圍巾、手套、毛帽','護唇膏、乳液(乾冷氣候易乾燥)','防滑靴/雪靴(視降雪狀況)'],
+  mild:['薄外套(早晚溫差)','長短袖各準備幾件','輕便雨具'],
+  mixed:['洋蔥式穿搭多層次衣物','保暖外套+短袖打底','摺疊雨傘']
+};
+const PACK_TYPE = {
+  leisure:['舒適好走的鞋子','隨身小包(逛街用)','記憶卡/備用儲存空間(拍照用)'],
+  business:['正式服裝、領帶/絲巾','筆電及變壓器','名片、隨身筆記本'],
+  adventure:['防水外套、排汗衣','登山鞋、護膝','頭燈或手電筒','行動糧、水袋'],
+  beach:['泳衣、海灘巾','防水袋(手機/相機防水)','拖鞋、曬後修復乳']
+};
+function genPackingList(){
+  const days = parseInt(document.getElementById('packDays').value)||1;
+  const climate = document.getElementById('packClimate').value;
+  const type = document.getElementById('packType').value;
+  const clothesQty = days<=3 ? days : Math.ceil(days*0.7);
+
+  const catsHtml = [
+    {title:'基本必備', items:PACK_BASE},
+    {title:'依氣候準備', items:PACK_CLIMATE[climate]},
+    {title:'依行程類型準備', items:PACK_TYPE[type]},
+    {title:'衣物估算', items:[`上衣約${clothesQty}件(可換洗天數少於總天數)`,`內著/襪子 ${days}套`,'睡衣1套','備用鞋1雙']}
+  ].map(cat=>`
+    <div class="pack-cat">
+      <h4>${cat.title}</h4>
+      <ul>${cat.items.map((it,i)=>`<li><input type="checkbox" id="pk-${cat.title}-${i}"><span>${it}</span></li>`).join('')}</ul>
+    </div>
+  `).join('');
+
+  document.getElementById('packing-result').innerHTML = `
+    <div id="packing-progress"></div>
+    <div class="pack-cats">${catsHtml}</div>
+    <div class="disc">此清單為通用型建議,實際還需依目的地天氣預報、活動性質(如是否需要正式服裝出席場合)自行增減。</div>
+    <button class="ghost" style="margin-top:10px;font-size:12.5px;" onclick="resetChecklist('#packing-result','travelplan-pk-','packing-progress')">清空打包清單勾選</button>
+  `;
+  bindCheckboxPersistence('#packing-result', 'travelplan-pk-', 'packing-progress');
+}
+
+/* ---------- 訂票訂房檢查清單 ---------- */
+const FLIGHT_CHECK = [
+  '轉機時間是否足夠(國際轉國際建議至少90分鐘以上,需重新過海關則抓更長)',
+  '確認是否含託運行李額度,或需要另外加購',
+  '確認退改票政策與手續費',
+  '確認訂位姓名與護照英文姓名完全一致',
+  '留意深夜/凌晨抵達班機的後續交通銜接',
+  '比較直飛與轉機的總時間+票價,有時轉機省下的錢不如想像中划算',
+  '確認是否需要落地簽或轉機簽證(過境轉機也可能需要)'
+];
+const HOTEL_CHECK = [
+  '確認實際地址與地圖位置,而非只看飯店名稱',
+  '確認到最近車站/機場的實際交通方式與時間',
+  '確認退房時間與是否可寄放行李',
+  '確認是否含早餐、是否有附加清潔費/城市稅未列在房價內',
+  '看近期評論,留意「照片與實際落差」「隔音」「維修中」等關鍵字',
+  '確認訂房是否可免費取消,以及取消期限',
+  '確認入住需要的證件與最低入住年齡限制'
+];
+/* ---------- 目的地專屬問句產生器:填了城市/國家後,自動把通用問句範本替換成
+   具體可以直接複製貼給AI助手的完整問句,省去使用者自己手動替換[城市][國家]的麻煩 ---------- */
+function genDestPrompts(){
+  const city = document.getElementById('destCity').value.trim();
+  const country = document.getElementById('destCountry').value.trim();
+  const diet = document.getElementById('destDiet').value.trim();
+  const box = document.getElementById('dest-prompts-result');
+  if(!city && !country){
+    box.innerHTML = `<p style="color:#b23a3a;">請至少填寫城市或國家其中一項</p>`;
+    return;
+  }
+  const dietText = diet || '無特殊飲食限制';
+  const prompts = [
+    `幫我查${city || '這個城市'}3天2夜行程,含${dietText}的餐廳推薦`,
+    `${city || '這個城市'}機場到市區,有哪些交通方式跟大概票價`,
+    `${city || '這個城市'}最近去,有哪些必去景點跟在地人才知道的私房景點`,
+    `${country || '這個國家'}現在對台灣護照的簽證規定是什麼`,
+    `${city || '這個城市'}這幾天天氣預報,行李該怎麼準備`,
+    `${country || '這個國家'}當地有什麼文化禁忌或小費習慣要注意`,
+    `${country || '這個國家'}海關對於攜帶物品(肉製品/藥品/現金)有什麼申報規定`
+  ];
+  box.innerHTML = `
+    <div style="font-size:13px;color:var(--muted);margin-bottom:10px;">已產生下列問句,點「複製」可以直接貼給我使用:</div>
+    ${prompts.map((p,i)=>`
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);">
+        <span style="flex:1;font-size:14px;">${p}</span>
+        <button class="small" onclick="copyPrompt(this, '${p.replace(/'/g,"\\'")}')">複製</button>
+      </div>
+    `).join('')}
+  `;
+}
+function copyPrompt(btn, text){
+  navigator.clipboard.writeText(text).then(()=>{
+    const orig = btn.textContent;
+    btn.textContent = '已複製!';
+    setTimeout(()=>{ btn.textContent = orig; }, 1500);
+  }).catch(()=>{
+    alert('複製失敗,請手動選取文字複製:\n' + text);
+  });
+}
+
+function renderChecklists(){
+  document.getElementById('flight-checklist').innerHTML = FLIGHT_CHECK.map((t,i)=>`<li><input type="checkbox" id="fc-${i}"><span>${t}</span></li>`).join('');
+  document.getElementById('hotel-checklist').innerHTML = HOTEL_CHECK.map((t,i)=>`<li><input type="checkbox" id="hc-${i}"><span>${t}</span></li>`).join('');
+}
+/* ---------- 勾選進度統計 ---------- */
+function updateProgress(containerSelector, progressElId){
+  const boxes = document.querySelectorAll(containerSelector + ' input[type=checkbox]');
+  const total = boxes.length;
+  const checked = document.querySelectorAll(containerSelector + ' input[type=checkbox]:checked').length;
+  const el = document.getElementById(progressElId);
+  if(!el || total===0) return;
+  const pct = Math.round((checked/total)*100);
+  el.innerHTML = `<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <div style="flex:1;height:8px;background:var(--sky);border-radius:4px;overflow:hidden;border:1px solid var(--line);">
+      <div style="height:100%;width:${pct}%;background:${pct===100?'#3f7d3a':'var(--terracotta)'};transition:width .3s;"></div>
+    </div>
+    <span style="font-size:12.5px;color:var(--muted);white-space:nowrap;">${checked}/${total} 已完成${pct===100?' 🎉':''}</span>
+  </div>`;
+}
+function resetChecklist(containerSelector, storagePrefix, progressElId){
+  if(!confirm('確定要清空這份清單的勾選紀錄嗎?')) return;
+  document.querySelectorAll(containerSelector + ' input[type=checkbox]').forEach(cb=>{
+    cb.checked = false;
+    try { localStorage.removeItem(storagePrefix + cb.id); } catch(e){}
+  });
+  updateProgress(containerSelector, progressElId);
+}
+
+/* ---------- 勾選狀態自動儲存(存在瀏覽器本機localStorage,關閉頁面再打開仍保留;
+   純本機儲存不會上傳到任何地方,只有這台電腦這個瀏覽器看得到) ---------- */
+function bindCheckboxPersistence(containerSelector, storagePrefix, progressElId){
+  document.querySelectorAll(containerSelector + ' input[type=checkbox]').forEach(cb=>{
+    if(!cb.id) return;
+    try {
+      const saved = localStorage.getItem(storagePrefix + cb.id);
+      if(saved === '1') cb.checked = true;
+    } catch(e){}
+    cb.addEventListener('change', ()=>{
+      try { localStorage.setItem(storagePrefix + cb.id, cb.checked ? '1' : '0'); } catch(e){}
+      if(progressElId) updateProgress(containerSelector, progressElId);
+    });
+  });
+  if(progressElId) updateProgress(containerSelector, progressElId);
+}
+function initPersistence(){
+  bindCheckboxPersistence('#flight-checklist', 'travelplan-fc-', 'flight-progress');
+  bindCheckboxPersistence('#hotel-checklist', 'travelplan-hc-', 'hotel-progress');
+}
+
+renderChecklists();
+initPersistence();
+</script>
+<button type="button" onclick="twShare()" style="position:fixed;left:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;border:0;padding:10px 14px;border-radius:20px;font:15px sans-serif;box-shadow:0 2px 6px rgba(0,0,0,.3)">📤 分享</button>
+<script>function twShare(){var u=location.href.split('#')[0].split('?')[0];var t=document.title||'景淵報表';
+if(navigator.share){navigator.share({title:t,text:t+'',url:u}).catch(function(){});return;}
+var ok=function(){alert('已複製連結,可以貼到 LINE 傳給朋友');};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(ok,function(){window.prompt('長按複製這個連結',u);});}else{window.prompt('長按複製這個連結',u);}}</script><a href="index.html" onclick="location.href='index.html?v='+Date.now();return false;" style="position:fixed;right:12px;bottom:12px;z-index:99999;background:#16213e;color:#fff;padding:10px 14px;border-radius:20px;font:15px sans-serif;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.3)">← 回目錄</a></body>
+</html>
+
